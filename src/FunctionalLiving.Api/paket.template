@@ -1,0 +1,24 @@
+type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.FunctionalLiving.Api
+title Be.Vlaanderen.Basisregisters.FunctionalLiving.Api
+
+authors Cumps Consulting
+owners David Cumps <https://cumps.be>
+copyright Copyright (c) David Cumps
+requireLicenseAcceptance false
+projectUrl https://github.com/cumpsd/functional-living
+iconUrl https://raw.githubusercontent.com/cumpsd/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+
+description Functional Living.
+
+files
+  FunctionalLiving.Api.dll => lib\netcoreapp2.2
+  FunctionalLiving.Api.pdb => lib\netcoreapp2.2
+  FunctionalLiving.Api.xml => lib\netcoreapp2.2
+  FunctionalLiving.Api.xml => content
+
+  FunctionalLiving.dll => lib\netcoreapp2.2
+  FunctionalLiving.pdb => lib\netcoreapp2.2

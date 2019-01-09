@@ -12,7 +12,7 @@ projectUrl https://github.com/cumpsd/functional-living
 iconUrl https://raw.githubusercontent.com/cumpsd/build-pipeline/master/logo.png
 licenseUrl https://opensource.org/licenses/EUPL-1.2
 
-description Functional Living.
+description Home automation integrating various technologies.
 
 files
   FunctionalLiving.Api.dll => lib\netcoreapp2.2

@@ -1,7 +1,7 @@
 {
   "name": "functional-living",
   "version": "0.0.1",
-  "description": "Home automation using various technologies.",
+  "description": "Home automation integrating various technologies.",
   "author": "Cumps Consulting",
   "license": "EUPL-1.2",
   "repository": {

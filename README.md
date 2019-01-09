@@ -2,7 +2,7 @@
 
 ## Goal
 
-> Home automation using various technologies.
+> Home automation integrating various technologies.
 
 ## Quick contributing guide
 

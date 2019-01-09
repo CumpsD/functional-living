@@ -19,10 +19,8 @@ namespace FunctionalLiving.Api.Example
     [AdvertiseApiVersions("1.0")]
     [ApiRoute("example")]
     [ApiExplorerSettings(GroupName = "Example")]
-    public class ExampleController : ApiBusController
+    public class ExampleController : FunctionalLivingController
     {
-        public ExampleController(ICommandHandlerResolver bus) : base(bus) { }
-
         /// <summary>
         /// Vraag een voorbeeld op.
         /// </summary>
@@ -53,6 +51,7 @@ namespace FunctionalLiving.Api.Example
         /// <summary>
         /// Voer een generiek commando uit.
         /// </summary>
+        /// <param name="bus"></param>
         /// <param name="commandId">Optionele unieke id voor het verzoek.</param>
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
@@ -69,6 +68,7 @@ namespace FunctionalLiving.Api.Example
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> Post(
+            [FromServices] ICommandHandlerResolver bus,
             [FromCommandId] Guid commandId,
             [FromBody] CommandRequest command,
             CancellationToken cancellationToken = default)
@@ -76,10 +76,10 @@ namespace FunctionalLiving.Api.Example
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // TODO: Check what this returns in the response
 
-            // Normally this would be Bus.Dispatch(...) but because of the example the command to dispatch is of type 'dynamic' which
+            // Normally this would be bus.Dispatch(...) but because of the example the command to dispatch is of type 'dynamic' which an extension method cannot handle.
             return Accepted(
                 await CommandHandlerResolverExtensions.Dispatch(
-                    Bus,
+                    bus,
                     commandId,
                     CommandRequestMapping.Map(command),
                     GetMetadata(),

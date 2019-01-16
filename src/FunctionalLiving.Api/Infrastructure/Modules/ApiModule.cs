@@ -28,9 +28,6 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
             containerBuilder
                 .RegisterModule(new EventHandlingModule(typeof(DomainAssemblyMarker).Assembly, eventSerializerSettings));
 
-            //containerBuilder
-            //    .RegisterModule(new EnvelopeModule());
-
             containerBuilder
                 .RegisterModule(new CommandHandlingModule(_configuration));
 

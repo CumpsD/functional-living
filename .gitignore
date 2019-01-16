@@ -1,4 +1,5 @@
 appsettings.*.json
+wwwroot/
 
 .vs/
 .fake/
@@ -13,6 +14,7 @@ appsettings.*.json
 [Oo]bj/
 [Xx]64/
 [Dd]ist/
+[Tt]est[Rr]esults/
 
 *.suo
 *.user

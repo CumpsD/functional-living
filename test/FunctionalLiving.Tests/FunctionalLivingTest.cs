@@ -4,11 +4,8 @@ namespace FunctionalLiving.Tests
     using Be.Vlaanderen.Basisregisters.EventHandling;
     using Be.Vlaanderen.Basisregisters.EventHandling.Autofac;
     using Autofac;
-    using Be.Vlaanderen.Basisregisters.AggregateSource.Testing;
-    using Be.Vlaanderen.Basisregisters.AggregateSource.Testing.Comparers;
     using Be.Vlaanderen.Basisregisters.AggregateSource.Testing.SqlStreamStore.Autofac;
     using Infrastructure.Modules;
-    using KellermanSoftware.CompareNetObjects;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using Xunit.Abstractions;
@@ -36,12 +33,5 @@ namespace FunctionalLiving.Tests
 
         protected override void ConfigureEventHandling(ContainerBuilder builder)
             => builder.RegisterModule(new EventHandlingModule(typeof(DomainAssemblyMarker).Assembly, _eventSerializerSettings));
-
-        protected override IFactComparer CreateFactComparer()
-        {
-            var comparer = new CompareLogic();
-            comparer.Config.MembersToIgnore.Add("Provenance");
-            return new CompareNetObjectsBasedFactComparer(comparer);
-        }
     }
 }

@@ -35,7 +35,7 @@ namespace FunctionalLiving.Api.Infrastructure
                     (provider, description) => new Info
                     {
                         Version = description.ApiVersion.ToString(),
-                        Title = "FunctionalLiving API",
+                        Title = "Functional Living API",
                         Description = GetApiLeadingText(description),
                         Contact = new Contact
                         {
@@ -68,17 +68,28 @@ namespace FunctionalLiving.Api.Infrastructure
         {
             // StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
-            app
-                .UseDefaultForApi(
-                    _applicationContainer,
-                    serviceProvider,
-                    env,
-                    appLifetime,
-                    loggerFactory,
-                    apiVersionProvider,
-                    groupName => $"Cumps Consulting - Functional Living API {groupName}")
-
-                .UseMiddleware<AddNoCacheHeadersMiddleware>();
+            app.UseDefaultForApi(new StartupOptions
+            {
+                ApplicationContainer = _applicationContainer,
+                ServiceProvider = serviceProvider,
+                HostingEnvironment = env,
+                ApplicationLifetime = appLifetime,
+                LoggerFactory = loggerFactory,
+                Api =
+                {
+                    VersionProvider = apiVersionProvider,
+                    Info = groupName => $"Cumps Consulting - Functional Living API {groupName}"
+                },
+                Server =
+                {
+                    PoweredByName = "Cumps Consulting - Functional Living",
+                    ServerName = "Cumps Consulting"
+                },
+                MiddlewareHooks =
+                {
+                    AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>(),
+                }
+            });
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)

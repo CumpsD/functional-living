@@ -10,7 +10,6 @@ namespace FunctionalLiving.Tests
     using Newtonsoft.Json;
     using Xunit.Abstractions;
 
-
     public class FunctionalLivingTest : AutofacBasedTest
     {
         private readonly JsonSerializerSettings _eventSerializerSettings = EventsJsonSerializerSettingsProvider.CreateSerializerSettings();

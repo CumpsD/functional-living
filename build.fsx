@@ -68,6 +68,7 @@ Target "Test_Solution" (fun _ -> test "FunctionalLiving")
 Target "Publish_Solution" (fun _ ->
   [
     "FunctionalLiving.Api"
+    "FunctionalLiving.Knx"
   ] |> List.iter publish)
 
 Target "Pack_Solution" (fun _ ->
@@ -77,6 +78,9 @@ Target "Pack_Solution" (fun _ ->
 
 Target "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
 Target "PushContainer_Api" (fun _ -> push "api")
+
+Target "Containerize_Knx" (fun _ -> containerize "FunctionalLiving.Knx" "knx")
+Target "PushContainer_Knx" (fun _ -> push "knx")
 
 // --------------------------------------------------------------------------------
 
@@ -104,11 +108,13 @@ Target "Push" DoNothing
 
 "Pack"               ==> "Containerize"
 "Containerize_Api"   ==> "Containerize"
+"Containerize_Knx"   ==> "Containerize"
 // Possibly add more projects to containerize here
 
 "Containerize"       ==> "Push"
 "DockerLogin"        ==> "Push"
 "PushContainer_Api"  ==> "Push"
+"PushContainer_Knx"  ==> "Push"
 // Possibly add more projects to push here
 
 // By default we build & test

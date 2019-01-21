@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 [assembly: ComVisible(false)]
 [assembly: AssemblyProduct("Cumps Consulting")]
@@ -10,3 +11,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Cumps Consulting")]
 
 [assembly: Guid("851c5950-eb1b-4cae-8c86-aa060c252679")]
+[assembly: InternalsVisibleTo("FunctionalLiving.Knx.Tests")]

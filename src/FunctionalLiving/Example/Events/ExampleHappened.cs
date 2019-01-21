@@ -29,6 +29,6 @@ namespace FunctionalLiving.Example.Events
             Language language)
             : this(
                 new ExampleId(exampleId),
-                new ExampleName(name, language)) {}
+                new ExampleName(name, language)) { }
     }
 }

@@ -20,6 +20,6 @@ namespace FunctionalLiving.Example.Events
         private ExampleWasBorn(
             Guid exampleId)
             : this(
-                new ExampleId(exampleId)) {}
+                new ExampleId(exampleId)) { }
     }
 }

@@ -112,6 +112,7 @@ The new version 1.2 of the European Union Public Licence (EUPL) is published in 
 * [xUnit](https://github.com/xunit/xunit/blob/master/license.txt) - _xUnit.net is a free, open source, community-focused unit testing tool for the .NET Framework._ - [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
 * [Autofac](https://github.com/autofac/Autofac/blob/develop/LICENSE) - _An addictive .NET IoC container._ - [MIT](https://choosealicense.com/licenses/mit/)
 * [AutoFixture](https://github.com/AutoFixture/AutoFixture/blob/master/LICENCE.txt) - _AutoFixture is an open source library for .NET designed to minimize the 'Arrange' phase of your unit tests in order to maximize maintainability._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [KNX.net](https://github.com/lifeemotions/knx.net/blob/master/LICENSE) - _KNX.net provides a KNX API for .NET_ - [MIT](https://choosealicense.com/licenses/mit/)
 
 ### Tooling
 
@@ -130,12 +131,12 @@ The new version 1.2 of the European Union Public Licence (EUPL) is published in 
 
 ### Flemish Government Frameworks
 
-* [Be.Vlaanderen.Basisregisters.AggregateSource](https://github.com/cumpsd/command-handling/blob/master/LICENSE) - _Lightweight infrastructure for doing command handling and eventsourcing using aggregates._ - [MIT](https://choosealicense.com/licenses/mit/)
-* [Be.Vlaanderen.Basisregisters.Api](https://github.com/cumpsd/api/blob/master/LICENSE) - _Common API infrastructure and helpers._ - [MIT](https://choosealicense.com/licenses/mit/)
-* [Be.Vlaanderen.Basisregisters.CommandHandling](https://github.com/cumpsd/command-handling/blob/master/LICENSE) - _Lightweight infrastructure for doing command handling and eventsourcing using aggregates._ - [MIT](https://choosealicense.com/licenses/mit/)
-* [Be.Vlaanderen.Basisregisters.EventHandling](https://github.com/cumpsd/event-handling/blob/master/LICENSE) - _Lightweight event handling infrastructure._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.AggregateSource](https://github.com/informatievlaanderen/command-handling/blob/master/LICENSE) - _Lightweight infrastructure for doing command handling and eventsourcing using aggregates._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.Api](https://github.com/informatievlaanderen/api/blob/master/LICENSE) - _Common API infrastructure and helpers._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.CommandHandling](https://github.com/informatievlaanderen/command-handling/blob/master/LICENSE) - _Lightweight infrastructure for doing command handling and eventsourcing using aggregates._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.EventHandling](https://github.com/informatievlaanderen/event-handling/blob/master/LICENSE) - _Lightweight event handling infrastructure._ - [MIT](https://choosealicense.com/licenses/mit/)
 
 ### Flemish Government Libraries
 
-* [Be.Vlaanderen.Basisregisters.Build.Pipeline](https://github.com/cumpsd/build-pipeline/blob/master/LICENSE) - _Contains generic files for all Basisregisters pipelines._ - [MIT](https://choosealicense.com/licenses/mit/)
-* [Be.Vlaanderen.Basisregisters.Testing.Infrastructure.Events](https://github.com/cumpsd/infrastructure-tests/blob/master/LICENSE) - _Infrastructure unit-tests to validate assemblies._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.Build.Pipeline](https://github.com/informatievlaanderen/build-pipeline/blob/master/LICENSE) - _Contains generic files for all Basisregisters pipelines._ - [MIT](https://choosealicense.com/licenses/mit/)
+* [Be.Vlaanderen.Basisregisters.Testing.Infrastructure.Events](https://github.com/informatievlaanderen/infrastructure-tests/blob/master/LICENSE) - _Infrastructure unit-tests to validate assemblies._ - [MIT](https://choosealicense.com/licenses/mit/)

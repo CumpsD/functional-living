@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Api", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "knx", "knx", "{39D0DA3B-D05A-48B9-B65B-895969311DA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx", "src\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj", "{2357A724-5340-4CBB-B380-04CA69285E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx.Sender", "src\FunctionalLiving.Knx.Sender\FunctionalLiving.Knx.Sender.csproj", "{2357A724-5340-4CBB-B380-04CA69285E6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx", "src\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj", "{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{2357A724-5340-4CBB-B380-04CA69285E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2357A724-5340-4CBB-B380-04CA69285E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2357A724-5340-4CBB-B380-04CA69285E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA} = {40C96AFD-C191-4A56-B7D0-540C1EB501BC}
 		{B569C6D4-5A45-44B1-8362-C0500FB7F818} = {40C96AFD-C191-4A56-B7D0-540C1EB501BC}
 		{2357A724-5340-4CBB-B380-04CA69285E6A} = {39D0DA3B-D05A-48B9-B65B-895969311DA2}
+		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C} = {39D0DA3B-D05A-48B9-B65B-895969311DA2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EB87445-E263-4E1E-89CC-3839170028E5}

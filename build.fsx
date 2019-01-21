@@ -68,7 +68,7 @@ Target "Test_Solution" (fun _ -> test "FunctionalLiving")
 Target "Publish_Solution" (fun _ ->
   [
     "FunctionalLiving.Api"
-    "FunctionalLiving.Knx"
+    "FunctionalLiving.Knx.Sender"
   ] |> List.iter publish)
 
 Target "Pack_Solution" (fun _ ->
@@ -79,7 +79,7 @@ Target "Pack_Solution" (fun _ ->
 Target "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
 Target "PushContainer_Api" (fun _ -> push "api")
 
-Target "Containerize_Knx" (fun _ -> containerize "FunctionalLiving.Knx" "knx")
+Target "Containerize_Knx" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "knx")
 Target "PushContainer_Knx" (fun _ -> push "knx")
 
 // --------------------------------------------------------------------------------

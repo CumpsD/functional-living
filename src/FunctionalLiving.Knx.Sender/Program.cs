@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx
+namespace FunctionalLiving.Knx.Sender
 {
     using System;
     using System.IO;

@@ -1,4 +1,4 @@
-﻿﻿namespace FunctionalLiving.Knx
+﻿namespace FunctionalLiving.Knx
 {
     using System;
     using System.Collections.Concurrent;

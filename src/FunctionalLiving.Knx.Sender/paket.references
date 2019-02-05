@@ -1,8 +1,24 @@
 Microsoft.NETCore.App
 
 Microsoft.Extensions.Configuration
+Microsoft.Extensions.Configuration.CommandLine
 Microsoft.Extensions.Configuration.FileExtensions
+Microsoft.Extensions.Configuration.EnvironmentVariables
 Microsoft.Extensions.Configuration.Json
+Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.Logging
+
+Autofac.Extensions.DependencyInjection
+
+Serilog
+Serilog.Sinks.Console
+Serilog.Sinks.File
+Serilog.Settings.Configuration
+Serilog.Enrichers.Environment
+Serilog.Enrichers.Thread
+Serilog.Extensions.Logging
+
+Destructurama.JsonNet
 
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

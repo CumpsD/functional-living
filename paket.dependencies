@@ -23,7 +23,9 @@ nuget NETStandard.Library 2.0.3
 
 // PRODUCTION STUFF
 nuget Microsoft.Extensions.Configuration 2.2.0
+nuget Microsoft.Extensions.Configuration.CommandLine 2.2.0
 nuget Microsoft.Extensions.Configuration.FileExtensions 2.2.0
+nuget Microsoft.Extensions.Configuration.EnvironmentVariables 2.2.0
 nuget Microsoft.Extensions.Configuration.Json 2.2.0
 
 nuget Autofac 4.8.1
@@ -58,8 +60,8 @@ nuget Microsoft.NET.Test.Sdk 15.9.0
 nuget xunit 2.4.1
 nuget xunit.runner.visualstudio 2.4.1
 nuget xunit.categories 2.0.4
-nuget AutoFixture 4.6.0
-nuget AutoFixture.Xunit2 4.6.0
+nuget AutoFixture 4.8.0
+nuget AutoFixture.Xunit2 4.8.0
 
 // BUILD STUFF
 nuget FAKE 4.64.13 // Don't update to v5!

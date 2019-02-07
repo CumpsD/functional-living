@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Library.props" />
+
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Extensions.fs" />
+    <Compile Include="StringHelpers.fs" />
+    <Compile Include="BitHelpers.fs" />
+    <Compile Include="Domain.fs" />
+    <Compile Include="Category1_SingleBit.fs" />
+    <Compile Include="Category5_Scaling.fs" />
+    <Compile Include="Category7_2ByteUnsignedValue.fs" />
+    <Compile Include="Category9_2ByteFloatValue.fs" />
+    <Compile Include="Category10_Time.fs" />
+    <Compile Include="Category11_Date.fs" />
+    <Compile Include="Category13_4ByteSignedValue.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Spec.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="paket.references" />
+  </ItemGroup>
+
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

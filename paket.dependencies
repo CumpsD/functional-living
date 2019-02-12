@@ -30,6 +30,9 @@ nuget Microsoft.Extensions.Configuration.FileExtensions 2.2.0
 nuget Microsoft.Extensions.Configuration.EnvironmentVariables 2.2.0
 nuget Microsoft.Extensions.Configuration.Json 2.2.0
 
+nuget Microsoft.Extensions.Http 2.2.0
+nuget Microsoft.Extensions.Http.Polly 2.2.0
+
 nuget Autofac 4.8.1
 nuget Autofac.Extensions.DependencyInjection 4.3.1
 

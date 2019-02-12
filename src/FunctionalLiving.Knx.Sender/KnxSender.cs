@@ -1,19 +1,27 @@
 namespace FunctionalLiving.Knx.Sender
 {
     using System;
+    using System.Net.Http;
+    using System.Net.Mime;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using Addressing;
     using Microsoft.Extensions.Logging;
+    using Modules;
 
     public class KnxSender
     {
         private readonly ILogger<KnxSender> _logger;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly KnxConnectionRouting _connection;
 
-        public KnxSender(ILogger<KnxSender> logger)
+        public KnxSender(
+            ILogger<KnxSender> logger,
+            IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
+            _httpClientFactory = httpClientFactory;
 
             _connection = new KnxConnectionRouting { Debug = false, ActionMessageCode = 0x29 };
             _connection.SetLockIntervalMs(20);
@@ -34,9 +42,9 @@ namespace FunctionalLiving.Knx.Sender
 
         private void Print(KnxAddress knxAddress, byte[] state)
         {
-            var address = knxAddress.ToString();
+            _logger.LogDebug("{address} - {state}", knxAddress.ToString(), BitConverter.ToString(state));
 
-            _logger.LogDebug("{address} - {state}", address, BitConverter.ToString(state));
+            SendToApi(knxAddress, state);
         }
 
         private void Connected() => _logger.LogInformation("Connected!");
@@ -49,6 +57,26 @@ namespace FunctionalLiving.Knx.Sender
 
             Thread.Sleep(1000);
             connection.Connect();
+        }
+
+        private void SendToApi(KnxAddress knxAddress, byte[] state)
+        {
+            using (var client = _httpClientFactory.CreateClient(HttpModule.HttpClientName))
+            using (var request = new HttpRequestMessage(HttpMethod.Post, "v1/knx"))
+            using (var httpContent = CreateHttpContent(knxAddress, state))
+            {
+                request.Content = httpContent;
+
+                using (var response = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult())
+                    response.EnsureSuccessStatusCode();
+            }
+        }
+
+        private HttpContent CreateHttpContent(KnxAddress knxAddress, byte[] state)
+        {
+            var json = $@"{{ address: ""{knxAddress}"", state: ""{BitConverter.ToString(state)}"" }}";
+            _logger.LogDebug("Sending Knx payload: {payload}", json);
+            return new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
         }
     }
 }

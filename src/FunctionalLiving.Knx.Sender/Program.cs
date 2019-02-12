@@ -81,6 +81,11 @@ namespace FunctionalLiving.Knx.Sender
 
             builder.RegisterModule(new LoggingModule(configuration, services));
 
+            var tempProvider = services.BuildServiceProvider();
+            var loggerFactory = tempProvider.GetService<ILoggerFactory>();
+
+            builder.RegisterModule(new HttpModule(configuration, services, loggerFactory));
+
             builder
                 .RegisterType<KnxSender>()
                 .SingleInstance();

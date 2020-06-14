@@ -23,13 +23,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
 
         protected override void Load(ContainerBuilder containerBuilder)
         {
-            var eventSerializerSettings = EventsJsonSerializerSettingsProvider.CreateSerializerSettings();
-
-            containerBuilder
-                .RegisterModule(new EventHandlingModule(typeof(DomainAssemblyMarker).Assembly, eventSerializerSettings));
-
-            containerBuilder
-                .RegisterModule(new CommandHandlingModule(_configuration));
+            CommandHandlerModules.Register(containerBuilder);
 
             containerBuilder.Populate(_services);
         }

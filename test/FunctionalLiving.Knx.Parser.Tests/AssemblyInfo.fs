@@ -4,12 +4,7 @@ open System.Reflection
 open System.Runtime.InteropServices
 
 [<assembly: ComVisible(false)>]
-[<assembly: AssemblyProduct("Cumps Consulting")>]
 [<assembly: AssemblyDescription("FunctionalLiving KNX Parser")>]
-[<assembly: AssemblyVersion("2.0.0.0")>]
-[<assembly: AssemblyFileVersion("2.0.0.0")>]
-[<assembly: AssemblyCopyright("Copyright (c) Cumps Consulting")>]
-[<assembly: AssemblyCompany("Cumps Consulting")>]
 
 [<assembly: AssemblyTitle("FunctionalLiving.Knx.Parser.Tests")>]
 [<assembly: AssemblyConfiguration("")>]

@@ -2,7 +2,7 @@ namespace FunctionalLiving
 {
     using System;
     using Example;
-    using Be.Vlaanderen.Basisregisters.CommandHandling.SqlStreamStore.Autofac;
+    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Autofac;
 
     public static class CommandHandlerModules
@@ -10,11 +10,13 @@ namespace FunctionalLiving
         public static void Register(ContainerBuilder containerBuilder)
         {
             containerBuilder
-                .RegisterSqlStreamStoreCommandHandler<ExampleCommandHandlerModule>(
-                    c => handler =>
-					    new ExampleCommandHandlerModule(
-                            c.Resolve<Func<IExamples>>(),
-                            handler));
+                .RegisterType<ExampleCommandHandlerModule>()
+                .Named<CommandHandlerModule>(typeof(ExampleCommandHandlerModule).FullName)
+                .As<CommandHandlerModule>();
+
+            containerBuilder
+                .RegisterType<CommandHandlerResolver>()
+                .As<ICommandHandlerResolver>();
         }
     }
 }

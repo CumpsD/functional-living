@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Library.props" />
-
- <ItemGroup>
-    <ProjectReference Include="..\FunctionalLiving\FunctionalLiving.csproj" />
-  </ItemGroup>
-
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
-</Project>

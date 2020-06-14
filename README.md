@@ -7,9 +7,9 @@
 ## Quick contributing guide
 
 * Fork and clone locally.
-* Build the solution with Visual Studio, `build.cmd` or `build.sh`.
+* Build the solution with Visual Studio or `build.sh`.
 * Create a topic specific branch in git. Add a nice feature in the code. Do not forget to add tests and/or docs.
-* Run `build.cmd` or `build.sh` to make sure everything still compiles and all tests are still passing.
+* Run `build.sh` to make sure everything still compiles and all tests are still passing.
 * When built, you'll find the binaries in `./dist` which you can then test with locally, to ensure the bug or feature has been successfully implemented.
 * Send a Pull Request.
 
@@ -18,14 +18,6 @@
 ### Getting started
 
 TODO: More to come :)
-
-### Generating documentation
-
-We use Structurizr to generate our documentation and populate our architecture decisions. All of this can be found in the [Structurizr](https://github.com/cumpsd/functional-living/tree/master/docs/FunctionalLiving.Structurizr) console application.
-
-To run it, make sure you have an `appsettings.json` with a structurizr.com `WorkspaceId`, `ApiKey` and `ApiSecret`. If you have moved your [adr's](https://github.com/cumpsd/functional-living/tree/master/docs/adr) to another location, don't forget to update `AdrPath`.
-
-This is how the generated documentation looks: https://structurizr.com/share/37794
 
 ### Possible build targets
 

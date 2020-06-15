@@ -1,7 +1,7 @@
-namespace FunctionalLiving.Api.Example.Responses
+namespace FunctionalLiving.Api.Knx.Responses
 {
     using System;
-    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Be.Vlaanderen.Basisregisters.BasicApiProblem;
     using Microsoft.AspNetCore.Http;
     using Swashbuckle.AspNetCore.Filters;
 
@@ -17,24 +17,24 @@ namespace FunctionalLiving.Api.Example.Responses
         }
     }
 
-    public class ExampleResponseExamples : IExamplesProvider
+    public class ExampleResponseExamples : IExamplesProvider<ExampleResponse>
     {
-        public object GetExamples()
+        public ExampleResponse GetExamples()
         {
             return new ExampleResponse("EXAMPLE000000002");
         }
     }
 
-    public class ExampleNotFoundResponseExamples : IExamplesProvider
+    public class ExampleNotFoundResponseExamples : IExamplesProvider<ProblemDetails>
     {
-        public object GetExamples()
+        public ProblemDetails GetExamples()
         {
-            return new BasicApiProblem
+            return new ProblemDetails
             {
                 HttpStatus = StatusCodes.Status404NotFound,
-                Title = BasicApiProblem.DefaultTitle,
+                Title = ProblemDetails.DefaultTitle,
                 Detail = "Onbestaand voorbeeld.",
-                ProblemInstanceUri = BasicApiProblem.GetProblemNumber()
+                ProblemInstanceUri = ProblemDetails.GetProblemNumber()
             };
         }
     }

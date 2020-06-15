@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Api.Example.Requests
+namespace FunctionalLiving.Api.Knx.Requests
 {
     using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
@@ -15,9 +15,9 @@ namespace FunctionalLiving.Api.Example.Requests
         public string Command { get; set; }
     }
 
-    public class CommandRequestExample : IExamplesProvider
+    public class CommandRequestExample : IExamplesProvider<CommandRequest>
     {
-        public object GetExamples()
+        public CommandRequest GetExamples()
         {
             return new CommandRequest
             {

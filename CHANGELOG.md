@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/cumpsd/functional-living/compare/v1.1.0...v1.2.0) (2020-06-15)
+
+
+### Features
+
+* add seq ([a37a5b1](https://github.com/cumpsd/functional-living/commit/a37a5b1ede9b4b13f3aec14beedd701e79462194))
+
 # [1.1.0](https://github.com/cumpsd/functional-living/compare/v1.0.0...v1.1.0) (2020-06-15)
 
 

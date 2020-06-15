@@ -38,11 +38,11 @@ nuget Be.Vlaanderen.Basisregisters.EventHandling.Autofac 2.2.3
 // TEST STUFF
 nuget Microsoft.NET.Test.Sdk 16.6.1
 nuget xunit 2.4.1
-nuget xunit.runner.visualstudio 2.4.1
+nuget xunit.runner.visualstudio 2.4.2
 nuget xunit.categories 2.0.4
 nuget AutoFixture 4.11.0
 nuget AutoFixture.Xunit2 4.11.0
-nuget Unquote 4.0.0
+nuget Unquote 5.0.0
 
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true

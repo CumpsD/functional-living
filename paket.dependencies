@@ -18,6 +18,8 @@ nuget Autofac.Extensions.DependencyInjection 6.0.0
 
 nuget FeatureToggle 4.0.2
 
+nuget Serilog.Sinks.Seq 4.0.0
+
 // BASE REGISTRIES STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 4.2.0
 nuget Be.Vlaanderen.Basisregisters.Testing.Infrastructure.Events 2.2.3 content: true, copy_content_to_output_dir: always, copy_local: true

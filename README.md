@@ -19,6 +19,11 @@
 
 TODO: More to come :)
 
+```bash
+./build.sh Publish
+docker-compose -f docker-compose.yml up
+```
+
 ### Possible build targets
 
 Our `build.sh` script knows a few tricks. By default it runs with the `Test` target.

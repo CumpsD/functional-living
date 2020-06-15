@@ -3,5 +3,7 @@ Be.Vlaanderen.Basisregisters.EventHandling.Autofac
 
 FeatureToggle
 
+Serilog.Sinks.Seq
+
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

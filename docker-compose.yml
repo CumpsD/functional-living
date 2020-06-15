@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  seq:
+    image: datalust/seq
+    container_name: functional-living-seq
+    hostname: functional-living-seq
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - "9001:80"
+      - "9002:5341"
+    networks:
+      - backend
+
+  api:
+    build: src/FunctionalLiving.Api/.
+    image: exira-backend
+    container_name: functional-living-api
+    hostname: functional-living-api
+    ports:
+      - "9000:5000"
+    networks:
+      - backend
+    depends_on:
+      - seq
+    links:
+      - seq
+
+  knx:
+    build: src/FunctionalLiving.Knx.Sender/.
+    image: exira-backend
+    container_name: functional-living-knx
+    hostname: functional-living-knx
+    networks:
+      - backend
+    depends_on:
+      - seq
+    links:
+      - seq
+
+networks:
+  backend:

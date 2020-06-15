@@ -2,8 +2,11 @@ appsettings.*.json
 wwwroot/
 
 .vs/
+.vscode/
 .fake/
 .idea/
+.ionide/
+.paket/
 
 [Pp]ackages/
 [Pp]aket-files/
@@ -39,3 +42,5 @@ TestResults.xml
 ehthumbs.db
 Icon?
 Thumbs.db
+
+tracing*.log

@@ -4,7 +4,7 @@ Be.Vlaanderen.Basisregisters.AggregateSource
 Be.Vlaanderen.Basisregisters.AggregateSource.ExplicitRouting
 
 Be.Vlaanderen.Basisregisters.CommandHandling
-Be.Vlaanderen.Basisregisters.CommandHandling.SqlStreamStore.Autofac
+Be.Vlaanderen.Basisregisters.CommandHandling.SqlStreamStore
 
 Be.Vlaanderen.Basisregisters.EventHandling
 

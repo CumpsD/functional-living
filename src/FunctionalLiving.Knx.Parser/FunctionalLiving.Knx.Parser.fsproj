@@ -2,6 +2,10 @@
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Library.props" />
 
   <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.fs" Link="SolutionInfo.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Extensions.fs" />
     <Compile Include="StringHelpers.fs" />

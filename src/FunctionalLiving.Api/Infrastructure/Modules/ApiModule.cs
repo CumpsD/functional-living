@@ -2,11 +2,8 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
-    using Be.Vlaanderen.Basisregisters.EventHandling;
-    using Be.Vlaanderen.Basisregisters.EventHandling.Autofac;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using FunctionalLiving.Infrastructure.Modules;
 
     public class ApiModule : Module
     {
@@ -23,13 +20,9 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
 
         protected override void Load(ContainerBuilder containerBuilder)
         {
-            var eventSerializerSettings = EventsJsonSerializerSettingsProvider.CreateSerializerSettings();
-
             containerBuilder
-                .RegisterModule(new EventHandlingModule(typeof(DomainAssemblyMarker).Assembly, eventSerializerSettings));
-
-            containerBuilder
-                .RegisterModule(new CommandHandlingModule(_configuration));
+                .RegisterModule(new LoggingModule(_configuration, _services))
+                .RegisterModule(new FunctionalLivingCommandHandlerModule());
 
             containerBuilder.Populate(_services);
         }

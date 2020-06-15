@@ -5,7 +5,6 @@ namespace FunctionalLiving.Tests
     using Be.Vlaanderen.Basisregisters.EventHandling.Autofac;
     using Autofac;
     using Be.Vlaanderen.Basisregisters.AggregateSource.Testing.SqlStreamStore.Autofac;
-    using Infrastructure.Modules;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using Xunit.Abstractions;
@@ -27,8 +26,7 @@ namespace FunctionalLiving.Tests
             _configuration = builder.Build();
         }
 
-        protected override void ConfigureCommandHandling(ContainerBuilder builder)
-            => builder.RegisterModule(new CommandHandlingModule(_configuration));
+        protected override void ConfigureCommandHandling(ContainerBuilder builder) { }
 
         protected override void ConfigureEventHandling(ContainerBuilder builder)
             => builder.RegisterModule(new EventHandlingModule(typeof(DomainAssemblyMarker).Assembly, _eventSerializerSettings));

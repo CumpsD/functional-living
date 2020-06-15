@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C2F8FF63-7A48-4179-A720-86206C42F496}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{453A566F-E4D5-4D12-A5A7-67D02B4330FD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -18,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{453A56
 		SEMVER.md = SEMVER.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Structurizr", "docs\FunctionalLiving.Structurizr\FunctionalLiving.Structurizr.csproj", "{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{2530FFF7-0356-4151-9212-F11E18FFB694}"
 	ProjectSection(SolutionItems) = preProject
 		docs\adr\0001-record-architecture-decisions.md = docs\adr\0001-record-architecture-decisions.md
@@ -32,8 +28,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9B81B90F-47EA-43A5-8927-C0EAB2273BB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Tests", "test\FunctionalLiving.Tests\FunctionalLiving.Tests.csproj", "{F2D21D44-C462-4332-B93B-89CE8540334A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Infrastructure", "src\FunctionalLiving.Infrastructure\FunctionalLiving.Infrastructure.csproj", "{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Api", "src\FunctionalLiving.Api\FunctionalLiving.Api.csproj", "{B569C6D4-5A45-44B1-8362-C0500FB7F818}"
 EndProject
@@ -55,10 +49,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03AED59C-4D29-465E-99B8-A44F076C1443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03AED59C-4D29-465E-99B8-A44F076C1443}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03AED59C-4D29-465E-99B8-A44F076C1443}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,10 +57,6 @@ Global
 		{F2D21D44-C462-4332-B93B-89CE8540334A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2D21D44-C462-4332-B93B-89CE8540334A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2D21D44-C462-4332-B93B-89CE8540334A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B569C6D4-5A45-44B1-8362-C0500FB7F818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B569C6D4-5A45-44B1-8362-C0500FB7F818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B569C6D4-5A45-44B1-8362-C0500FB7F818}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,10 +86,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EEB2ADE5-8F0E-49C9-99F2-2CF2251924BF} = {C2F8FF63-7A48-4179-A720-86206C42F496}
 		{03AED59C-4D29-465E-99B8-A44F076C1443} = {40C96AFD-C191-4A56-B7D0-540C1EB501BC}
 		{F2D21D44-C462-4332-B93B-89CE8540334A} = {9B81B90F-47EA-43A5-8927-C0EAB2273BB6}
-		{7CF9BA80-BCE5-45D7-B176-87CC033CD7CA} = {40C96AFD-C191-4A56-B7D0-540C1EB501BC}
 		{B569C6D4-5A45-44B1-8362-C0500FB7F818} = {40C96AFD-C191-4A56-B7D0-540C1EB501BC}
 		{2357A724-5340-4CBB-B380-04CA69285E6A} = {39D0DA3B-D05A-48B9-B65B-895969311DA2}
 		{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C} = {39D0DA3B-D05A-48B9-B65B-895969311DA2}

@@ -1,25 +1,30 @@
 namespace FunctionalLiving.Api.Infrastructure
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using Be.Vlaanderen.Basisregisters.Api;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Modules;
-    using SqlStreamStore;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
+        private const string DefaultCulture = "en-GB";
+        private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl";
+
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
@@ -32,23 +37,45 @@ namespace FunctionalLiving.Api.Infrastructure
         {
             services
                 .ConfigureDefaultForApi<Startup>(
-                    (provider, description) => new Info
+                    new StartupConfigureOptions
                     {
-                        Version = description.ApiVersion.ToString(),
-                        Title = "Functional Living API",
-                        Description = GetApiLeadingText(description),
-                        Contact = new Contact
+                        Cors =
                         {
-                            Name = "David Cumps",
-                            Email = "david@cumps.be",
-                            Url = "https://cumps.be"
+                            Origins = _configuration
+                                .GetSection("Cors")
+                                .GetChildren()
+                                .Select(c => c.Value)
+                                .ToArray()
+                        },
+                        Swagger =
+                        {
+                            ApiInfo = (provider, description) => new OpenApiInfo
+                            {
+                                Version = description.ApiVersion.ToString(),
+                                Title = "Functional Living API",
+                                Description = GetApiLeadingText(description),
+                                Contact = new OpenApiContact
+                                {
+                                    Name = "David Cumps",
+                                    Email = "david@cumps.be",
+                                    Url = new Uri("https://cumps.be")
+                                }
+                            },
+                            XmlCommentPaths = new[] {typeof(Startup).GetTypeInfo().Assembly.GetName().Name}
+                        },
+                        Localization =
+                        {
+                            DefaultCulture = new CultureInfo(DefaultCulture),
+                            SupportedCultures = SupportedCultures
+                                .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(x => new CultureInfo(x.Trim()))
+                                .ToArray()
+                        },
+                        MiddlewareHooks =
+                        {
+                            FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>(),
                         }
-                    },
-                    new []
-                    {
-                        typeof(Startup).GetTypeInfo().Assembly.GetName().Name,
-                    },
-                    _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray());
+                    });
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new ApiModule(_configuration, services));
@@ -60,25 +87,38 @@ namespace FunctionalLiving.Api.Infrastructure
         public void Configure(
             IServiceProvider serviceProvider,
             IApplicationBuilder app,
-            IHostingEnvironment env,
-            IApplicationLifetime appLifetime,
+            IWebHostEnvironment env,
+            IHostApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
-            IApiVersionDescriptionProvider apiVersionProvider,
-            MsSqlStreamStore streamStore)
+            IApiVersionDescriptionProvider apiVersionProvider)
         {
-            // StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
-
-            app.UseDefaultForApi(new StartupOptions
+            app.UseDefaultForApi(new StartupUseOptions
             {
-                ApplicationContainer = _applicationContainer,
-                ServiceProvider = serviceProvider,
-                HostingEnvironment = env,
-                ApplicationLifetime = appLifetime,
-                LoggerFactory = loggerFactory,
+                Common =
+                {
+                    ApplicationContainer = _applicationContainer,
+                    ServiceProvider = serviceProvider,
+                    HostingEnvironment = env,
+                    ApplicationLifetime = appLifetime,
+                    LoggerFactory = loggerFactory
+                },
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Cumps Consulting - Functional Living API {groupName}"
+                    Info = groupName => $"Cumps Consulting - Functional Living API {groupName}",
+                    CSharpClientOptions =
+                    {
+                        ClassName = "FunctionalLivingClient",
+                        Namespace = "FunctionalLiving.Client"
+                    },
+                    TypeScriptClientOptions =
+                    {
+                        ClassName = "FunctionalLivingClient"
+                    },
+                    CustomExceptionHandlers = new IExceptionHandler[]
+                    {
+                        new FunctionalLivingExceptionHandler(),
+                    },
                 },
                 Server =
                 {
@@ -93,6 +133,6 @@ namespace FunctionalLiving.Api.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Cumps Consulting Functional Living API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Right now you are reading the documentation for version {description.ApiVersion} of the Cumps Consulting Functional Living API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}";
     }
 }

@@ -15,10 +15,10 @@ licenseUrl https://opensource.org/licenses/EUPL-1.2
 description Home automation integrating various technologies.
 
 files
-  FunctionalLiving.Api.dll => lib\netcoreapp2.2
-  FunctionalLiving.Api.pdb => lib\netcoreapp2.2
-  FunctionalLiving.Api.xml => lib\netcoreapp2.2
+  FunctionalLiving.Api.dll => lib\netcoreapp3.1
+  FunctionalLiving.Api.pdb => lib\netcoreapp3.1
+  FunctionalLiving.Api.xml => lib\netcoreapp3.1
   FunctionalLiving.Api.xml => content
 
-  FunctionalLiving.dll => lib\netcoreapp2.2
-  FunctionalLiving.pdb => lib\netcoreapp2.2
+  FunctionalLiving.dll => lib\netcoreapp3.1
+  FunctionalLiving.pdb => lib\netcoreapp3.1

@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/cumpsd/functional-living/compare/v1.0.0...v1.1.0) (2020-06-15)
+
+
+### Features
+
+* allow tweaking a lot of configuration ([d25a0c3](https://github.com/cumpsd/functional-living/commit/d25a0c36c5da8dea4ce6a5d537c900bfb53859a0))
+
 # 1.0.0 (2020-06-15)
 
 

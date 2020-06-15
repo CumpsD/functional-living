@@ -8,7 +8,7 @@ namespace FunctionalLiving.Knx
     {
         public KnxCommandHandlerModule()
         {
-            For<DoExample>()
+            For<KnxCommand>()
                 .Handle(async (message, ct) =>
                 {
                     Console.WriteLine("Hey");

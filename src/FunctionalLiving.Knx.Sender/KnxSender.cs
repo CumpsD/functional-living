@@ -8,22 +8,78 @@ namespace FunctionalLiving.Knx.Sender
     using System.Threading.Tasks;
     using Addressing;
     using Microsoft.Extensions.Logging;
-    using Modules;
+    using Microsoft.Extensions.Options;
+    using Infrastructure.Modules;
+    using Infrastructure.Toggles;
+    using FunctionalLiving.Knx.Log;
+
+    public class KnxConfiguration
+    {
+        public const string ConfigurationPath = "Knx";
+
+        public string RouterIp { get; set; }
+        public int RouterPort { get; set; } = 3671;
+        public string LocalIp { get; set; } = "127.0.0.1";
+        public int LocalPort { get; set; } = 3671;
+    }
 
     public class KnxSender
     {
         private readonly ILogger<KnxSender> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly KnxConnectionRouting _connection;
+        private readonly KnxConnection _connection;
+        private readonly SendToLog _sendToLog;
+        private readonly SendToApi _sendToApi;
 
         public KnxSender(
             ILogger<KnxSender> logger,
-            IHttpClientFactory httpClientFactory)
+            ILogger<KnxConnection> knxLogger,
+            IHttpClientFactory httpClientFactory,
+            IOptions<KnxConfiguration> knxConfiguration,
+            SendToLog sendToLog,
+            SendToApi sendToApi,
+            UseKnxConnectionRouting useKnxConnectionRouting,
+            UseKnxConnectionTunneling useKnxConnectionTunneling,
+            DebugKnx debugKnx)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
 
-            _connection = new KnxConnectionRouting { Debug = false, ActionMessageCode = 0x29 };
+            _sendToLog = sendToLog;
+            _sendToApi = sendToApi;
+
+            Logger.DebugEventEndpoint = (id, message) => { knxLogger.LogDebug(message); };
+            Logger.InfoEventEndpoint = (id, message) => { knxLogger.LogInformation(message); };
+            Logger.WarnEventEndpoint = (id, message) => { knxLogger.LogWarning(message); };
+            Logger.ErrorEventEndpoint = (id, message) => { knxLogger.LogError(message); };
+
+            if (useKnxConnectionTunneling.FeatureEnabled && useKnxConnectionRouting.FeatureEnabled)
+                throw new Exception("Cannot enable Tunneling and Routing simultaneously.");
+
+            if (!useKnxConnectionTunneling.FeatureEnabled && !useKnxConnectionRouting.FeatureEnabled)
+                throw new Exception("Either enable Tunneling or Routing");
+
+            if (useKnxConnectionTunneling.FeatureEnabled)
+            {
+                _connection = new KnxConnectionTunneling(
+                    knxConfiguration.Value.RouterIp,
+                    knxConfiguration.Value.RouterPort,
+                    knxConfiguration.Value.LocalIp,
+                    knxConfiguration.Value.LocalPort)
+                {
+                    Debug = debugKnx.FeatureEnabled,
+                };
+            }
+
+            if (useKnxConnectionRouting.FeatureEnabled)
+            {
+                _connection = new KnxConnectionRouting
+                {
+                    Debug = debugKnx.FeatureEnabled,
+                    ActionMessageCode = 0x29
+                };
+            }
+
             _connection.SetLockIntervalMs(20);
             _connection.KnxConnectedDelegate += Connected;
             _connection.KnxDisconnectedDelegate += () => Disconnected(_connection);
@@ -32,22 +88,28 @@ namespace FunctionalLiving.Knx.Sender
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
+            => _connection.Connect();
+
+        private void Event(KnxAddress address, byte[] state)
+            => Handle(address, state);
+
+        private void Status(KnxAddress address, byte[] state)
+            => Handle(address, state);
+
+        private void Handle(KnxAddress knxAddress, byte[] state)
         {
-            _connection.Connect();
+            if (_sendToLog.FeatureEnabled)
+                Print(knxAddress, state);
+
+            if (_sendToApi.FeatureEnabled)
+                SendToApi(knxAddress, state);
         }
-
-        private void Event(KnxAddress address, byte[] state) => Print(address, state);
-
-        private void Status(KnxAddress address, byte[] state) => Print(address, state);
 
         private void Print(KnxAddress knxAddress, byte[] state)
-        {
-            _logger.LogDebug("{address} - {state}", knxAddress.ToString(), BitConverter.ToString(state));
+            => _logger.LogInformation("{address} - {state}", knxAddress.ToString(), BitConverter.ToString(state));
 
-            SendToApi(knxAddress, state);
-        }
-
-        private void Connected() => _logger.LogInformation("Connected!");
+        private void Connected()
+            => _logger.LogInformation("Connected!");
 
         private void Disconnected(KnxConnection connection)
         {

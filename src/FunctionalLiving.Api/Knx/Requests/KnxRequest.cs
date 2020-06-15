@@ -2,27 +2,31 @@ namespace FunctionalLiving.Api.Knx.Requests
 {
     using System.ComponentModel.DataAnnotations;
     using FluentValidation;
+    using FunctionalLiving.Knx.Commands;
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Filters;
 
     public class KnxRequest
     {
-        /// <summary>Type of the Knx message.</summary>
+        /// <summary>Type of the Knx group address.</summary>
         [Required]
-        [Display(Name = "Type")]
-        public string Type { get; set; }
+        [Display(Name = "Address")]
+        public string Address { get; set; }
 
-        /// <summary>The Knx message.</summary>
+        /// <summary>The Knx message as a string of hex bytes.</summary>
         [Required]
-        [Display(Name = "Command")]
-        public string Command { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
     }
 
     public class KnxRequestValidator : AbstractValidator<KnxRequest>
     {
         public KnxRequestValidator()
         {
-            RuleFor(x => x.Type)
+            RuleFor(x => x.Address)
+                .NotEmpty();
+
+            RuleFor(x => x.State)
                 .NotEmpty();
         }
     }
@@ -33,20 +37,18 @@ namespace FunctionalLiving.Api.Knx.Requests
         {
             return new KnxRequest
             {
-                Type = "FunctionalLiving.Example.Commands.DoExample",
-                Command = "{}"
+                Address = "1/3/17",
+                State = "15-A7"
             };
         }
     }
 
     public static class KnxRequestMapping
     {
-        public static dynamic Map(KnxRequest message)
+        public static KnxCommand Map(KnxRequest message)
         {
-            var assembly = typeof(DomainAssemblyMarker).Assembly;
-            var type = assembly.GetType(message.Type);
-
-            return JsonConvert.DeserializeObject(message.Command, type);
+            // TODO: Map message to command
+            return new KnxCommand();
         }
     }
 }

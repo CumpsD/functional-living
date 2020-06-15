@@ -9,7 +9,7 @@ namespace FunctionalLiving.Knx.Sender
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Modules;
+    using Infrastructure.Modules;
     using Serilog;
 
     public class Program
@@ -79,18 +79,25 @@ namespace FunctionalLiving.Knx.Sender
 
             var builder = new ContainerBuilder();
 
-            builder.RegisterModule(new LoggingModule(configuration, services));
+            builder
+                .RegisterModule(new LoggingModule(configuration, services));
 
             var tempProvider = services.BuildServiceProvider();
             var loggerFactory = tempProvider.GetService<ILoggerFactory>();
 
-            builder.RegisterModule(new HttpModule(configuration, services, loggerFactory));
+            services
+                .Configure<KnxConfiguration>(configuration.GetSection(KnxConfiguration.ConfigurationPath));
+
+            builder
+                .RegisterModule(new HttpModule(configuration, services, loggerFactory))
+                .RegisterModule(new TogglesModule(configuration, loggerFactory));
 
             builder
                 .RegisterType<KnxSender>()
                 .SingleInstance();
 
-            builder.Populate(services);
+            builder
+                .Populate(services);
 
             return new AutofacServiceProvider(builder.Build());
         }

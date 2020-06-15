@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Sender.Modules
+namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
 {
     using System;
     using Autofac;

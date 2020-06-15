@@ -49,10 +49,8 @@ namespace FunctionalLiving.Api.Knx
             await new KnxRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
-            // Normally this would be bus.Dispatch(...) but because of the example the command to dispatch is of type 'dynamic' which an extension method cannot handle.
             return Accepted(
-                await CommandHandlerResolverExtensions.Dispatch(
-                    bus,
+                await bus.Dispatch(
                     Guid.NewGuid(),
                     KnxRequestMapping.Map(request),
                     GetMetadata(),

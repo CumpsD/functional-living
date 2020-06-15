@@ -62,7 +62,7 @@ Target.create "Pack_Solution" (fun _ ->
 Target.create "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
 Target.create "PushContainer_Api" (fun _ -> push "api")
 
-Target.create "Containerize_Knx" (fun _ -> containerize "unctionalLiving.Knx.Sender" "knx")
+Target.create "Containerize_Knx" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "knx")
 Target.create "PushContainer_Knx" (fun _ -> push "knx")
 
 Target.create "Build" ignore

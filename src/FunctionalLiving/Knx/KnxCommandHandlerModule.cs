@@ -1,13 +1,12 @@
-namespace FunctionalLiving.Example
+namespace FunctionalLiving.Knx
 {
     using System;
-    using Be.Vlaanderen.Basisregisters.AggregateSource;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
 
-    public sealed class ExampleCommandHandlerModule : CommandHandlerModule
+    public sealed class KnxCommandHandlerModule : CommandHandlerModule
     {
-        public ExampleCommandHandlerModule()
+        public KnxCommandHandlerModule()
         {
             For<DoExample>()
                 .Handle(async (message, ct) =>

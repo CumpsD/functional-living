@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
 
   <ItemGroup>
@@ -7,13 +7,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FunctionalLiving.Infrastructure\FunctionalLiving.Infrastructure.csproj" />
     <ProjectReference Include="..\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj" />
     <ProjectReference Include="..\FunctionalLiving\FunctionalLiving.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Destructurama.JsonNet">
+      <HintPath>..\..\packages\Be.Vlaanderen.Basisregisters.Api\lib\netcoreapp3.1\Destructurama.JsonNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />

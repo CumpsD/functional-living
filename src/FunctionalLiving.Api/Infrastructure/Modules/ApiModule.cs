@@ -6,7 +6,6 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
     using Be.Vlaanderen.Basisregisters.EventHandling.Autofac;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using FunctionalLiving.Infrastructure.Modules;
 
     public class ApiModule : Module
     {

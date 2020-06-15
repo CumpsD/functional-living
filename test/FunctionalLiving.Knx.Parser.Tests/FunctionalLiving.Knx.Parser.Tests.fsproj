@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Test.props" />
 
   <ItemGroup>
-    <Compile Include="..\..\SolutionInfo.fs" Link="Properties\SolutionInfo.fs" />
+    <Compile Include="..\..\SolutionInfo.fs" Link="SolutionInfo.fs" />
   </ItemGroup>
 
   <ItemGroup>

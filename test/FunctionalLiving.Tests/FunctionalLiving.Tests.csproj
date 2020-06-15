@@ -3,7 +3,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FunctionalLiving\FunctionalLiving.csproj" />
-    <ProjectReference Include="..\..\src\FunctionalLiving.Infrastructure\FunctionalLiving.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

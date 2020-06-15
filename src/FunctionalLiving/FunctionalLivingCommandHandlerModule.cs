@@ -4,9 +4,9 @@ namespace FunctionalLiving
     using Autofac;
     using Knx;
 
-    public static class CommandHandlerModules
+    public class FunctionalLivingCommandHandlerModule : Module
     {
-        public static void Register(ContainerBuilder containerBuilder)
+        protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
                 .RegisterType<KnxCommandHandlerModule>()

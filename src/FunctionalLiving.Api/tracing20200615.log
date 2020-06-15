@@ -1,0 +1,166 @@
+2020-06-15 15:13:03.664 +02:00 [FTL] Application startup exception
+System.ArgumentException: The type 'FunctionalLiving.Knx.KnxCommandHandlerModule' is not assignable to service 'FunctionalLiving.Knx.KnxCommandHandlerModule (FunctionalLiving.CommandHandlerModule)'.
+   at Autofac.Builder.RegistrationBuilder.CreateRegistration(Guid id, RegistrationData data, IInstanceActivator activator, Service[] services, IComponentRegistration target, Boolean isAdapterForIndividualComponent) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 198
+   at Autofac.Builder.RegistrationBuilder.CreateRegistration[TLimit,TActivatorData,TSingleRegistrationStyle](IRegistrationBuilder`3 builder) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 134
+   at Autofac.Builder.RegistrationBuilder.RegisterSingleComponent[TLimit,TActivatorData,TSingleRegistrationStyle](IComponentRegistryBuilder cr, IRegistrationBuilder`3 builder) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 256
+   at Autofac.RegistrationExtensions.<>c__DisplayClass2_0`1.<RegisterType>b__0(IComponentRegistryBuilder cr) in C:\projects\autofac\src\Autofac\RegistrationExtensions.cs:line 137
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.UpdateRegistry(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 208
+   at Autofac.Module.Configure(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\Module.cs:line 85
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.UpdateRegistry(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 208
+   at Autofac.Module.Configure(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\Module.cs:line 85
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.Build(ContainerBuildOptions options) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 182
+   at FunctionalLiving.Api.Infrastructure.Startup.ConfigureServices(IServiceCollection services) in C:\Skully\dotfiles\repos\gh-cumps\functional-living\src\FunctionalLiving.Api\Infrastructure\Startup.cs:line 82
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.InvokeCore(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass9_0.<Invoke>g__Startup|0(IServiceCollection serviceCollection)
+   at Microsoft.AspNetCore.Hosting.StartupLoader.ConfigureServicesDelegateBuilder`1.<>c__DisplayClass15_0.<BuildStartupServicesFilterPipeline>g__RunPipeline|0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.Invoke(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass8_0.<Build>b__0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.StartupLoader.ConfigureServicesDelegateBuilder`1.<>c__DisplayClass14_0.<ConfigureServices>g__ConfigureServicesWithContainerConfiguration|0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.ConfigureServices(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.WebHost.EnsureApplicationServices()
+   at Microsoft.AspNetCore.Hosting.WebHost.Initialize()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.WebHost.BuildApplication()
+2020-06-15 15:13:03.744 +02:00 [WRN] Overriding address(es) 'http://localhost:5000/'. Binding to endpoints defined in UseKestrel() instead.
+2020-06-15 15:13:50.977 +02:00 [FTL] Application startup exception
+System.ArgumentException: The type 'FunctionalLiving.Knx.KnxCommandHandlerModule' is not assignable to service 'FunctionalLiving.Knx.KnxCommandHandlerModule (FunctionalLiving.CommandHandlerModule)'.
+   at Autofac.Builder.RegistrationBuilder.CreateRegistration(Guid id, RegistrationData data, IInstanceActivator activator, Service[] services, IComponentRegistration target, Boolean isAdapterForIndividualComponent) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 198
+   at Autofac.Builder.RegistrationBuilder.CreateRegistration[TLimit,TActivatorData,TSingleRegistrationStyle](IRegistrationBuilder`3 builder) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 134
+   at Autofac.Builder.RegistrationBuilder.RegisterSingleComponent[TLimit,TActivatorData,TSingleRegistrationStyle](IComponentRegistryBuilder cr, IRegistrationBuilder`3 builder) in C:\projects\autofac\src\Autofac\Builder\RegistrationBuilder.cs:line 256
+   at Autofac.RegistrationExtensions.<>c__DisplayClass2_0`1.<RegisterType>b__0(IComponentRegistryBuilder cr) in C:\projects\autofac\src\Autofac\RegistrationExtensions.cs:line 137
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.UpdateRegistry(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 208
+   at Autofac.Module.Configure(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\Module.cs:line 85
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.UpdateRegistry(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 208
+   at Autofac.Module.Configure(IComponentRegistryBuilder componentRegistry) in C:\projects\autofac\src\Autofac\Module.cs:line 85
+   at Autofac.ContainerBuilder.Build(IComponentRegistryBuilder componentRegistry, Boolean excludeDefaultModules) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 222
+   at Autofac.ContainerBuilder.Build(ContainerBuildOptions options) in C:\projects\autofac\src\Autofac\ContainerBuilder.cs:line 182
+   at FunctionalLiving.Api.Infrastructure.Startup.ConfigureServices(IServiceCollection services) in C:\Skully\dotfiles\repos\gh-cumps\functional-living\src\FunctionalLiving.Api\Infrastructure\Startup.cs:line 82
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.InvokeCore(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass9_0.<Invoke>g__Startup|0(IServiceCollection serviceCollection)
+   at Microsoft.AspNetCore.Hosting.StartupLoader.ConfigureServicesDelegateBuilder`1.<>c__DisplayClass15_0.<BuildStartupServicesFilterPipeline>g__RunPipeline|0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.Invoke(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass8_0.<Build>b__0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.StartupLoader.ConfigureServicesDelegateBuilder`1.<>c__DisplayClass14_0.<ConfigureServices>g__ConfigureServicesWithContainerConfiguration|0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.ConfigureServices(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.WebHost.EnsureApplicationServices()
+   at Microsoft.AspNetCore.Hosting.WebHost.Initialize()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.WebHost.BuildApplication()
+2020-06-15 15:13:51.038 +02:00 [WRN] Overriding address(es) 'http://localhost:5000/'. Binding to endpoints defined in UseKestrel() instead.
+2020-06-15 15:15:40.343 +02:00 [WRN] Overriding address(es) 'http://localhost:5000/'. Binding to endpoints defined in UseKestrel() instead.
+2020-06-15 15:15:53.351 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'Void Microsoft.OpenApi.Any.OpenApiString..ctor(System.String)'.
+   at Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.AutoRestSchemaFilter.Apply(OpenApiSchema schema, SchemaFilterContext context)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.ApplyFilters(OpenApiSchema schema, Type type, SchemaRepository schemaRepository, MemberInfo memberInfo, ParameterInfo parameterInfo)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GeneratePropertySchema(DataProperty serializerMember, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateObjectSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateInlineSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.<>c__DisplayClass7_0.<GenerateReferencedSchema>b__0()
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaRepository.GetOrAdd(Type type, String schemaId, Func`1 factoryMethod)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateReferencedSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateSchemaForType(Type type, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateSchema(Type type, SchemaRepository schemaRepository, MemberInfo memberInfo, ParameterInfo parameterInfo)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateRequestBodyFromBodyParameter(ApiDescription apiDescription, SchemaRepository schemaRepository, ApiParameterDescription bodyParameter)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateRequestBody(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapWhenMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.Invoke(HttpContext context)
+   at Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.DefaultResponseCompressionQualityMiddleware.Invoke(HttpContext context) in /home/runner/work/default-response-compression-quality-middleware/default-response-compression-quality-middleware/src/Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.DefaultResponseCompressionQuality/DefaultResponseCompressionQualityMiddleware.cs:line 53
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2020-06-15 15:15:53.403 +02:00 [ERR] [c77f31e0e48a4fbe82e18291a508f407] Unhandled exception!
+System.MissingMethodException: Method not found: 'Void Microsoft.OpenApi.Any.OpenApiString..ctor(System.String)'.
+   at Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.AutoRestSchemaFilter.Apply(OpenApiSchema schema, SchemaFilterContext context)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.ApplyFilters(OpenApiSchema schema, Type type, SchemaRepository schemaRepository, MemberInfo memberInfo, ParameterInfo parameterInfo)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GeneratePropertySchema(DataProperty serializerMember, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateObjectSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateInlineSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.<>c__DisplayClass7_0.<GenerateReferencedSchema>b__0()
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaRepository.GetOrAdd(Type type, String schemaId, Func`1 factoryMethod)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateReferencedSchema(DataContract dataContract, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateSchemaForType(Type type, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SchemaGenerator.GenerateSchema(Type type, SchemaRepository schemaRepository, MemberInfo memberInfo, ParameterInfo parameterInfo)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateRequestBodyFromBodyParameter(ApiDescription apiDescription, SchemaRepository schemaRepository, ApiParameterDescription bodyParameter)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateRequestBody(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapWhenMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.Invoke(HttpContext context)
+   at Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.DefaultResponseCompressionQualityMiddleware.Invoke(HttpContext context) in /home/runner/work/default-response-compression-quality-middleware/default-response-compression-quality-middleware/src/Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.DefaultResponseCompressionQuality/DefaultResponseCompressionQualityMiddleware.cs:line 53
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2020-06-15 15:15:53.407 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Type    : urn:be.vlaanderen.basisregisters.api:unhandled
+Title   : Er heeft zich een fout voorgedaan!
+Status  : 500
+Detail  : 
+Instance: c77f31e0e48a4fbe82e18291a508f407
+
+2020-06-15 15:16:12.072 +02:00 [DBG] Hosting starting
+2020-06-15 15:16:12.303 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'Cumps Consulting - Functional Living API v1' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.306 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization.resources" among the resources "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Localization.resources", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-144x144.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-192x192.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-36x36.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-48x48.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-72x72.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-96x96.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114-precomposed.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-120x120-precomposed.png", ... embedded in the assembly "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.318 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'Cumps Consulting - Functional Living API v1' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.319 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources.resources" among the resources "" embedded in the assembly "Be.Vlaanderen.Basisregisters.Api", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.319 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'An overview of the available API methods.' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.319 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization.resources" among the resources "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Localization.resources", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-144x144.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-192x192.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-36x36.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-48x48.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-72x72.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-96x96.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114-precomposed.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-120x120-precomposed.png", ... embedded in the assembly "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.320 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'An overview of the available API methods.' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.320 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources.resources" among the resources "" embedded in the assembly "Be.Vlaanderen.Basisregisters.Api", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.320 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.320 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization.resources" among the resources "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Localization.resources", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-144x144.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-192x192.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-36x36.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-48x48.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-72x72.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-96x96.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114-precomposed.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-120x120-precomposed.png", ... embedded in the assembly "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.321 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.321 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources.resources" among the resources "" embedded in the assembly "Be.Vlaanderen.Basisregisters.Api", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.321 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.321 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.321 +02:00 [DBG] ResourceManagerStringLocalizer searched for '/' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.321 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization.resources" among the resources "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Localization.resources", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-144x144.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-192x192.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-36x36.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-48x48.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-72x72.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.android-chrome-96x96.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114-precomposed.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-114x114.png", "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.www.apple-touch-icon-120x120-precomposed.png", ... embedded in the assembly "Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.321 +02:00 [DBG] ResourceManagerStringLocalizer searched for '/' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.322 +02:00 [DBG] FirstChanceException event raised in FunctionalLiving.Api.
+System.Resources.MissingManifestResourceException: Could not find the resource "Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources.resources" among the resources "" embedded in the assembly "Be.Vlaanderen.Basisregisters.Api", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'Cumps Consulting - Functional Living API v1' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'Cumps Consulting - Functional Living API v1' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'An overview of the available API methods.' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'An overview of the available API methods.' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for 'API Documentation' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.323 +02:00 [DBG] ResourceManagerStringLocalizer searched for '/' in 'Be.Vlaanderen.Basisregisters.AspNetCore.Swagger.ReDoc.Resources.Localization' with culture 'en-US'.
+2020-06-15 15:16:12.324 +02:00 [DBG] ResourceManagerStringLocalizer searched for '/' in 'Be.Vlaanderen.Basisregisters.Api.Resources.StartupDefaults+DefaultResources' with culture 'en-US'.
+2020-06-15 15:16:12.343 +02:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-06-15 15:16:12.370 +02:00 [WRN] Overriding address(es) 'http://localhost:5000/'. Binding to endpoints defined in UseKestrel() instead.
+2020-06-15 15:16:12.387 +02:00 [INF] Application started.
+2020-06-15 15:16:12.387 +02:00 [DBG] Hosting started
+2020-06-15 15:16:12.387 +02:00 [DBG] Loaded hosting startup assembly FunctionalLiving.Api

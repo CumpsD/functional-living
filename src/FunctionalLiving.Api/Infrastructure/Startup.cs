@@ -1,11 +1,13 @@
 namespace FunctionalLiving.Api.Infrastructure
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using Be.Vlaanderen.Basisregisters.Api;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -20,6 +22,9 @@ namespace FunctionalLiving.Api.Infrastructure
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
+        private const string DefaultCulture = "en-GB";
+        private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl";
+
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
@@ -57,11 +62,23 @@ namespace FunctionalLiving.Api.Infrastructure
                                 }
                             },
                             XmlCommentPaths = new[] {typeof(Startup).GetTypeInfo().Assembly.GetName().Name}
+                        },
+                        Localization =
+                        {
+                            DefaultCulture = new CultureInfo(DefaultCulture),
+                            SupportedCultures = SupportedCultures
+                                .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(x => new CultureInfo(x.Trim()))
+                                .ToArray()
+                        },
+                        MiddlewareHooks =
+                        {
+                            FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>(),
                         }
                     });
 
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new ApiModule(services));
+            containerBuilder.RegisterModule(new ApiModule(_configuration, services));
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);
@@ -75,7 +92,6 @@ namespace FunctionalLiving.Api.Infrastructure
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider)
         {
-
             app.UseDefaultForApi(new StartupUseOptions
             {
                 Common =
@@ -98,7 +114,11 @@ namespace FunctionalLiving.Api.Infrastructure
                     TypeScriptClientOptions =
                     {
                         ClassName = "FunctionalLivingClient"
-                    }
+                    },
+                    CustomExceptionHandlers = new IExceptionHandler[]
+                    {
+                        new FunctionalLivingExceptionHandler(),
+                    },
                 },
                 Server =
                 {
@@ -113,6 +133,6 @@ namespace FunctionalLiving.Api.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Cumps Consulting Functional Living API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Right now you are reading the documentation for version {description.ApiVersion} of the Cumps Consulting Functional Living API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}";
     }
 }

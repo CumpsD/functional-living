@@ -17,7 +17,7 @@ namespace FunctionalLiving.Api.Infrastructure
         }
 
         private readonly ClaimsPrincipal _claimsPrincipal;
-        private const string AcmIdClaimName = "urn:be:vlaanderen:example-registry:acmid";
+        private const string AcmIdClaimName = "urn:cumps-consulting:functional-living:acmid";
 
         public string Ip { get; private set; }
         public string FirstName { get; private set; }

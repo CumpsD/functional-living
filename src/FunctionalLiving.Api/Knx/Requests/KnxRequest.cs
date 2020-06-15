@@ -1,25 +1,37 @@
 namespace FunctionalLiving.Api.Knx.Requests
 {
     using System.ComponentModel.DataAnnotations;
+    using FluentValidation;
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Filters;
 
-    public class CommandRequest
+    public class KnxRequest
     {
-        /// <summary>Type van het commando.</summary>
+        /// <summary>Type of the Knx message.</summary>
         [Required]
+        [Display(Name = "Type")]
         public string Type { get; set; }
 
-        /// <summary>Het commando.</summary>
+        /// <summary>The Knx message.</summary>
         [Required]
+        [Display(Name = "Command")]
         public string Command { get; set; }
     }
 
-    public class CommandRequestExample : IExamplesProvider<CommandRequest>
+    public class KnxRequestValidator : AbstractValidator<KnxRequest>
     {
-        public CommandRequest GetExamples()
+        public KnxRequestValidator()
         {
-            return new CommandRequest
+            RuleFor(x => x.Type)
+                .NotEmpty();
+        }
+    }
+
+    public class KnxRequestExample : IExamplesProvider<KnxRequest>
+    {
+        public KnxRequest GetExamples()
+        {
+            return new KnxRequest
             {
                 Type = "FunctionalLiving.Example.Commands.DoExample",
                 Command = "{}"
@@ -27,9 +39,9 @@ namespace FunctionalLiving.Api.Knx.Requests
         }
     }
 
-    public static class CommandRequestMapping
+    public static class KnxRequestMapping
     {
-        public static dynamic Map(CommandRequest message)
+        public static dynamic Map(KnxRequest message)
         {
             var assembly = typeof(DomainAssemblyMarker).Assembly;
             var type = assembly.GetType(message.Type);

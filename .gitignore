@@ -42,3 +42,5 @@ TestResults.xml
 ehthumbs.db
 Icon?
 Thumbs.db
+
+tracing*.log

@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/cumpsd/functional-living/compare/v1.5.0...v1.6.0) (2020-06-16)
+
+
+### Bug Fixes
+
+* make it work on windows again ([bcba132](https://github.com/cumpsd/functional-living/commit/bcba1328ce65097c4b260cc949e6c88b1f2d05ab))
+
+
+### Features
+
+* show what is going on ([2630a32](https://github.com/cumpsd/functional-living/commit/2630a32af5344126116827f1f30ced43286d897d))
+
 # [1.5.0](https://github.com/cumpsd/functional-living/compare/v1.4.3...v1.5.0) (2020-06-16)
 
 

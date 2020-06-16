@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/cumpsd/functional-living/compare/v1.4.3...v1.5.0) (2020-06-16)
+
+
+### Features
+
+* add commandlogging ([54bb767](https://github.com/cumpsd/functional-living/commit/54bb76738e138b89ea96d304458363ecbac2c94d))
+
 ## [1.4.3](https://github.com/cumpsd/functional-living/compare/v1.4.2...v1.4.3) (2020-06-16)
 
 

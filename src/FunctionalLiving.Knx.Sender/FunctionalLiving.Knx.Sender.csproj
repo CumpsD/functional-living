@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj" />
-    <ProjectReference Include="..\FunctionalLiving\FunctionalLiving.csproj" />
   </ItemGroup>
 
   <ItemGroup>

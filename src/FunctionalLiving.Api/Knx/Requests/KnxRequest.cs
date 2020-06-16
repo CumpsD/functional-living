@@ -1,8 +1,11 @@
 namespace FunctionalLiving.Api.Knx.Requests
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using FluentValidation;
     using FunctionalLiving.Knx.Commands;
+    using FunctionalLiving.Knx.Addressing;
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Filters;
 
@@ -56,8 +59,22 @@ namespace FunctionalLiving.Api.Knx.Requests
     {
         public static KnxCommand Map(KnxRequest message)
         {
-            // TODO: Map message to command
-            return new KnxCommand();
+            var groupAddress = KnxGroupAddress.Parse(message.DestinationAddress);
+
+            return new KnxCommand(
+                groupAddress,
+                StringToByteArray(message.State));
+        }
+
+        private static byte[] StringToByteArray(string hex) {
+            if (hex.StartsWith("0x"))
+                hex = hex.Substring(2);
+
+            return Enumerable
+                .Range(0, hex.Length)
+                .Where(x => x % 2 == 0)
+                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                .ToArray();
         }
     }
 }

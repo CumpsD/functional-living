@@ -1,3 +1,11 @@
+## [1.4.3](https://github.com/cumpsd/functional-living/compare/v1.4.2...v1.4.3) (2020-06-16)
+
+
+### Bug Fixes
+
+* make docker compose work ([96a967f](https://github.com/cumpsd/functional-living/commit/96a967f8a8cece7f8a91af8872c04be18410fca3))
+* use api name in compose ([cce288d](https://github.com/cumpsd/functional-living/commit/cce288d1c06472471360bbff6f338383eb936dbc))
+
 ## [1.4.2](https://github.com/cumpsd/functional-living/compare/v1.4.1...v1.4.2) (2020-06-16)
 
 ## [1.4.1](https://github.com/cumpsd/functional-living/compare/v1.4.0...v1.4.1) (2020-06-16)

@@ -33,6 +33,7 @@ namespace FunctionalLiving.Api.Knx.Responses
 
     public class BadRequestResponseExamples : IExamplesProvider<ValidationProblemDetails>
     {
+        // TODO: Improve this example
         public ValidationProblemDetails GetExamples() =>
             new ValidationProblemDetails
             {

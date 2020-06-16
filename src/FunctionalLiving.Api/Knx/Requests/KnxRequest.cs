@@ -4,9 +4,8 @@ namespace FunctionalLiving.Api.Knx.Requests
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using FluentValidation;
-    using FunctionalLiving.Knx.Commands;
     using FunctionalLiving.Knx.Addressing;
-    using Newtonsoft.Json;
+    using FunctionalLiving.Knx.Commands;
     using Swashbuckle.AspNetCore.Filters;
 
     public class KnxRequest

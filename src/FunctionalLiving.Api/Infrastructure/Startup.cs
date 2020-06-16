@@ -4,9 +4,9 @@ namespace FunctionalLiving.Api.Infrastructure
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using Be.Vlaanderen.Basisregisters.Api;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
@@ -16,8 +16,8 @@ namespace FunctionalLiving.Api.Infrastructure
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
-    using Modules;
     using Microsoft.OpenApi.Models;
+    using Modules;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup

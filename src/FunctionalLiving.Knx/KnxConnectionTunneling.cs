@@ -49,14 +49,18 @@ namespace FunctionalLiving.Knx
 
         internal void RevertSingleSequenceNumber() => _sequenceNumber--;
 
-        internal void ResetSequenceNumber() => _sequenceNumber = 0x00;
+        internal void ResetSequenceNumber()
+        {
+             Logger.Debug(ClassName, "Resetting sequence number.");
+            _sequenceNumber = 0x00;
+        }
 
         /// <summary>
         ///     Start the connection
         /// </summary>
         public override void Connect()
         {
-            Logger.Info(ClassName, "KNXLib connecting...");
+            Logger.Info(ClassName, $"Connecting to Knx, using local endpoint '{_localEndpoint}'.");
 
             try
             {
@@ -75,8 +79,15 @@ namespace FunctionalLiving.Knx
 
                 _udpClient = new UdpClient(_localEndpoint)
                 {
-                    Client = { DontFragment = true, SendBufferSize = 0, ReceiveTimeout = StateRequestTimerInterval * 2 }
+                    Client =
+                    {
+                        DontFragment = true,
+                        SendBufferSize = 0,
+                        ReceiveTimeout = StateRequestTimerInterval * 2
+                    }
                 };
+
+                Logger.Debug(ClassName, "UDP Client created.");
             }
             catch (SocketException ex)
             {
@@ -128,6 +139,8 @@ namespace FunctionalLiving.Knx
 
         internal override void Connected()
         {
+            Logger.Debug(ClassName, "Knx Tunneling Connected.");
+
             base.Connected();
 
             InitializeStateRequest();
@@ -135,6 +148,8 @@ namespace FunctionalLiving.Knx
 
         internal override void Disconnected()
         {
+            Logger.Debug(ClassName, "Knx Tunneling Disconnected.");
+
             base.Disconnected();
 
             TerminateStateRequest();
@@ -153,6 +168,8 @@ namespace FunctionalLiving.Knx
         // TODO: I wonder if we can extract all these types of requests
         private void ConnectRequest()
         {
+            Logger.Debug(ClassName, "Sending 'Connect' datagram.");
+
             // HEADER
             var datagram = new byte[26];
             datagram[00] = 0x06;
@@ -188,6 +205,8 @@ namespace FunctionalLiving.Knx
 
         private void StateRequest(object sender, ElapsedEventArgs ev)
         {
+            Logger.Debug(ClassName, "Sending 'State' datagram.");
+
             // HEADER
             var datagram = new byte[16];
             datagram[00] = 0x06;
@@ -220,6 +239,8 @@ namespace FunctionalLiving.Knx
 
         internal void DisconnectRequest()
         {
+            Logger.Debug(ClassName, "Sending 'Disconnect' datagram.");
+
             // HEADER
             var datagram = new byte[16];
             datagram[00] = 0x06;

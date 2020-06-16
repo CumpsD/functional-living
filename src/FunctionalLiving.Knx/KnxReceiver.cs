@@ -20,7 +20,8 @@
 
         private BlockingCollection<KnxDatagram> _rxDatagrams;
 
-        protected KnxReceiver(KnxConnection connection) => KnxConnection = connection;
+        protected KnxReceiver(KnxConnection connection)
+            => KnxConnection = connection;
 
         protected KnxConnection KnxConnection { get; }
 
@@ -62,6 +63,8 @@
 
             _receiverThread = new Thread(ReceiverThreadFlow) { Name = "KnxReceiverThread", IsBackground = true };
             _receiverThread.Start();
+
+            Logger.Debug(ClassName, "Started Consumer and Receiver threads.");
         }
 
         public void Stop()

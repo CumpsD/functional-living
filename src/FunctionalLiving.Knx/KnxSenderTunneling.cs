@@ -4,9 +4,12 @@
     using System.Net;
     using System.Net.Sockets;
     using Addressing;
+    using Log;
 
     internal class KnxSenderTunneling : KnxSender
     {
+        private static readonly string ClassName = typeof(KnxSenderTunneling).ToString();
+
         private UdpClient _udpClient;
         private readonly IPEndPoint _remoteEndpoint;
 
@@ -19,12 +22,19 @@
             _remoteEndpoint = remoteEndpoint;
         }
 
-        public void SetClient(UdpClient client) => _udpClient = client;
+        public void SetClient(UdpClient client)
+            => _udpClient = client;
 
-        public void SendDataSingle(byte[] datagram) => _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
+        public void SendDataSingle(byte[] datagram)
+        {
+            Logger.Debug(ClassName, $"Sending '{BitConverter.ToString(datagram)}'.");
+            _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
+        }
 
         public override void SendData(byte[] datagram)
         {
+            // TODO: Why does this need to send 4 times?
+            Logger.Debug(ClassName, $"Sending 4x '{BitConverter.ToString(datagram)}'.");
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);

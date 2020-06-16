@@ -68,8 +68,8 @@ namespace FunctionalLiving.Knx.Sender
             _connection.SetLockIntervalMs(20);
             _connection.KnxConnectedDelegate += Connected;
             _connection.KnxDisconnectedDelegate += () => Disconnected(_connection);
-            _connection.KnxEventDelegate += (sender, args) => Event(args.DestinationAddress, args.State);
-            _connection.KnxStatusDelegate += (sender, args) => Status(args.DestinationAddress, args.State);
+            _connection.KnxEventDelegate += (sender, args) => Event(args.SourceAddress, args.DestinationAddress, args.State);
+            _connection.KnxStatusDelegate += (sender, args) => Status(args.SourceAddress, args.DestinationAddress, args.State);
         }
 
         private static void SetupKnxLogging(ILogger<KnxConnection> knxLogger)
@@ -147,23 +147,39 @@ namespace FunctionalLiving.Knx.Sender
         public async Task StartAsync(CancellationToken cancellationToken)
             => _connection.Connect();
 
-        private void Event(KnxAddress address, byte[] state)
-            => Handle(address, state);
+        private void Event(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
+            => Handle(sourceAddress, destinationAddress, state);
 
-        private void Status(KnxAddress address, byte[] state)
-            => Handle(address, state);
+        private void Status(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
+            => Handle(sourceAddress, destinationAddress, state);
 
-        private void Handle(KnxAddress knxAddress, byte[] state)
+        private void Handle(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
         {
             if (_sendToLog.FeatureEnabled)
-                Print(knxAddress, state);
+                Print(sourceAddress, destinationAddress, state);
 
             if (_sendToApi.FeatureEnabled)
-                SendToApi(knxAddress, state);
+                SendToApi(sourceAddress, destinationAddress, state);
         }
 
-        private void Print(KnxAddress knxAddress, byte[] state)
-            => _logger.LogInformation("{address} - {state}", knxAddress.ToString(), BitConverter.ToString(state));
+        private void Print(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
+            => _logger.LogInformation(
+                "{sourceAddress} - {destinationAddress} - {state}",
+                sourceAddress.ToString(),
+                destinationAddress.ToString(),
+                BitConverter.ToString(state));
 
         private void Connected()
             => _logger.LogInformation("Connected!");
@@ -178,11 +194,14 @@ namespace FunctionalLiving.Knx.Sender
             connection.Connect();
         }
 
-        private void SendToApi(KnxAddress knxAddress, byte[] state)
+        private void SendToApi(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
         {
             using (var client = _httpClientFactory.CreateClient(HttpModule.HttpClientName))
             using (var request = new HttpRequestMessage(HttpMethod.Post, "v1/knx"))
-            using (var httpContent = CreateHttpContent(knxAddress, state))
+            using (var httpContent = CreateHttpContent(sourceAddress, destinationAddress, state))
             {
                 request.Content = httpContent;
 
@@ -191,9 +210,17 @@ namespace FunctionalLiving.Knx.Sender
             }
         }
 
-        private HttpContent CreateHttpContent(KnxAddress knxAddress, byte[] state)
+        private HttpContent CreateHttpContent(
+            KnxAddress sourceAddress,
+            KnxAddress destinationAddress,
+            byte[] state)
         {
-            var json = $@"{{ address: ""{knxAddress}"", state: ""{BitConverter.ToString(state)}"" }}";
+            var json = $@"{{
+                sourceAddress: ""{sourceAddress}"",
+                destinationAddress: ""{destinationAddress}"",
+                state: ""{BitConverter.ToString(state)}""
+            }}";
+
             _logger.LogDebug("Sending Knx payload: {payload}", json);
             return new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
         }

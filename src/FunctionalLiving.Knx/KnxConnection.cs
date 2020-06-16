@@ -184,7 +184,8 @@ namespace FunctionalLiving.Knx
         ///     Set the lock interval between requests sent to the network (in ms)
         /// </summary>
         /// <param name="interval">time in ms for the interval</param>
-        public void SetLockIntervalMs(int interval) => _lockManager.IntervalMs = interval;
+        public void SetLockIntervalMs(int interval)
+            => _lockManager.IntervalMs = interval;
 
         /// <summary>
         ///     Send a bit value as data to specified address
@@ -271,7 +272,8 @@ namespace FunctionalLiving.Knx
         /// </summary>
         /// <param name="address">KNX Address</param>
         /// <param name="data">byte value</param>
-        public void Action(KnxAddress address, byte data) => Action(address, new byte[] {0x00, data});
+        public void Action(KnxAddress address, byte data)
+            => Action(address, new byte[] {0x00, data});
 
         /// <summary>
         ///     Send a byte array value as data to specified address
@@ -317,7 +319,8 @@ namespace FunctionalLiving.Knx
         /// <param name="type">Datapoint type, e.g.: 9.001</param>
         /// <param name="data">Data to convert</param>
         /// <returns></returns>
-        public object FromDataPoint(string type, string data) => DataPointTranslator.Instance.FromDataPoint(type, data);
+        public object FromDataPoint(string type, string data)
+            => DataPointTranslator.Instance.FromDataPoint(type, data);
 
         /// <summary>
         ///     Convert a value received from KNX using datapoint translator, e.g.,
@@ -326,7 +329,8 @@ namespace FunctionalLiving.Knx
         /// <param name="type">Datapoint type, e.g.: 9.001</param>
         /// <param name="data">Data to convert</param>
         /// <returns></returns>
-        public object FromDataPoint(string type, byte[] data) => DataPointTranslator.Instance.FromDataPoint(type, data);
+        public object FromDataPoint(string type, byte[] data)
+            => DataPointTranslator.Instance.FromDataPoint(type, data);
 
         /// <summary>
         ///     Convert a value to send to KNX using datapoint translator, e.g.,
@@ -335,7 +339,8 @@ namespace FunctionalLiving.Knx
         /// <param name="type">Datapoint type, e.g.: 9.001</param>
         /// <param name="value">Value to convert</param>
         /// <returns></returns>
-        public byte[] ToDataPoint(string type, string value) => DataPointTranslator.Instance.ToDataPoint(type, value);
+        public byte[] ToDataPoint(string type, string value)
+            => DataPointTranslator.Instance.ToDataPoint(type, value);
 
         /// <summary>
         ///     Convert a value to send to KNX using datapoint translator, e.g.,
@@ -344,7 +349,8 @@ namespace FunctionalLiving.Knx
         /// <param name="type">Datapoint type, e.g.: 9.001</param>
         /// <param name="value">Value to convert</param>
         /// <returns></returns>
-        public byte[] ToDataPoint(string type, object value) => DataPointTranslator.Instance.ToDataPoint(type, value);
+        public byte[] ToDataPoint(string type, object value)
+            => DataPointTranslator.Instance.ToDataPoint(type, value);
 
         public abstract void Dispose();
 

@@ -16,16 +16,21 @@ namespace FunctionalLiving.Knx
         private readonly object _rxSequenceNumberLock = new object();
         private byte _rxSequenceNumber;
 
-        internal KnxReceiverTunneling(KnxConnection connection, UdpClient udpClient, IPEndPoint localEndpoint)
+        internal KnxReceiverTunneling(
+            KnxConnection connection,
+            UdpClient udpClient,
+            IPEndPoint localEndpoint)
             : base(connection)
         {
             _udpClient = udpClient;
             _localEndpoint = localEndpoint;
         }
 
-        private KnxConnectionTunneling KnxConnectionTunneling => (KnxConnectionTunneling) KnxConnection;
+        private KnxConnectionTunneling KnxConnectionTunneling
+            => (KnxConnectionTunneling) KnxConnection;
 
-        public void SetClient(UdpClient client) => _udpClient = client;
+        public void SetClient(UdpClient client)
+            => _udpClient = client;
 
         public override void ReceiverThreadFlow()
         {
@@ -34,6 +39,7 @@ namespace FunctionalLiving.Knx
                 while (true)
                 {
                     var datagram = _udpClient.Receive(ref _localEndpoint);
+                    Logger.Debug(ClassName, $"UDP Client Received: '{BitConverter.ToString(datagram)}'.");
                     ProcessDatagram(datagram);
                 }
             }
@@ -60,6 +66,8 @@ namespace FunctionalLiving.Knx
         {
             try
             {
+                Logger.Debug(ClassName, $"Processing datagram '{KnxHelper.GetServiceType(datagram)}'.");
+
                 switch (KnxHelper.GetServiceType(datagram))
                 {
                     case KnxHelper.SERVICE_TYPE.CONNECT_RESPONSE:
@@ -131,7 +139,8 @@ namespace FunctionalLiving.Knx
             ((KnxSenderTunneling) KnxConnectionTunneling.KnxSender).SendTunnelingAck(sequenceNumber);
         }
 
-        private void ProcessDisconnectRequest(byte[] datagram) => KnxConnectionTunneling.DisconnectRequest();
+        private void ProcessDisconnectRequest(byte[] datagram)
+            => KnxConnectionTunneling.DisconnectRequest();
 
         private void ProcessDisconnectResponse(byte[] datagram)
         {

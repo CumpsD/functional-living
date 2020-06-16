@@ -7,13 +7,16 @@
     {
         protected KnxConnection KnxConnection { get; }
 
-        protected KnxSender(KnxConnection connection) => KnxConnection = connection;
+        protected KnxSender(KnxConnection connection)
+            => KnxConnection = connection;
 
         public abstract void SendData(byte[] datagram);
 
-        public void Action(KnxAddress destinationAddress, byte[] data) => SendData(CreateActionDatagram(destinationAddress, data));
+        public void Action(KnxAddress destinationAddress, byte[] data)
+            => SendData(CreateActionDatagram(destinationAddress, data));
 
-        public void RequestStatus(KnxAddress destinationAddress) => SendData(CreateRequestStatusDatagram(destinationAddress));
+        public void RequestStatus(KnxAddress destinationAddress)
+            => SendData(CreateRequestStatusDatagram(destinationAddress));
 
         protected abstract byte[] CreateActionDatagram(KnxAddress destinationAddress, byte[] data);
 

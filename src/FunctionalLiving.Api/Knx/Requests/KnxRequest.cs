@@ -8,10 +8,15 @@ namespace FunctionalLiving.Api.Knx.Requests
 
     public class KnxRequest
     {
-        /// <summary>Type of the Knx group address.</summary>
+        /// <summary>Source Knx device address.</summary>
         [Required]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
+        [Display(Name = "SourceAddress")]
+        public string SourceAddress { get; set; }
+
+        /// <summary>Destination Knx group address.</summary>
+        [Required]
+        [Display(Name = "DestinationAddress")]
+        public string DestinationAddress { get; set; }
 
         /// <summary>The Knx message as a string of hex bytes.</summary>
         [Required]
@@ -23,7 +28,10 @@ namespace FunctionalLiving.Api.Knx.Requests
     {
         public KnxRequestValidator()
         {
-            RuleFor(x => x.Address)
+            RuleFor(x => x.SourceAddress)
+                .NotEmpty();
+
+            RuleFor(x => x.DestinationAddress)
                 .NotEmpty();
 
             RuleFor(x => x.State)
@@ -37,8 +45,9 @@ namespace FunctionalLiving.Api.Knx.Requests
         {
             return new KnxRequest
             {
-                Address = "1/3/17",
-                State = "15-A7"
+                SourceAddress = "1.1.72",
+                DestinationAddress = "0/3/6",
+                State = "0x273A"
             };
         }
     }

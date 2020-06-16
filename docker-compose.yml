@@ -21,6 +21,9 @@ services:
     hostname: functional-living-knx
     network_mode: host
     environment:
+      Features__SendToLog: 'true'
+      Features__SendToApi: 'true'
+      Features__UseKnxConnectionTunneling: 'true'
       Knx__RouterIp: 10.0.4.7
       Api__Endpoint: http://functional-living-api:5000
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.Infrastructure.Modules.TogglesModule: Debug

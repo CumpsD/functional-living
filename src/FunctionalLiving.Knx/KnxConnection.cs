@@ -5,17 +5,17 @@ namespace FunctionalLiving.Knx
     using System.Text;
     using DPT;
     using Exceptions;
-    using Log;
     using Enums;
     using Addressing;
     using Events;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     ///     Base class that controls the KNX connection, implemented by KnxConnectionRouting and KnxConnetionTunneling
     /// </summary>
     public abstract class KnxConnection : IDisposable
     {
-        private static readonly string ClassName = typeof(KnxConnection).ToString();
+        private readonly ILogger<KnxConnection> _logger;
 
         /// <summary>
         ///     Delegate function for connection established trigger
@@ -64,8 +64,12 @@ namespace FunctionalLiving.Knx
         /// </summary>
         /// <param name="host">Host to connect</param>
         /// <param name="port">Port to use</param>
-        protected KnxConnection(string host, int port)
+        protected KnxConnection(
+            ILoggerFactory loggerFactory,
+            string host,
+            int port)
         {
+            _logger = loggerFactory.CreateLogger<KnxConnection>();
             ConnectionConfiguration = new KnxConnectionConfiguration(host, port);
 
             ActionMessageCode = 0x00;
@@ -127,12 +131,11 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Calling KnxConnectedDelegate failed.");
             }
 
-            Logger.Debug(
-                ClassName,
-                "KNX is connected. Unlocking send - {0} free locks",
+            _logger.LogDebug(
+                "KNX is connected. Unlocking send - {LockCount} free locks",
                 _lockManager.LockCount);
         }
 
@@ -149,12 +152,11 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Calling KnxDisconnectedDelegate failed.");
             }
 
-            Logger.Debug(
-                ClassName,
-                "KNX is disconnected. Send locked - {0} free locks",
+            _logger.LogDebug(
+                "KNX is disconnected. Send locked - {LockCount} free locks",
                 _lockManager.LockCount);
         }
 
@@ -166,12 +168,11 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Calling KnxEventDelegate failed.");
             }
 
-            Logger.Debug(
-                ClassName,
-                "Device '{0}' sent event '{1}' to '{2}'.",
+            _logger.LogDebug(
+                "Device '{SourceAddress}' sent event '{State}' to '{DestinationAddress}'.",
                 args.SourceAddress,
                 args.StateHex,
                 args.DestinationAddress);
@@ -185,12 +186,11 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Calling KnxStatusDelegate failed.");
             }
 
-            Logger.Debug(
-                ClassName,
-                "Device '{0}' has status '{1}' for '{2}'.",
+            _logger.LogDebug(
+                "Device '{SourceAddress}' has status '{State}' for '{DestinationAddress}'.",
                 args.SourceAddress,
                 args.StateHex,
                 args.DestinationAddress);
@@ -308,17 +308,15 @@ namespace FunctionalLiving.Knx
                 Array.Reverse(data);
             }
 
-            Logger.Debug(
-                ClassName,
-                "Sending '{0}' to '{1}'.",
+            _logger.LogDebug(
+                "Sending '{State}' to '{DestinationAddress}'.",
                 BitConverter.ToString(data),
                 address);
 
             _lockManager.PerformLockedOperation(() => KnxSender.Action(address, data));
 
-            Logger.Debug(
-                ClassName,
-                "Sent '{0}' to '{1}'.",
+            _logger.LogDebug(
+                "Sent '{State}' to '{DestinationAddress}'.",
                 BitConverter.ToString(data),
                 address);
         }
@@ -329,16 +327,14 @@ namespace FunctionalLiving.Knx
         /// <param name="address"></param>
         public void RequestStatus(KnxAddress address)
         {
-            Logger.Debug(
-                ClassName,
-                "Sending request status to '{0}'.",
+            _logger.LogDebug(
+                "Sending request status to '{DestinationAddress}'.",
                 address);
 
             _lockManager.PerformLockedOperation(() => KnxSender.RequestStatus(address));
 
-            Logger.Debug(
-                ClassName,
-                "Sent request status to '{0}'.",
+            _logger.LogDebug(
+                "Sent request status to '{DestinationAddress}'.",
                 address);
         }
 

@@ -1,7 +1,7 @@
 namespace FunctionalLiving.Knx.DPT
 {
     using System.Globalization;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     internal sealed class DataPoint8BitNoSignScaledAngle : DataPoint
     {
@@ -60,13 +60,13 @@ namespace FunctionalLiving.Knx.DPT
                     break;
 
                 default:
-                    Logger.Error("5.003", "input value received is not a valid type");
+                    // Logger.Error("5.003", "input value received is not a valid type");
                     return dataPoint;
             }
 
             if (input < 0 || input > 360)
             {
-                Logger.Error("5.003", "input value received is not in a valid range");
+                // Logger.Error("5.003", "input value received is not in a valid range");
                 return dataPoint;
             }
 

@@ -2,7 +2,7 @@ namespace FunctionalLiving.Knx.DPT
 {
     using System;
     using System.Globalization;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     internal sealed class DataPoint2ByteFloatTemperature : DataPoint
     {
@@ -76,13 +76,13 @@ namespace FunctionalLiving.Knx.DPT
                     break;
 
                 default:
-                    Logger.Error("9.001", "input value received is not a valid type");
+                    // Logger.Error("9.001", "input value received is not a valid type");
                     return dataPoint;
             }
 
             if (input < -273 || input > +670760)
             {
-                Logger.Error("9.001", "input value received is not in a valid range");
+                // Logger.Error("9.001", "input value received is not in a valid range");
                 return dataPoint;
             }
 

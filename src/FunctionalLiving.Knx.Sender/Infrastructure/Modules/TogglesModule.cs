@@ -39,9 +39,9 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
                     _configuration[SendToLog.ConfigurationPath],
                     _logger)
 
-                .RegisterToggle<DebugKnx>(
-                    DebugKnx.ConfigurationPath,
-                    _configuration[DebugKnx.ConfigurationPath],
+                .RegisterToggle<DebugKnxCemi>(
+                    DebugKnxCemi.ConfigurationPath,
+                    _configuration[DebugKnxCemi.ConfigurationPath],
                     _logger)
 
                 .RegisterToggle<UseKnxConnectionRouting>(

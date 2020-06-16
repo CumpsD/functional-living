@@ -11,7 +11,10 @@
         private readonly IList<UdpClient> _udpClients;
         private readonly IPEndPoint _remoteEndpoint;
 
-        internal KnxSenderRouting(KnxConnection connection, IList<UdpClient> udpClients, IPEndPoint remoteEndpoint)
+        internal KnxSenderRouting(
+            KnxConnection connection,
+            IList<UdpClient> udpClients,
+            IPEndPoint remoteEndpoint)
             : base(connection)
         {
             _udpClients = udpClients;

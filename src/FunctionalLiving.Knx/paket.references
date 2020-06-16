@@ -1,2 +1,13 @@
+Microsoft.Extensions.Logging
+
+Serilog
+Serilog.Sinks.Console
+Serilog.Sinks.File
+Serilog.Sinks.Seq
+Serilog.Settings.Configuration
+Serilog.Enrichers.Environment
+Serilog.Enrichers.Thread
+Serilog.Extensions.Logging
+
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

@@ -4,14 +4,14 @@
     using System.Collections.Concurrent;
     using System.Linq;
     using System.Threading;
-    using Log;
     using Addressing;
     using Events;
     using Enums;
+    using Microsoft.Extensions.Logging;
 
     internal abstract class KnxReceiver
     {
-        private static readonly string ClassName = typeof(KnxReceiver).ToString();
+        private readonly ILogger<KnxReceiver> _logger;
 
         private Thread _receiverThread;
         private Thread _consumerThread;
@@ -20,8 +20,13 @@
 
         private BlockingCollection<KnxDatagram> _rxDatagrams;
 
-        protected KnxReceiver(KnxConnection connection)
-            => KnxConnection = connection;
+        protected KnxReceiver(
+            ILoggerFactory loggerFactory,
+            KnxConnection connection)
+        {
+            _logger = loggerFactory.CreateLogger<KnxReceiver>();
+            KnxConnection = connection;
+        }
 
         protected KnxConnection KnxConnection { get; }
 
@@ -64,7 +69,7 @@
             _receiverThread = new Thread(ReceiverThreadFlow) { Name = "KnxReceiverThread", IsBackground = true };
             _receiverThread.Start();
 
-            Logger.Debug(ClassName, "Started Consumer and Receiver threads.");
+            _logger.LogDebug("Started Consumer and Receiver threads.");
         }
 
         public void Stop()
@@ -189,29 +194,29 @@
 
                 if (KnxConnection.Debug)
                 {
-                    Logger.Debug(ClassName, "-----------------------------------------------------------------------------------------------------");
-                    Logger.Debug(ClassName, BitConverter.ToString(cemi));
-                    Logger.Debug(ClassName, $"Event Header Length: {datagram.header_length}");
-                    Logger.Debug(ClassName, $"Event Protocol Version: {datagram.protocol_version:x}");
-                    Logger.Debug(ClassName, $"Event Service Type: 0x{BitConverter.ToString(datagram.service_type).Replace("-", string.Empty)}");
-                    Logger.Debug(ClassName, $"Event Total Length: {datagram.total_length}");
+                    _logger.LogDebug("-----------------------------------------------------------------------------------------------------");
+                    _logger.LogDebug(BitConverter.ToString(cemi));
+                    _logger.LogDebug("Event Header Length: {HeaderLength}", datagram.header_length);
+                    _logger.LogDebug("Event Protocol Version: {ProtocolVersion}", datagram.protocol_version);
+                    _logger.LogDebug("Event Service Type: {ServiceType}", "0x" + BitConverter.ToString(datagram.service_type).Replace("-", string.Empty));
+                    _logger.LogDebug("Event Total Length: {TotalLength}", datagram.total_length);
 
-                    Logger.Debug(ClassName, $"Event Message Code: {datagram.message_code:x}");
-                    Logger.Debug(ClassName, $"Event Aditional Info Length: {datagram.aditional_info_length}");
+                    _logger.LogDebug("Event Message Code: {MessageCode}", datagram.message_code);
+                    _logger.LogDebug("Event Aditional Info Length: {AdditionalInfoLength}", datagram.aditional_info_length);
 
                     if (datagram.aditional_info_length > 0)
-                        Logger.Debug(
-                            ClassName,
-                            $"Event Aditional Info: 0x{BitConverter.ToString(datagram.aditional_info).Replace("-", string.Empty)}");
+                        _logger.LogDebug(
+                            "Event Aditional Info: {AdditionalInfo}",
+                            "0x" + BitConverter.ToString(datagram.aditional_info).Replace("-", string.Empty));
 
-                    Logger.Debug(ClassName, $"Event Control Field 1: {datagram.control_field_1}");
-                    Logger.Debug(ClassName, $"Event Control Field 2: {datagram.control_field_2}");
-                    Logger.Debug(ClassName, $"Event Source Address: {datagram.source_address}");
-                    Logger.Debug(ClassName, $"Event Destination Address: {datagram.destination_address}");
-                    Logger.Debug(ClassName, $"Event Data Length: {datagram.data_length}");
-                    Logger.Debug(ClassName, $"Event APDU: 0x{BitConverter.ToString(datagram.apdu).Replace("-", string.Empty)}");
-                    Logger.Debug(ClassName, $"Event Data: 0x{string.Join(string.Empty, datagram.data.Select(c => ((int) c).ToString("X2")))}");
-                    Logger.Debug(ClassName, "-----------------------------------------------------------------------------------------------------");
+                    _logger.LogDebug("Event Control Field 1: {ControlField1}", datagram.control_field_1);
+                    _logger.LogDebug("Event Control Field 2: {ControlField2}", datagram.control_field_2);
+                    _logger.LogDebug("Event Source Address: {SourceAddress}", datagram.source_address);
+                    _logger.LogDebug("Event Destination Address: {DestinationAddress}", datagram.destination_address);
+                    _logger.LogDebug("Event Data Length: {DataLength}", datagram.data_length);
+                    _logger.LogDebug("Event APDU: {APDU}", "0x" + BitConverter.ToString(datagram.apdu).Replace("-", string.Empty));
+                    _logger.LogDebug("Event Data: {Data}", "0x" + string.Join(string.Empty, datagram.data.Select(c => ((int) c).ToString("X2"))));
+                    _logger.LogDebug("-----------------------------------------------------------------------------------------------------");
                 }
 
                 if (datagram.message_code != 0x29)
@@ -231,7 +236,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "ProcessCEMI failed.");
             }
         }
     }

@@ -5,16 +5,23 @@
     using System.Net;
     using System.Net.Sockets;
     using System.Threading;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     internal class KnxReceiverRouting : KnxReceiver
     {
-        private static readonly string ClassName = typeof(KnxReceiverRouting).ToString();
+        private readonly ILogger<KnxReceiverRouting> _logger;
 
         private readonly IList<UdpClient> _udpClients;
 
-        internal KnxReceiverRouting(KnxConnection connection, IList<UdpClient> udpClients)
-            : base(connection) => _udpClients = udpClients;
+        internal KnxReceiverRouting(
+            ILoggerFactory loggerFactory,
+            KnxConnection connection,
+            IList<UdpClient> udpClients)
+            : base(loggerFactory, connection)
+        {
+            _logger = loggerFactory.CreateLogger<KnxReceiverRouting>();
+            _udpClients = udpClients;
+        }
 
         public override void ReceiverThreadFlow()
         {
@@ -33,7 +40,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "UDP Receive failed.");
             }
         }
 
@@ -57,7 +64,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "OnReceive failed.");
             }
         }
 
@@ -69,7 +76,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "ProcessDatagram failed.");
             }
         }
 

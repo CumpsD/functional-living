@@ -14,7 +14,6 @@ namespace FunctionalLiving.Knx.Sender
     using Microsoft.Extensions.Options;
     using Infrastructure.Modules;
     using Infrastructure.Toggles;
-    using Log;
 
     public class KnxConfiguration
     {
@@ -35,23 +34,21 @@ namespace FunctionalLiving.Knx.Sender
         private readonly SendToApi _sendToApi;
 
         public KnxSender(
+            ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
-            ILogger<KnxConnection> knxLogger,
             IHttpClientFactory httpClientFactory,
             IOptions<KnxConfiguration> knxConfiguration,
             SendToLog sendToLog,
             SendToApi sendToApi,
             UseKnxConnectionRouting useKnxConnectionRouting,
             UseKnxConnectionTunneling useKnxConnectionTunneling,
-            DebugKnx debugKnx)
+            DebugKnxCemi debugKnxCemi)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
 
             _sendToLog = sendToLog;
             _sendToApi = sendToApi;
-
-            SetupKnxLogging(knxLogger);
 
             if (useKnxConnectionTunneling.FeatureEnabled && useKnxConnectionRouting.FeatureEnabled)
                 throw new Exception("Cannot enable Tunneling and Routing simultaneously.");
@@ -60,10 +57,10 @@ namespace FunctionalLiving.Knx.Sender
                 throw new Exception("Either enable Tunneling or Routing");
 
             if (useKnxConnectionTunneling.FeatureEnabled)
-                SetupTunnelingConnection(logger, knxConfiguration, debugKnx);
+                SetupTunnelingConnection(loggerFactory, logger, knxConfiguration, debugKnxCemi);
 
             if (useKnxConnectionRouting.FeatureEnabled)
-                SetupRoutingConnection(logger, debugKnx);
+                SetupRoutingConnection(loggerFactory, logger, debugKnxCemi);
 
             _connection.SetLockIntervalMs(20);
             _connection.KnxConnectedDelegate += Connected;
@@ -72,18 +69,11 @@ namespace FunctionalLiving.Knx.Sender
             _connection.KnxStatusDelegate += (sender, args) => Status(args.SourceAddress, args.DestinationAddress, args.State);
         }
 
-        private static void SetupKnxLogging(ILogger<KnxConnection> knxLogger)
-        {
-            Logger.DebugEventEndpoint = (id, message) => { knxLogger.LogDebug(message); };
-            Logger.InfoEventEndpoint = (id, message) => { knxLogger.LogInformation(message); };
-            Logger.WarnEventEndpoint = (id, message) => { knxLogger.LogWarning(message); };
-            Logger.ErrorEventEndpoint = (id, message) => { knxLogger.LogError(message); };
-        }
-
         private void SetupTunnelingConnection(
+            ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
             IOptions<KnxConfiguration> knxConfiguration,
-            DebugKnx debugKnx)
+            DebugKnxCemi debugKnxCemi)
         {
             var knxConfig = knxConfiguration.Value;
 
@@ -99,26 +89,28 @@ namespace FunctionalLiving.Knx.Sender
                 knxConfig.RouterPort);
 
             _connection = new KnxConnectionTunneling(
+                loggerFactory,
                 knxConfig.RouterIp,
                 knxConfig.RouterPort,
                 knxConfig.LocalIp,
                 knxConfig.LocalPort)
             {
-                Debug = debugKnx.FeatureEnabled,
+                Debug = debugKnxCemi.FeatureEnabled,
             };
         }
 
         private void SetupRoutingConnection(
+            ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
-            DebugKnx debugKnx)
+            DebugKnxCemi debugKnxCemi)
         {
             logger.LogInformation(
                 "Using '{ConnectionMode}'.",
                 "Routing");
 
-            _connection = new KnxConnectionRouting
+            _connection = new KnxConnectionRouting(loggerFactory)
             {
-                Debug = debugKnx.FeatureEnabled,
+                Debug = debugKnxCemi.FeatureEnabled,
                 ActionMessageCode = 0x29
             };
         }

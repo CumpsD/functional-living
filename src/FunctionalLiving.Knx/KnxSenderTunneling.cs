@@ -4,20 +4,25 @@
     using System.Net;
     using System.Net.Sockets;
     using Addressing;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     internal class KnxSenderTunneling : KnxSender
     {
-        private static readonly string ClassName = typeof(KnxSenderTunneling).ToString();
+        private readonly ILogger<KnxSenderTunneling> _logger;
 
         private UdpClient _udpClient;
         private readonly IPEndPoint _remoteEndpoint;
 
         private KnxConnectionTunneling KnxConnectionTunneling => (KnxConnectionTunneling) KnxConnection;
 
-        internal KnxSenderTunneling(KnxConnection connection, UdpClient udpClient, IPEndPoint remoteEndpoint)
+        internal KnxSenderTunneling(
+            ILoggerFactory loggerFactory,
+            KnxConnection connection,
+            UdpClient udpClient,
+            IPEndPoint remoteEndpoint)
             : base(connection)
         {
+            _logger = loggerFactory.CreateLogger<KnxSenderTunneling>();
             _udpClient = udpClient;
             _remoteEndpoint = remoteEndpoint;
         }
@@ -27,9 +32,8 @@
 
         public void SendDataSingle(byte[] datagram)
         {
-            Logger.Debug(
-                ClassName,
-                "Sending '{0}'.",
+            _logger.LogDebug(
+                "Sending '{Datagram}'.",
                 BitConverter.ToString(datagram));
 
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
@@ -38,9 +42,8 @@
         public override void SendData(byte[] datagram)
         {
             // TODO: Why does this need to send 4 times?
-            Logger.Debug(
-                ClassName,
-                "Sending 4x '{0}'.",
+            _logger.LogDebug(
+                "Sending 4x '{Datagram}'.",
                 BitConverter.ToString(datagram));
 
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
@@ -51,6 +54,10 @@
 
         public void SendTunnelingAck(byte sequenceNumber)
         {
+            _logger.LogDebug(
+                "Sending Tunneling Ack '{SequenceNumber}'.",
+                sequenceNumber);
+
             // HEADER
             var datagram = new byte[10];
             datagram[00] = 0x06;

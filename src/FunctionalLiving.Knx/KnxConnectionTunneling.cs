@@ -5,7 +5,7 @@ namespace FunctionalLiving.Knx
     using System.Net.Sockets;
     using System.Timers;
     using Exceptions;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     ///     Class that controls a Tunneling KNX connection, a tunneling connection is UDP based and has state.
@@ -14,7 +14,8 @@ namespace FunctionalLiving.Knx
     /// </summary>
     public class KnxConnectionTunneling : KnxConnection
     {
-        private static readonly string ClassName = typeof(KnxConnectionTunneling).ToString();
+        private readonly ILoggerFactory _loggerFactory;
+        private readonly ILogger<KnxConnectionTunneling> _logger;
 
         private readonly IPEndPoint _localEndpoint;
         private readonly Timer _stateRequestTimer;
@@ -30,9 +31,16 @@ namespace FunctionalLiving.Knx
         /// <param name="remotePort">Remote gateway port</param>
         /// <param name="localIpAddress">Local IP address to bind to</param>
         /// <param name="localPort">Local port to bind to</param>
-        public KnxConnectionTunneling(string remoteIpAddress, int remotePort, string localIpAddress, int localPort)
-            : base(remoteIpAddress, remotePort)
+        public KnxConnectionTunneling(
+            ILoggerFactory loggerFactory,
+            string remoteIpAddress,
+            int remotePort,
+            string localIpAddress,
+            int localPort)
+            : base(loggerFactory, remoteIpAddress, remotePort)
         {
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger<KnxConnectionTunneling>();
             _localEndpoint = new IPEndPoint(IPAddress.Parse(localIpAddress), localPort);
 
             ChannelId = 0x00;
@@ -51,7 +59,7 @@ namespace FunctionalLiving.Knx
 
         internal void ResetSequenceNumber()
         {
-             Logger.Debug(ClassName, "Resetting sequence number.");
+            _logger.LogDebug("Resetting sequence number.");
             _sequenceNumber = 0x00;
         }
 
@@ -60,9 +68,8 @@ namespace FunctionalLiving.Knx
         /// </summary>
         public override void Connect()
         {
-            Logger.Info(
-                ClassName,
-                "Connecting to Knx, using local endpoint '{0}'.",
+            _logger.LogInformation(
+                "Connecting to Knx, using local endpoint '{LocalEndpoint}'.",
                 _localEndpoint);
 
             try
@@ -76,7 +83,7 @@ namespace FunctionalLiving.Knx
                     }
                     catch (Exception e)
                     {
-                        Logger.Error(ClassName, e);
+                        _logger.LogError(e, "UDP Client creation failed.");
                     }
                 }
 
@@ -90,7 +97,7 @@ namespace FunctionalLiving.Knx
                     }
                 };
 
-                Logger.Debug(ClassName, "UDP Client created.");
+                _logger.LogDebug("UDP Client created.");
             }
             catch (SocketException ex)
             {
@@ -99,8 +106,8 @@ namespace FunctionalLiving.Knx
 
             if (KnxReceiver == null || KnxSender == null)
             {
-                KnxReceiver = new KnxReceiverTunneling(this, _udpClient, _localEndpoint);
-                KnxSender = new KnxSenderTunneling(this, _udpClient, RemoteEndpoint);
+                KnxReceiver = new KnxReceiverTunneling(_loggerFactory, this, _udpClient, _localEndpoint);
+                KnxSender = new KnxSenderTunneling(_loggerFactory, this, _udpClient, RemoteEndpoint);
             }
             else
             {
@@ -116,7 +123,7 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Connect failed.");
             }
         }
 
@@ -134,7 +141,7 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "Disconnect failed.");
             }
 
             base.Disconnected();
@@ -142,7 +149,7 @@ namespace FunctionalLiving.Knx
 
         internal override void Connected()
         {
-            Logger.Debug(ClassName, "Knx Tunneling Connected.");
+            _logger.LogDebug("Knx Tunneling Connected.");
 
             base.Connected();
 
@@ -151,7 +158,7 @@ namespace FunctionalLiving.Knx
 
         internal override void Disconnected()
         {
-            Logger.Debug(ClassName, "Knx Tunneling Disconnected.");
+            _logger.LogDebug("Knx Tunneling Disconnected.");
 
             base.Disconnected();
 
@@ -171,7 +178,7 @@ namespace FunctionalLiving.Knx
         // TODO: I wonder if we can extract all these types of requests
         private void ConnectRequest()
         {
-            Logger.Debug(ClassName, "Sending '{0}' datagram.", "Connect");
+            _logger.LogDebug("Sending '{DatagramType}' datagram.", "Connect");
 
             // HEADER
             var datagram = new byte[26];
@@ -203,12 +210,19 @@ namespace FunctionalLiving.Knx
             datagram[24] = 0x02;
             datagram[25] = 0x00;
 
-            ((KnxSenderTunneling) KnxSender).SendDataSingle(datagram);
+            try
+            {
+                ((KnxSenderTunneling) KnxSender).SendDataSingle(datagram);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "ConnectRequest SendData failed.");
+            }
         }
 
         private void StateRequest(object sender, ElapsedEventArgs ev)
         {
-            Logger.Debug(ClassName, "Sending '{0}' datagram.", "State");
+            _logger.LogDebug("Sending '{DatagramType}' datagram.", "State");
 
             // HEADER
             var datagram = new byte[16];
@@ -236,13 +250,13 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "StateRequest SendData failed.");
             }
         }
 
         internal void DisconnectRequest()
         {
-            Logger.Debug(ClassName, "Sending '{0}' datagram.", "Disconnect");
+            _logger.LogDebug("Sending '{DatagramType}' datagram.", "Disconnect");
 
             // HEADER
             var datagram = new byte[16];
@@ -264,7 +278,14 @@ namespace FunctionalLiving.Knx
             datagram[14] = (byte) (_localEndpoint.Port >> 8);
             datagram[15] = (byte) _localEndpoint.Port;
 
-            KnxSender.SendData(datagram);
+            try
+            {
+                KnxSender.SendData(datagram);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "DisconnectRequest SendData failed.");
+            }
         }
 
         public override void Dispose() => Dispose(true);

@@ -4,11 +4,11 @@ namespace FunctionalLiving.Knx
     using System.Net;
     using System.Net.Sockets;
     using System.Threading;
-    using Log;
+    using Microsoft.Extensions.Logging;
 
     internal class KnxReceiverTunneling : KnxReceiver
     {
-        private static readonly string ClassName = typeof(KnxReceiverTunneling).ToString();
+        private readonly ILogger<KnxReceiverTunneling> _logger;
 
         private UdpClient _udpClient;
         private IPEndPoint _localEndpoint;
@@ -17,11 +17,13 @@ namespace FunctionalLiving.Knx
         private byte _rxSequenceNumber;
 
         internal KnxReceiverTunneling(
+            ILoggerFactory loggerFactory,
             KnxConnection connection,
             UdpClient udpClient,
             IPEndPoint localEndpoint)
-            : base(connection)
+            : base(loggerFactory, connection)
         {
+            _logger = loggerFactory.CreateLogger<KnxReceiverTunneling>();
             _udpClient = udpClient;
             _localEndpoint = localEndpoint;
         }
@@ -40,9 +42,8 @@ namespace FunctionalLiving.Knx
                 {
                     var datagram = _udpClient.Receive(ref _localEndpoint);
 
-                    Logger.Debug(
-                        ClassName,
-                        "UDP Client Received: '{0}'.",
+                    _logger.LogDebug(
+                        "UDP Client Received: '{Datagram}'.",
                         BitConverter.ToString(datagram));
 
                     ProcessDatagram(datagram);
@@ -50,7 +51,7 @@ namespace FunctionalLiving.Knx
             }
             catch (SocketException e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "UDP Receive failed.");
                 KnxConnectionTunneling.Disconnected();
             }
             catch (ObjectDisposedException)
@@ -63,7 +64,7 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "UDP Receive failed.");
             }
         }
 
@@ -71,9 +72,8 @@ namespace FunctionalLiving.Knx
         {
             try
             {
-                Logger.Debug(
-                    ClassName,
-                    "Processing datagram '{0}'.",
+                _logger.LogDebug(
+                    "Processing datagram '{Datagram}'.",
                     KnxHelper.GetServiceType(datagram));
 
                 switch (KnxHelper.GetServiceType(datagram))
@@ -105,7 +105,7 @@ namespace FunctionalLiving.Knx
             }
             catch (Exception e)
             {
-                Logger.Error(ClassName, e);
+                _logger.LogError(e, "ProcessDatagram failed.");
             }
         }
 
@@ -180,9 +180,8 @@ namespace FunctionalLiving.Knx
             if (response != 0x21)
                 return;
 
-            Logger.Debug(
-                ClassName,
-                "Received connection state response - No active connection with channel ID {0}",
+            _logger.LogDebug(
+                "Received connection state response - No active connection with channel ID {ChannelId}",
                 knxDatagram.channel_id);
 
             KnxConnection.Disconnect();
@@ -203,8 +202,7 @@ namespace FunctionalLiving.Knx
 
             if (knxDatagram.channel_id == 0x00 && knxDatagram.status == 0x24)
             {
-                Logger.Info(
-                    ClassName,
+                _logger.LogInformation(
                     "KNXLib received connect response - No more connections available");
             }
             else

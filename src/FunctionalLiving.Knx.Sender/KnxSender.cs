@@ -3,17 +3,17 @@ namespace FunctionalLiving.Knx.Sender
     using System;
     using System.Net;
     using System.Net.Http;
-    using System.Net.Sockets;
     using System.Net.Mime;
     using System.Net.NetworkInformation;
+    using System.Net.Sockets;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using Addressing;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
     using Infrastructure.Modules;
     using Infrastructure.Toggles;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
 
     public class KnxConfiguration
     {
@@ -29,9 +29,11 @@ namespace FunctionalLiving.Knx.Sender
     {
         private readonly ILogger<KnxSender> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        private KnxConnection _connection;
+
         private readonly SendToLog _sendToLog;
         private readonly SendToApi _sendToApi;
+
+        private readonly KnxConnection? _connection;
 
         public KnxSender(
             ILoggerFactory loggerFactory,
@@ -57,19 +59,19 @@ namespace FunctionalLiving.Knx.Sender
                 throw new Exception("Either enable Tunneling or Routing");
 
             if (useKnxConnectionTunneling.FeatureEnabled)
-                SetupTunnelingConnection(loggerFactory, logger, knxConfiguration, debugKnxCemi);
+                _connection = SetupTunnelingConnection(loggerFactory, logger, knxConfiguration, debugKnxCemi);
 
             if (useKnxConnectionRouting.FeatureEnabled)
-                SetupRoutingConnection(loggerFactory, logger, debugKnxCemi);
+                _connection = SetupRoutingConnection(loggerFactory, logger, debugKnxCemi);
 
-            _connection.SetLockIntervalMs(20);
+            _connection!.SetLockIntervalMs(20);
             _connection.KnxConnectedDelegate += Connected;
             _connection.KnxDisconnectedDelegate += () => Disconnected(_connection);
             _connection.KnxEventDelegate += (sender, args) => Event(args.SourceAddress, args.DestinationAddress, args.State);
             _connection.KnxStatusDelegate += (sender, args) => Status(args.SourceAddress, args.DestinationAddress, args.State);
         }
 
-        private void SetupTunnelingConnection(
+        private KnxConnection SetupTunnelingConnection(
             ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
             IOptions<KnxConfiguration> knxConfiguration,
@@ -88,18 +90,18 @@ namespace FunctionalLiving.Knx.Sender
                 knxConfig.RouterIp,
                 knxConfig.RouterPort);
 
-            _connection = new KnxConnectionTunneling(
+            return new KnxConnectionTunneling(
                 loggerFactory,
-                knxConfig.RouterIp,
+                knxConfig.RouterIp ?? throw new ArgumentException("RouterIp is not defined."),
                 knxConfig.RouterPort,
-                knxConfig.LocalIp,
+                knxConfig.LocalIp ?? throw new ArgumentException("LocalIp is not defined and failed to automatically determine."),
                 knxConfig.LocalPort)
             {
                 Debug = debugKnxCemi.FeatureEnabled,
             };
         }
 
-        private void SetupRoutingConnection(
+        private KnxConnection SetupRoutingConnection(
             ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
             DebugKnxCemi debugKnxCemi)
@@ -108,7 +110,7 @@ namespace FunctionalLiving.Knx.Sender
                 "Using '{ConnectionMode}'.",
                 "Routing");
 
-            _connection = new KnxConnectionRouting(loggerFactory)
+            return new KnxConnectionRouting(loggerFactory)
             {
                 Debug = debugKnxCemi.FeatureEnabled,
                 ActionMessageCode = 0x29
@@ -118,7 +120,7 @@ namespace FunctionalLiving.Knx.Sender
         private static void CheckRouterIp(KnxConfiguration knxConfig)
         {
             if (string.IsNullOrWhiteSpace(knxConfig.RouterIp))
-                throw new Exception("RouterIp is not defined.");
+                throw new ArgumentException("RouterIp is not defined.");
         }
 
         private void CheckLocalIp(KnxConfiguration knxConfig)
@@ -128,8 +130,8 @@ namespace FunctionalLiving.Knx.Sender
 
             knxConfig.LocalIp = GetLocalIpAddress();
 
-            if (string.IsNullOrWhiteSpace(knxConfig.RouterIp))
-                throw new Exception("RouterIp is not defined and failed to automatically determine.");
+            if (string.IsNullOrWhiteSpace(knxConfig.LocalIp))
+                throw new Exception("LocalIp is not defined and failed to automatically determine.");
 
             _logger.LogInformation(
                 "No LocalIp defined, automatically determined '{LocalIp}'.",
@@ -137,7 +139,7 @@ namespace FunctionalLiving.Knx.Sender
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
-            => _connection.Connect();
+            => _connection!.Connect();
 
         private void Event(
             KnxAddress sourceAddress,

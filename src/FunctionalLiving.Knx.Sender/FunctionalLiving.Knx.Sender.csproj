@@ -19,6 +19,9 @@
     <Reference Include="Destructurama.JsonNet">
       <HintPath>..\..\packages\Be.Vlaanderen.Basisregisters.Api\lib\netcoreapp3.1\Destructurama.JsonNet.dll</HintPath>
     </Reference>
+    <Reference Include="FeatureToggle.Common">
+      <HintPath>..\..\packages\FeatureToggle.Common\lib\netstandard1.4\FeatureToggle.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />

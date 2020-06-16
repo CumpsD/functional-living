@@ -13,6 +13,8 @@ nuget Microsoft.Extensions.Configuration.Json 3.1.5
 nuget Microsoft.Extensions.Http 3.1.5
 nuget Microsoft.Extensions.Http.Polly 3.1.5
 
+nuget Microsoft.Net.Http.Headers 2.2.8
+
 nuget Autofac 5.2.0
 nuget Autofac.Extensions.DependencyInjection 6.0.0
 

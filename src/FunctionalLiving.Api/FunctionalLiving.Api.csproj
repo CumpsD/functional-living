@@ -28,6 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Destructurama.JsonNet">
+      <HintPath>..\..\packages\Be.Vlaanderen.Basisregisters.Api\lib\netcoreapp3.1\Destructurama.JsonNet.dll</HintPath>
+    </Reference>
+    <Reference Include="FeatureToggle.Common">
+      <HintPath>..\..\packages\FeatureToggle.Common\lib\netstandard1.4\FeatureToggle.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj" />
     <ProjectReference Include="..\FunctionalLiving\FunctionalLiving.csproj" />
   </ItemGroup>

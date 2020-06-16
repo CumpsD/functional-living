@@ -1,12 +1,13 @@
 namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
 {
     using System;
+    using System.Net.Http;
     using Autofac;
-    using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Net.Http.Headers;
     using Polly;
-    using HttpClientHandler = System.Net.Http.HttpClientHandler;
 
     public class HttpModule : Module
     {
@@ -24,7 +25,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
                 .AddHttpClient(HttpClientName, client =>
                 {
                     client.BaseAddress = configuration.GetValue<Uri>("Api:Endpoint");
-                    client.DefaultRequestHeaders.Add("User-Agent", "FunctionalLiving.Knx.Sender");
+                    client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "FunctionalLiving.Knx.Sender");
                 })
 
                 .ConfigurePrimaryHttpMessageHandler(c =>

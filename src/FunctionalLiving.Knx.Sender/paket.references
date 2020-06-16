@@ -5,12 +5,13 @@ Microsoft.Extensions.Configuration.EnvironmentVariables
 Microsoft.Extensions.Configuration.Json
 Microsoft.Extensions.DependencyInjection
 Microsoft.Extensions.Logging
+
 Microsoft.Extensions.Http
 Microsoft.Extensions.Http.Polly
 
-Autofac.Extensions.DependencyInjection
+Microsoft.Net.Http.Headers
 
-FeatureToggle
+Autofac.Extensions.DependencyInjection
 
 Serilog
 Serilog.Sinks.Console

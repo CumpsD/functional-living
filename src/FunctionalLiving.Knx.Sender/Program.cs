@@ -6,10 +6,10 @@ namespace FunctionalLiving.Knx.Sender
     using System.Threading.Tasks;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Infrastructure.Modules;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Infrastructure.Modules;
     using Serilog;
 
     public class Program

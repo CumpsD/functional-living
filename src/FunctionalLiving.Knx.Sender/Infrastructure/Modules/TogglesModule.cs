@@ -1,22 +1,18 @@
 namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
 {
     using System;
-    using Autofac;
-    using Destructurama;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
-    using Serilog;
-    using Serilog.Debugging;
-    using FeatureToggle;
-    using Toggles;
-    using System.Linq.Expressions;
     using System.Linq;
+    using System.Linq.Expressions;
+    using Autofac;
+    using FeatureToggle;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+    using Toggles;
 
     public class TogglesModule : Module
     {
         private readonly IConfiguration _configuration;
-        private readonly Microsoft.Extensions.Logging.ILogger? _logger;
+        private readonly ILogger? _logger;
 
         public TogglesModule(
             IConfiguration configuration,
@@ -62,7 +58,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
             this ContainerBuilder containerBuilder,
             string configurationPath,
             string value,
-            Microsoft.Extensions.Logging.ILogger? logger) where T : IFeatureToggle
+            ILogger? logger) where T : IFeatureToggle
         {
             if (bool.TryParse(value, out var toggleEnabled))
             {

@@ -168,7 +168,7 @@ namespace FunctionalLiving.Knx.Sender
             KnxAddress destinationAddress,
             byte[] state)
             => _logger.LogInformation(
-                "From Device '{SourceAddress}' to Group '{DestinationAddress}' ~> '{State}'",
+                "Receieved message from Device '{SourceAddress}' to Group '{DestinationAddress}' ~> '{State}'",
                 sourceAddress.ToString(),
                 destinationAddress.ToString(),
                 BitConverter.ToString(state));

@@ -39,7 +39,12 @@ namespace FunctionalLiving.Knx
                 while (true)
                 {
                     var datagram = _udpClient.Receive(ref _localEndpoint);
-                    Logger.Debug(ClassName, $"UDP Client Received: '{BitConverter.ToString(datagram)}'.");
+
+                    Logger.Debug(
+                        ClassName,
+                        "UDP Client Received: '{0}'.",
+                        BitConverter.ToString(datagram));
+
                     ProcessDatagram(datagram);
                 }
             }
@@ -66,7 +71,10 @@ namespace FunctionalLiving.Knx
         {
             try
             {
-                Logger.Debug(ClassName, $"Processing datagram '{KnxHelper.GetServiceType(datagram)}'.");
+                Logger.Debug(
+                    ClassName,
+                    "Processing datagram '{0}'.",
+                    KnxHelper.GetServiceType(datagram));
 
                 switch (KnxHelper.GetServiceType(datagram))
                 {
@@ -172,7 +180,10 @@ namespace FunctionalLiving.Knx
             if (response != 0x21)
                 return;
 
-            Logger.Debug(ClassName, "Received connection state response - No active connection with channel ID {0}", knxDatagram.channel_id);
+            Logger.Debug(
+                ClassName,
+                "Received connection state response - No active connection with channel ID {0}",
+                knxDatagram.channel_id);
 
             KnxConnection.Disconnect();
         }
@@ -192,7 +203,9 @@ namespace FunctionalLiving.Knx
 
             if (knxDatagram.channel_id == 0x00 && knxDatagram.status == 0x24)
             {
-                Logger.Info(ClassName, "KNXLib received connect response - No more connections available");
+                Logger.Info(
+                    ClassName,
+                    "KNXLib received connect response - No more connections available");
             }
             else
             {

@@ -27,14 +27,22 @@
 
         public void SendDataSingle(byte[] datagram)
         {
-            Logger.Debug(ClassName, $"Sending '{BitConverter.ToString(datagram)}'.");
+            Logger.Debug(
+                ClassName,
+                "Sending '{0}'.",
+                BitConverter.ToString(datagram));
+
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
         }
 
         public override void SendData(byte[] datagram)
         {
             // TODO: Why does this need to send 4 times?
-            Logger.Debug(ClassName, $"Sending 4x '{BitConverter.ToString(datagram)}'.");
+            Logger.Debug(
+                ClassName,
+                "Sending 4x '{0}'.",
+                BitConverter.ToString(datagram));
+
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);

@@ -60,7 +60,10 @@ namespace FunctionalLiving.Knx
         /// </summary>
         public override void Connect()
         {
-            Logger.Info(ClassName, $"Connecting to Knx, using local endpoint '{_localEndpoint}'.");
+            Logger.Info(
+                ClassName,
+                "Connecting to Knx, using local endpoint '{0}'.",
+                _localEndpoint);
 
             try
             {
@@ -168,7 +171,7 @@ namespace FunctionalLiving.Knx
         // TODO: I wonder if we can extract all these types of requests
         private void ConnectRequest()
         {
-            Logger.Debug(ClassName, "Sending 'Connect' datagram.");
+            Logger.Debug(ClassName, "Sending '{0}' datagram.", "Connect");
 
             // HEADER
             var datagram = new byte[26];
@@ -205,7 +208,7 @@ namespace FunctionalLiving.Knx
 
         private void StateRequest(object sender, ElapsedEventArgs ev)
         {
-            Logger.Debug(ClassName, "Sending 'State' datagram.");
+            Logger.Debug(ClassName, "Sending '{0}' datagram.", "State");
 
             // HEADER
             var datagram = new byte[16];
@@ -239,7 +242,7 @@ namespace FunctionalLiving.Knx
 
         internal void DisconnectRequest()
         {
-            Logger.Debug(ClassName, "Sending 'Disconnect' datagram.");
+            Logger.Debug(ClassName, "Sending '{0}' datagram.", "Disconnect");
 
             // HEADER
             var datagram = new byte[16];

@@ -130,7 +130,10 @@ namespace FunctionalLiving.Knx
                 Logger.Error(ClassName, e);
             }
 
-            Logger.Debug(ClassName, "KNX is connected. Unlocking send - {0} free locks", _lockManager.LockCount);
+            Logger.Debug(
+                ClassName,
+                "KNX is connected. Unlocking send - {0} free locks",
+                _lockManager.LockCount);
         }
 
         /// <summary>
@@ -149,7 +152,10 @@ namespace FunctionalLiving.Knx
                 Logger.Error(ClassName, e);
             }
 
-            Logger.Debug(ClassName, "KNX is disconnected. Send locked - {0} free locks", _lockManager.LockCount);
+            Logger.Debug(
+                ClassName,
+                "KNX is disconnected. Send locked - {0} free locks",
+                _lockManager.LockCount);
         }
 
         internal void Event(KnxEventArgs args)
@@ -163,7 +169,12 @@ namespace FunctionalLiving.Knx
                 Logger.Error(ClassName, e);
             }
 
-            Logger.Debug(ClassName, $"Device {args.SourceAddress} sent event {args.StateHex} to {args.DestinationAddress}");
+            Logger.Debug(
+                ClassName,
+                "Device '{0}' sent event '{1}' to '{2}'.",
+                args.SourceAddress,
+                args.StateHex,
+                args.DestinationAddress);
         }
 
         internal void Status(KnxStatusArgs args)
@@ -177,7 +188,12 @@ namespace FunctionalLiving.Knx
                 Logger.Error(ClassName, e);
             }
 
-            Logger.Debug(ClassName, $"Device {args.SourceAddress} has status {args.StateHex} for {args.DestinationAddress}");
+            Logger.Debug(
+                ClassName,
+                "Device '{0}' has status '{1}' for '{2}'.",
+                args.SourceAddress,
+                args.StateHex,
+                args.DestinationAddress);
         }
 
         /// <summary>
@@ -292,11 +308,19 @@ namespace FunctionalLiving.Knx
                 Array.Reverse(data);
             }
 
-            Logger.Debug(ClassName, "Sending 0x{0} to {1}.", BitConverter.ToString(data), address);
+            Logger.Debug(
+                ClassName,
+                "Sending '{0}' to '{1}'.",
+                BitConverter.ToString(data),
+                address);
 
             _lockManager.PerformLockedOperation(() => KnxSender.Action(address, data));
 
-            Logger.Debug(ClassName, "Sent 0x{0} to {1}.", BitConverter.ToString(data), address);
+            Logger.Debug(
+                ClassName,
+                "Sent '{0}' to '{1}'.",
+                BitConverter.ToString(data),
+                address);
         }
 
         /// <summary>
@@ -305,11 +329,17 @@ namespace FunctionalLiving.Knx
         /// <param name="address"></param>
         public void RequestStatus(KnxAddress address)
         {
-            Logger.Debug(ClassName, "Sending request status to {0}.", address);
+            Logger.Debug(
+                ClassName,
+                "Sending request status to '{0}'.",
+                address);
 
             _lockManager.PerformLockedOperation(() => KnxSender.RequestStatus(address));
 
-            Logger.Debug(ClassName, "Sent request status to {0}.", address);
+            Logger.Debug(
+                ClassName,
+                "Sent request status to '{0}'.",
+                address);
         }
 
         /// <summary>

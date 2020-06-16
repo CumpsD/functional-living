@@ -1,6 +1,6 @@
 namespace FunctionalLiving.Knx.Commands
 {
-    using FunctionalLiving.Knx.Addressing;
+    using Addressing;
 
     public class KnxCommand
     {

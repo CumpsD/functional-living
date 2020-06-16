@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FunctionalLiving.Knx.Parser\FunctionalLiving.Knx.Parser.fsproj" />
     <ProjectReference Include="..\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj" />
   </ItemGroup>
 

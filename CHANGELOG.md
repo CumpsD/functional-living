@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/cumpsd/functional-living/compare/v1.3.0...v1.4.0) (2020-06-16)
+
+
+### Features
+
+* detect ip ([50099d4](https://github.com/cumpsd/functional-living/commit/50099d456df0b193a5c87924f1d400a9253d2cc2))
+
 # [1.3.0](https://github.com/cumpsd/functional-living/compare/v1.2.0...v1.3.0) (2020-06-16)
 
 

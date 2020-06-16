@@ -5,6 +5,9 @@ services:
     build: dist/FunctionalLiving.Api/linux/
     container_name: functional-living-api
     hostname: functional-living-api
+    environment:
+      Serilog__WriteTo__1__Name: Seq
+      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
       - "9000:5000"
     depends_on:
@@ -18,7 +21,9 @@ services:
     hostname: functional-living-knx
     environment:
       Knx__RouterIp: 10.0.4.7
-      Api__Endpoint: http://functional-living-api:9000
+      Api__Endpoint: http://functional-living-api:5000
+      Serilog__WriteTo__1__Name: Seq
+      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     depends_on:
       - seq
       - api
@@ -34,4 +39,3 @@ services:
       ACCEPT_EULA: Y
     ports:
       - "9001:80"
-      - "9002:5341"

@@ -23,6 +23,8 @@ services:
     environment:
       Knx__RouterIp: 10.0.4.7
       Api__Endpoint: http://functional-living-api:5000
+      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.Infrastructure.Modules.TogglesModule: Debug
+      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.KnxSender: Debug
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9002
     depends_on:

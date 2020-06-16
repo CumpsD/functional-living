@@ -168,10 +168,10 @@ namespace FunctionalLiving.Knx.Sender
             KnxAddress destinationAddress,
             byte[] state)
             => _logger.LogInformation(
-                "Receieved message from Device '{SourceAddress}' to Group '{DestinationAddress}' ~> '{State}'",
+                "Received message from Device '{SourceAddress}' to Group '{DestinationAddress}' ~> '{State}'",
                 sourceAddress.ToString(),
                 destinationAddress.ToString(),
-                BitConverter.ToString(state));
+                "0x" + BitConverter.ToString(state).Replace("-", string.Empty));
 
         private void Connected()
             => _logger.LogInformation("Connected!");
@@ -210,7 +210,7 @@ namespace FunctionalLiving.Knx.Sender
             var json = $@"{{
                 sourceAddress: ""{sourceAddress}"",
                 destinationAddress: ""{destinationAddress}"",
-                state: ""{BitConverter.ToString(state)}""
+                state: ""0x{BitConverter.ToString(state).Replace("-", string.Empty)}""
             }}";
 
             _logger.LogDebug("Sending Knx payload: {payload}", json);

@@ -34,7 +34,7 @@
         {
             _logger.LogDebug(
                 "Sending '{Datagram}'.",
-                BitConverter.ToString(datagram));
+                "0x" + BitConverter.ToString(datagram).Replace("-", string.Empty));
 
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
         }
@@ -44,7 +44,7 @@
             // TODO: Why does this need to send 4 times?
             _logger.LogDebug(
                 "Sending 4x '{Datagram}'.",
-                BitConverter.ToString(datagram));
+                "0x" + BitConverter.ToString(datagram).Replace("-", string.Empty));
 
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);
             _udpClient.Send(datagram, datagram.Length, _remoteEndpoint);

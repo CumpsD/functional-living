@@ -44,7 +44,7 @@ namespace FunctionalLiving.Knx
 
                     _logger.LogDebug(
                         "UDP Client Received: '{Datagram}'.",
-                        BitConverter.ToString(datagram));
+                        "0x" + BitConverter.ToString(datagram).Replace("-", string.Empty));
 
                     ProcessDatagram(datagram);
                 }

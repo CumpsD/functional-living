@@ -310,14 +310,14 @@ namespace FunctionalLiving.Knx
 
             _logger.LogDebug(
                 "Sending '{State}' to '{DestinationAddress}'.",
-                BitConverter.ToString(data),
+                "0x" + BitConverter.ToString(data).Replace("-", string.Empty),
                 address);
 
             _lockManager.PerformLockedOperation(() => KnxSender.Action(address, data));
 
             _logger.LogDebug(
                 "Sent '{State}' to '{DestinationAddress}'.",
-                BitConverter.ToString(data),
+                "0x" + BitConverter.ToString(data).Replace("-", string.Empty),
                 address);
         }
 

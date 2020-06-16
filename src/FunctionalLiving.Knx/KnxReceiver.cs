@@ -195,7 +195,7 @@
                 if (KnxConnection.Debug)
                 {
                     _logger.LogDebug("-----------------------------------------------------------------------------------------------------");
-                    _logger.LogDebug(BitConverter.ToString(cemi));
+                    _logger.LogDebug("0x" + BitConverter.ToString(cemi).Replace("-", string.Empty));
                     _logger.LogDebug("Event Header Length: {HeaderLength}", datagram.header_length);
                     _logger.LogDebug("Event Protocol Version: {ProtocolVersion}", datagram.protocol_version);
                     _logger.LogDebug("Event Service Type: {ServiceType}", "0x" + BitConverter.ToString(datagram.service_type).Replace("-", string.Empty));

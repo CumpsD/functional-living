@@ -1,8 +1,11 @@
 namespace FunctionalLiving.Knx.Sender
 {
     using System;
+    using System.Net;
     using System.Net.Http;
+    using System.Net.Sockets;
     using System.Net.Mime;
+    using System.Net.NetworkInformation;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -17,9 +20,9 @@ namespace FunctionalLiving.Knx.Sender
     {
         public const string ConfigurationPath = "Knx";
 
-        public string RouterIp { get; set; }
+        public string? RouterIp { get; set; }
         public int RouterPort { get; set; } = 3671;
-        public string LocalIp { get; set; } = "127.0.0.1";
+        public string? LocalIp { get; set; }
         public int LocalPort { get; set; } = 3671;
     }
 
@@ -61,11 +64,32 @@ namespace FunctionalLiving.Knx.Sender
 
             if (useKnxConnectionTunneling.FeatureEnabled)
             {
+                var knxConfig = knxConfiguration.Value;
+                if (string.IsNullOrWhiteSpace(knxConfig.RouterIp))
+                    throw new Exception("RouterIp is not defined.");
+
+                if (string.IsNullOrWhiteSpace(knxConfig.LocalIp))
+                {
+                    knxConfig.LocalIp = GetLocalIpAddress();
+
+                    _logger.LogInformation(
+                        "No LocalIp defined, automatically determined '{LocalIp}'.",
+                        knxConfig.LocalIp);
+                }
+
+                logger.LogInformation(
+                    "Using '{ConnectionMode}' from '{LocalIp}:{LocalPort}' to '{RouterIp}:{RouterPort}'.",
+                    "Tunneling",
+                    knxConfig.LocalIp,
+                    knxConfig.LocalPort,
+                    knxConfig.RouterIp,
+                    knxConfig.RouterPort);
+
                 _connection = new KnxConnectionTunneling(
-                    knxConfiguration.Value.RouterIp,
-                    knxConfiguration.Value.RouterPort,
-                    knxConfiguration.Value.LocalIp,
-                    knxConfiguration.Value.LocalPort)
+                    knxConfig.RouterIp,
+                    knxConfig.RouterPort,
+                    knxConfig.LocalIp,
+                    knxConfig.LocalPort)
                 {
                     Debug = debugKnx.FeatureEnabled,
                 };
@@ -139,6 +163,39 @@ namespace FunctionalLiving.Knx.Sender
             var json = $@"{{ address: ""{knxAddress}"", state: ""{BitConverter.ToString(state)}"" }}";
             _logger.LogDebug("Sending Knx payload: {payload}", json);
             return new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
+        }
+
+        private string GetLocalIpAddress()
+        {
+            UnicastIPAddressInformation mostSuitableIp = null;
+
+            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (var network in networkInterfaces)
+            {
+                if (network.OperationalStatus != OperationalStatus.Up)
+                    continue;
+
+                var properties = network.GetIPProperties();
+
+                if (properties.GatewayAddresses.Count == 0)
+                    continue;
+
+                foreach (var address in properties.UnicastAddresses)
+                {
+                    if (address.Address.AddressFamily != AddressFamily.InterNetwork)
+                        continue;
+
+                    if (IPAddress.IsLoopback(address.Address))
+                        continue;
+
+                    return address.Address.ToString();
+                }
+            }
+
+            return mostSuitableIp != null
+                ? mostSuitableIp.Address.ToString()
+                : "";
         }
     }
 }

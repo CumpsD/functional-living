@@ -72,7 +72,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
                     .RegisterInstance(toggle)
                     .As<T>();
 
-                logger?.LogInformation(
+                logger?.LogDebug(
                     "Registered Toggle '{ToggleType}' with value '{ToggleValue}'.",
                     typeof(T).Name,
                     toggleEnabled);

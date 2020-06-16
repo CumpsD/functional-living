@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/cumpsd/functional-living/compare/v1.2.0...v1.3.0) (2020-06-16)
+
+
+### Features
+
+* auto detect ip ([4958c40](https://github.com/cumpsd/functional-living/commit/4958c40c265563b192b7b48b1a8e8e39f1376de6))
+
 # [1.2.0](https://github.com/cumpsd/functional-living/compare/v1.1.0...v1.2.0) (2020-06-15)
 
 

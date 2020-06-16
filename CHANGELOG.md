@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/cumpsd/functional-living/compare/v1.4.0...v1.4.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* correct compose ports ([684b794](https://github.com/cumpsd/functional-living/commit/684b79448c6d85f3fc30c709bdc152a1661107d2))
+
 # [1.4.0](https://github.com/cumpsd/functional-living/compare/v1.3.0...v1.4.0) (2020-06-16)
 
 

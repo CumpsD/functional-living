@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/cumpsd/functional-living/compare/v1.8.0...v1.9.0) (2020-06-17)
+
+
+### Features
+
+* add knx sender to docker compose ([e621c1c](https://github.com/cumpsd/functional-living/commit/e621c1c16f94ff6c18c156719718ae0bb1e84fbe))
+
 # [1.8.0](https://github.com/cumpsd/functional-living/compare/v1.7.0...v1.8.0) (2020-06-17)
 
 

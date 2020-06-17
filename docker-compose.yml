@@ -9,7 +9,7 @@ services:
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
-      - "9000:5000"
+      - "9000:9000"
     depends_on:
       - seq
     links:
@@ -31,7 +31,7 @@ services:
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxListener: Debug
       Serilog__WriteTo__1__Name: Seq
-      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9002
+      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9011
     depends_on:
       - seq
       - api
@@ -46,5 +46,5 @@ services:
     environment:
       ACCEPT_EULA: Y
     ports:
-      - "9001:80"
-      - "9002:5341"
+      - "9010:80"
+      - "9011:5341"

@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Api.Infrastructure
+namespace FunctionalLiving.Knx.Sender.Infrastructure
 {
     using Microsoft.AspNetCore.Hosting;
     using Be.Vlaanderen.Basisregisters.Api;
@@ -14,7 +14,7 @@ namespace FunctionalLiving.Api.Infrastructure
                     {
                         Hosting =
                         {
-                            HttpPort = 9000
+                            HttpPort = 9001
                         },
                         Logging =
                         {

@@ -52,6 +52,7 @@ Target.create "Publish_Solution" (fun _ ->
   [
     "FunctionalLiving.Api"
     "FunctionalLiving.Knx.Listener"
+    "FunctionalLiving.Knx.Sender"
   ] |> List.iter publish)
 
 Target.create "Pack_Solution" (fun _ ->

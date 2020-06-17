@@ -29,22 +29,17 @@ namespace FunctionalLiving.Knx.Sender
     {
         private readonly ILogger<KnxSender> _logger;
 
-        private readonly SendToLog _sendToLog;
-
         private readonly KnxConnection? _connection;
 
         public KnxSender(
             ILoggerFactory loggerFactory,
             ILogger<KnxSender> logger,
             IOptions<KnxConfiguration> knxConfiguration,
-            SendToLog sendToLog,
             UseKnxConnectionRouting useKnxConnectionRouting,
             UseKnxConnectionTunneling useKnxConnectionTunneling,
             DebugKnxCemi debugKnxCemi)
         {
             _logger = logger;
-
-            _sendToLog = sendToLog;
 
             if (useKnxConnectionTunneling.FeatureEnabled && useKnxConnectionRouting.FeatureEnabled)
                 throw new Exception("Cannot enable Tunneling and Routing simultaneously.");
@@ -61,8 +56,6 @@ namespace FunctionalLiving.Knx.Sender
             _connection!.SetLockIntervalMs(20);
             _connection.KnxConnectedDelegate += Connected;
             _connection.KnxDisconnectedDelegate += () => Disconnected(_connection);
-            _connection.KnxEventDelegate += (sender, args) => Event(args.SourceAddress, args.DestinationAddress, args.State);
-            _connection.KnxStatusDelegate += (sender, args) => Status(args.SourceAddress, args.DestinationAddress, args.State);
         }
 
         private KnxConnection SetupTunnelingConnection(
@@ -136,50 +129,54 @@ namespace FunctionalLiving.Knx.Sender
             => _connection!.Connect();
 
         public void Action(KnxAddress address, bool data)
-            => _connection.Action(address, data);
-
-        public void Action(KnxAddress address, string data)
-            => _connection.Action(address, data);
-
-        public void Action(KnxAddress address, int data)
-            => _connection.Action(address, data);
-
-        public void Action(KnxAddress address, byte data)
-            => _connection.Action(address, data);
-
-        public void Action(KnxAddress address, byte[] data)
-            => _connection.Action(address, data);
-
-        private void Event(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
-            => Handle(sourceAddress, destinationAddress, state);
-
-        private void Status(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
-            => Handle(sourceAddress, destinationAddress, state);
-
-        private void Handle(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
         {
-            if (_sendToLog.FeatureEnabled)
-                Print(sourceAddress, destinationAddress, state);
+            _logger.LogInformation(
+                "Sending message to Group '{DestinationAddress}' ~> '{State}'",
+                address.ToString(),
+                data);
+
+            _connection.Action(address, data);
         }
 
-        private void Print(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
-            => _logger.LogInformation(
-                "Received message from Device '{SourceAddress}' to Group '{DestinationAddress}' ~> '{State}'",
-                sourceAddress.ToString(),
-                destinationAddress.ToString(),
-                "0x" + BitConverter.ToString(state).Replace("-", string.Empty));
+        public void Action(KnxAddress address, string data)
+        {
+            _logger.LogInformation(
+                "Sending message to Group '{DestinationAddress}' ~> '{State}'",
+                address.ToString(),
+                data);
+
+            _connection.Action(address, data);
+        }
+
+        public void Action(KnxAddress address, int data)
+        {
+            _logger.LogInformation(
+                "Sending message to Group '{DestinationAddress}' ~> '{State}'",
+                address.ToString(),
+                data);
+
+            _connection.Action(address, data);
+        }
+
+        public void Action(KnxAddress address, byte data)
+        {
+             _logger.LogInformation(
+                "Sending message to Group '{DestinationAddress}' ~> '{State}'",
+                address.ToString(),
+                "0x" + BitConverter.ToString(new byte[] { data }).Replace("-", string.Empty));
+
+            _connection.Action(address, data);
+        }
+
+        public void Action(KnxAddress address, byte[] data)
+        {
+            _logger.LogInformation(
+                "Sending message to Group '{DestinationAddress}' ~> '{State}'",
+                address.ToString(),
+                "0x" + BitConverter.ToString(data).Replace("-", string.Empty));
+
+            _connection.Action(address, data);
+        }
 
         private void Connected()
             => _logger.LogInformation("Connected!");

@@ -25,11 +25,6 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
         protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
-                .RegisterToggle<SendToLog>(
-                    SendToLog.ConfigurationPath,
-                    _configuration[SendToLog.ConfigurationPath],
-                    _logger)
-
                 .RegisterToggle<DebugKnxCemi>(
                     DebugKnxCemi.ConfigurationPath,
                     _configuration[DebugKnxCemi.ConfigurationPath],

@@ -65,6 +65,9 @@ Target.create "PushContainer_Api" (fun _ -> push "api")
 Target.create "Containerize_KnxListener" (fun _ -> containerize "FunctionalLiving.Knx.Listener" "knx-listener")
 Target.create "PushContainer_KnxListener" (fun _ -> push "knx-listener")
 
+Target.create "Containerize_KnxSender" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "knx-sender")
+Target.create "PushContainer_KnxSender" (fun _ -> push "knx-sender")
+
 Target.create "Build" ignore
 Target.create "Test" ignore
 Target.create "Publish" ignore
@@ -94,6 +97,7 @@ Target.create "Push" ignore
 "Pack"
   ==> "Containerize_Api"
   ==> "Containerize_KnxListener"
+  ==> "Containerize_KnxSender"
   ==> "Containerize"
 // Possibly add more projects to containerize here
 
@@ -101,6 +105,7 @@ Target.create "Push" ignore
   ==> "DockerLogin"
   ==> "PushContainer_Api"
   ==> "PushContainer_KnxListener"
+  ==> "PushContainer_KnxSender"
   ==> "Push"
 // Possibly add more projects to push here
 

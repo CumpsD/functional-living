@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/cumpsd/functional-living/compare/v1.6.1...v1.7.0) (2020-06-17)
+
+
+### Features
+
+* add plumbing for future knx sender ([d62aab9](https://github.com/cumpsd/functional-living/commit/d62aab9710a3d255739b9140a5006c69b3dacfd1))
+
 ## [1.6.1](https://github.com/cumpsd/functional-living/compare/v1.6.0...v1.6.1) (2020-06-17)
 
 # [1.6.0](https://github.com/cumpsd/functional-living/compare/v1.5.0...v1.6.0) (2020-06-16)

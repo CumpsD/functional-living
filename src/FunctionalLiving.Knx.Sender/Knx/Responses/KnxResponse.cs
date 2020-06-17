@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Api.Knx.Responses
+namespace FunctionalLiving.Knx.Sender.Responses
 {
     using System;
     using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace FunctionalLiving.Api.Knx.Responses
         public ProblemDetails GetExamples()
             => new ProblemDetails
             {
-                ProblemTypeUri = "cumps-consulting:functional-living:api:internal-server-error",
+                ProblemTypeUri = "cumps-consulting:functional-living:knx-sender:internal-server-error",
                 HttpStatus = StatusCodes.Status500InternalServerError,
                 Title = ProblemDetails.DefaultTitle,
                 Detail = "<more info about the internal error>",

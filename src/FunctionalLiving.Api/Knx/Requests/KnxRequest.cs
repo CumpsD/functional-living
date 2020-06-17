@@ -44,14 +44,12 @@ namespace FunctionalLiving.Api.Knx.Requests
     public class KnxRequestExample : IExamplesProvider<KnxRequest>
     {
         public KnxRequest GetExamples()
-        {
-            return new KnxRequest
+            => new KnxRequest
             {
                 SourceAddress = "1.1.72",
                 DestinationAddress = "0/3/6",
                 State = "0x273A"
             };
-        }
     }
 
     public static class KnxRequestMapping
@@ -65,7 +63,8 @@ namespace FunctionalLiving.Api.Knx.Requests
                 StringToByteArray(message.State));
         }
 
-        private static byte[] StringToByteArray(string hex) {
+        private static byte[] StringToByteArray(string hex)
+        {
             if (hex.StartsWith("0x"))
                 hex = hex.Substring(2);
 

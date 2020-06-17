@@ -135,6 +135,21 @@ namespace FunctionalLiving.Knx.Sender
         public void Start()
             => _connection!.Connect();
 
+        public void Action(KnxAddress address, bool data)
+            => _connection.Action(address, data);
+
+        public void Action(KnxAddress address, string data)
+            => _connection.Action(address, data);
+
+        public void Action(KnxAddress address, int data)
+            => _connection.Action(address, data);
+
+        public void Action(KnxAddress address, byte data)
+            => _connection.Action(address, data);
+
+        public void Action(KnxAddress address, byte[] data)
+            => _connection.Action(address, data);
+
         private void Event(
             KnxAddress sourceAddress,
             KnxAddress destinationAddress,

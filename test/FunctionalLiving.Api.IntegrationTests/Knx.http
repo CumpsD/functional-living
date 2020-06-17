@@ -1,8 +1,39 @@
-POST http://127.0.0.1:1090/v1/knx HTTP/1.1
+# Functional Living Knx Listener Test
+# Send a datagram from Knx to the Api
+
+POST http://127.0.0.1:9000/v1/knx HTTP/1.1
 content-type: application/json
 
 {
   sourceAddress: "1.1.24",
   destinationAddress: "0/3/11",
   state: "0x4402"
+}
+
+###
+
+# Functional Living Knx Sender Test
+# Turn off the Living light
+
+POST http://127.0.0.1:9001/v1/knx HTTP/1.1
+content-type: application/json
+
+{
+  destinationAddress: "2/2/10",
+  dataType: "bool",
+  state: "false"
+}
+
+###
+
+# Functional Living Knx Sender Test
+# Turn on the Living light
+
+POST http://127.0.0.1:9001/v1/knx HTTP/1.1
+content-type: application/json
+
+{
+  destinationAddress: "2/2/10",
+  dataType: "bool",
+  state: "true"
 }

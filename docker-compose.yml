@@ -15,10 +15,10 @@ services:
     links:
       - seq
 
-  knx:
-    build: dist/FunctionalLiving.Knx.Sender/linux/
-    container_name: functional-living-knx
-    hostname: functional-living-knx
+  knx-listener:
+    build: dist/FunctionalLiving.Knx.Listener/linux/
+    container_name: functional-living-knx-listener
+    hostname: functional-living-knx-listener
     network_mode: host
     environment:
       Features__SendToLog: 'true'
@@ -28,8 +28,8 @@ services:
       Knx__RouterPort: 3671
       Knx__LocalPort: 3672
       Api__Endpoint: http://functional-living-api:9000
-      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.Infrastructure.Modules.TogglesModule: Debug
-      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.KnxSender: Debug
+      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
+      Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxListener: Debug
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9002
     depends_on:

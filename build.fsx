@@ -51,7 +51,7 @@ Target.create "Test_Solution" (fun _ -> test "FunctionalLiving")
 Target.create "Publish_Solution" (fun _ ->
   [
     "FunctionalLiving.Api"
-    "FunctionalLiving.Knx.Sender"
+    "FunctionalLiving.Knx.Listener"
   ] |> List.iter publish)
 
 Target.create "Pack_Solution" (fun _ ->
@@ -62,8 +62,8 @@ Target.create "Pack_Solution" (fun _ ->
 Target.create "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
 Target.create "PushContainer_Api" (fun _ -> push "api")
 
-Target.create "Containerize_Knx" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "knx")
-Target.create "PushContainer_Knx" (fun _ -> push "knx")
+Target.create "Containerize_KnxListener" (fun _ -> containerize "FunctionalLiving.Knx.Listener" "knx-listener")
+Target.create "PushContainer_KnxListener" (fun _ -> push "knx-listener")
 
 Target.create "Build" ignore
 Target.create "Test" ignore
@@ -93,14 +93,14 @@ Target.create "Push" ignore
 
 "Pack"
   ==> "Containerize_Api"
-  ==> "Containerize_Knx"
+  ==> "Containerize_KnxListener"
   ==> "Containerize"
 // Possibly add more projects to containerize here
 
 "Containerize"
   ==> "DockerLogin"
   ==> "PushContainer_Api"
-  ==> "PushContainer_Knx"
+  ==> "PushContainer_KnxListener"
   ==> "Push"
 // Possibly add more projects to push here
 

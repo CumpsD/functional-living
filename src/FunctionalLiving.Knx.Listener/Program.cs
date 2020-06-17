@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Sender
+namespace FunctionalLiving.Knx.Listener
 {
     using System;
     using System.IO;
@@ -48,11 +48,11 @@ namespace FunctionalLiving.Knx.Sender
             var container = ConfigureServices(configuration);
             var logger = container.GetRequiredService<ILogger<Program>>();
 
-            logger.LogInformation("Starting FunctionalLiving.Knx.Sender");
+            logger.LogInformation("Starting FunctionalLiving.Knx.Listener");
 
             try
             {
-                var runner = container.GetRequiredService<KnxSender>();
+                var runner = container.GetRequiredService<KnxListener>();
 
                 await runner.StartAsync(ct);
 
@@ -93,7 +93,7 @@ namespace FunctionalLiving.Knx.Sender
                 .RegisterModule(new TogglesModule(configuration, loggerFactory));
 
             builder
-                .RegisterType<KnxSender>()
+                .RegisterType<KnxListener>()
                 .SingleInstance();
 
             builder

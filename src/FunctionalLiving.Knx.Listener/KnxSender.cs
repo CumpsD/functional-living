@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Sender
+namespace FunctionalLiving.Knx.Listener
 {
     using System;
     using System.Net;
@@ -25,9 +25,9 @@ namespace FunctionalLiving.Knx.Sender
         public int LocalPort { get; set; } = 3671;
     }
 
-    public class KnxSender
+    public class KnxListener
     {
-        private readonly ILogger<KnxSender> _logger;
+        private readonly ILogger<KnxListener> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
 
         private readonly SendToLog _sendToLog;
@@ -35,9 +35,9 @@ namespace FunctionalLiving.Knx.Sender
 
         private readonly KnxConnection? _connection;
 
-        public KnxSender(
+        public KnxListener(
             ILoggerFactory loggerFactory,
-            ILogger<KnxSender> logger,
+            ILogger<KnxListener> logger,
             IHttpClientFactory httpClientFactory,
             IOptions<KnxConfiguration> knxConfiguration,
             SendToLog sendToLog,
@@ -73,7 +73,7 @@ namespace FunctionalLiving.Knx.Sender
 
         private KnxConnection SetupTunnelingConnection(
             ILoggerFactory loggerFactory,
-            ILogger<KnxSender> logger,
+            ILogger<KnxListener> logger,
             IOptions<KnxConfiguration> knxConfiguration,
             DebugKnxCemi debugKnxCemi)
         {
@@ -103,7 +103,7 @@ namespace FunctionalLiving.Knx.Sender
 
         private KnxConnection SetupRoutingConnection(
             ILoggerFactory loggerFactory,
-            ILogger<KnxSender> logger,
+            ILogger<KnxListener> logger,
             DebugKnxCemi debugKnxCemi)
         {
             logger.LogInformation(

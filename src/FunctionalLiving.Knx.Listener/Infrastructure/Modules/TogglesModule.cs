@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
+namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
 {
     using System;
     using System.Linq;

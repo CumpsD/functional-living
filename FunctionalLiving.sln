@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Api", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "knx", "knx", "{39D0DA3B-D05A-48B9-B65B-895969311DA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx.Sender", "src\FunctionalLiving.Knx.Sender\FunctionalLiving.Knx.Sender.csproj", "{2357A724-5340-4CBB-B380-04CA69285E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx.Listener", "src\FunctionalLiving.Knx.Listener\FunctionalLiving.Knx.Listener.csproj", "{2357A724-5340-4CBB-B380-04CA69285E6A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalLiving.Knx", "src\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj", "{9248E3D0-1DAC-4DF4-9DA8-B3FF2332784C}"
 EndProject

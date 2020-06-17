@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Sender.Infrastructure.Toggles
+namespace FunctionalLiving.Knx.Listener.Infrastructure.Toggles
 {
     using FeatureToggle;
 

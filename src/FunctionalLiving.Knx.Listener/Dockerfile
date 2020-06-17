@@ -5,4 +5,4 @@ LABEL maintainer "David Cumps <david@cumps.be>"
 COPY / /app
 WORKDIR /app
 
-ENTRYPOINT ["./FunctionalLiving.Knx.Sender"]
+ENTRYPOINT ["./FunctionalLiving.Knx.Listener"]

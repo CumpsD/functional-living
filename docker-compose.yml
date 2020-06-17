@@ -25,6 +25,8 @@ services:
       Features__SendToApi: 'true'
       Features__UseKnxConnectionTunneling: 'true'
       Knx__RouterIp: 10.0.4.7
+      Knx__RouterPort: 3671
+      Knx__LocalPort: 3672
       Api__Endpoint: http://functional-living-api:9000
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Sender.KnxSender: Debug

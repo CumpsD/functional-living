@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/cumpsd/functional-living/compare/v1.7.0...v1.8.0) (2020-06-17)
+
+
+### Features
+
+* connect knx sender to knx ([a37b0de](https://github.com/cumpsd/functional-living/commit/a37b0dee90ec6149222831829f6f105a8af5af7f))
+* send command to knx ([558b6e9](https://github.com/cumpsd/functional-living/commit/558b6e999edf3d23332e7f07c56c9622235e2ef7))
+
 # [1.7.0](https://github.com/cumpsd/functional-living/compare/v1.6.1...v1.7.0) (2020-06-17)
 
 

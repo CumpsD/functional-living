@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Listener
+namespace FunctionalLiving.Knx.Sender
 {
     using System;
     using System.Net;
@@ -25,32 +25,26 @@ namespace FunctionalLiving.Knx.Listener
         public int LocalPort { get; set; } = 3671;
     }
 
-    public class KnxListener
+    public class KnxSender
     {
-        private readonly ILogger<KnxListener> _logger;
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILogger<KnxSender> _logger;
 
         private readonly SendToLog _sendToLog;
-        private readonly SendToApi _sendToApi;
 
         private readonly KnxConnection? _connection;
 
-        public KnxListener(
+        public KnxSender(
             ILoggerFactory loggerFactory,
-            ILogger<KnxListener> logger,
-            IHttpClientFactory httpClientFactory,
+            ILogger<KnxSender> logger,
             IOptions<KnxConfiguration> knxConfiguration,
             SendToLog sendToLog,
-            SendToApi sendToApi,
             UseKnxConnectionRouting useKnxConnectionRouting,
             UseKnxConnectionTunneling useKnxConnectionTunneling,
             DebugKnxCemi debugKnxCemi)
         {
             _logger = logger;
-            _httpClientFactory = httpClientFactory;
 
             _sendToLog = sendToLog;
-            _sendToApi = sendToApi;
 
             if (useKnxConnectionTunneling.FeatureEnabled && useKnxConnectionRouting.FeatureEnabled)
                 throw new Exception("Cannot enable Tunneling and Routing simultaneously.");
@@ -73,7 +67,7 @@ namespace FunctionalLiving.Knx.Listener
 
         private KnxConnection SetupTunnelingConnection(
             ILoggerFactory loggerFactory,
-            ILogger<KnxListener> logger,
+            ILogger<KnxSender> logger,
             IOptions<KnxConfiguration> knxConfiguration,
             DebugKnxCemi debugKnxCemi)
         {
@@ -103,7 +97,7 @@ namespace FunctionalLiving.Knx.Listener
 
         private KnxConnection SetupRoutingConnection(
             ILoggerFactory loggerFactory,
-            ILogger<KnxListener> logger,
+            ILogger<KnxSender> logger,
             DebugKnxCemi debugKnxCemi)
         {
             logger.LogInformation(
@@ -138,7 +132,7 @@ namespace FunctionalLiving.Knx.Listener
                 knxConfig.LocalIp);
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public void Start()
             => _connection!.Connect();
 
         private void Event(
@@ -160,9 +154,6 @@ namespace FunctionalLiving.Knx.Listener
         {
             if (_sendToLog.FeatureEnabled)
                 Print(sourceAddress, destinationAddress, state);
-
-            if (_sendToApi.FeatureEnabled)
-                SendToApi(sourceAddress, destinationAddress, state);
         }
 
         private void Print(
@@ -186,37 +177,6 @@ namespace FunctionalLiving.Knx.Listener
 
             Thread.Sleep(1000);
             connection.Connect();
-        }
-
-        private void SendToApi(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
-        {
-            using (var client = _httpClientFactory.CreateClient(HttpModule.HttpClientName))
-            using (var request = new HttpRequestMessage(HttpMethod.Post, "v1/knx"))
-            using (var httpContent = CreateHttpContent(sourceAddress, destinationAddress, state))
-            {
-                request.Content = httpContent;
-
-                using (var response = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult())
-                    response.EnsureSuccessStatusCode();
-            }
-        }
-
-        private HttpContent CreateHttpContent(
-            KnxAddress sourceAddress,
-            KnxAddress destinationAddress,
-            byte[] state)
-        {
-            var json = $@"{{
-                sourceAddress: ""{sourceAddress}"",
-                destinationAddress: ""{destinationAddress}"",
-                state: ""0x{BitConverter.ToString(state).Replace("-", string.Empty)}""
-            }}";
-
-            _logger.LogDebug("Sending Knx payload: {payload}", json);
-            return new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
         }
 
         private string GetLocalIpAddress()

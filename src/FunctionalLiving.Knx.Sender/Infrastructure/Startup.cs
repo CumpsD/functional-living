@@ -28,8 +28,15 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IConfiguration configuration) => _configuration = configuration;
+        public Startup(
+            IConfiguration configuration,
+            ILoggerFactory loggerFactory)
+        {
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
+        }
 
         /// <summary>Configures services for the application.</summary>
         /// <param name="services">The collection of services to configure the application with.</param>
@@ -78,7 +85,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                     });
 
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new ApiModule(_configuration, services));
+            containerBuilder.RegisterModule(new ApiModule(_configuration, services, _loggerFactory));
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);
@@ -90,7 +97,8 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
             IWebHostEnvironment env,
             IHostApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
-            IApiVersionDescriptionProvider apiVersionProvider)
+            IApiVersionDescriptionProvider apiVersionProvider,
+            KnxSender knxSender)
         {
             app.UseDefaultForApi(new StartupUseOptions
             {
@@ -130,6 +138,8 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                     AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>(),
                 }
             });
+
+            knxSender.Start();
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)

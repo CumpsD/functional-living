@@ -54,7 +54,7 @@ namespace FunctionalLiving.Knx.Listener
             {
                 var runner = container.GetRequiredService<KnxListener>();
 
-                await runner.StartAsync(ct);
+                runner.Start();
 
                 logger.LogInformation("Running... Press CTRL + C to exit.");
                 ct.WaitHandle.WaitOne();

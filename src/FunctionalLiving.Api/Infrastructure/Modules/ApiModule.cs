@@ -2,6 +2,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using FunctionalLiving.Infrastructure.Modules;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
             containerBuilder
                 .RegisterModule(new LoggingModule(_configuration, _services))
                 .RegisterModule(new TogglesModule(_configuration, _loggerFactory))
+                .RegisterModule(new InfluxModule(_configuration))
                 .RegisterModule(new FunctionalLivingCommandHandlerModule());
 
             containerBuilder.Populate(_services);

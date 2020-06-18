@@ -1,0 +1,56 @@
+namespace FunctionalLiving.Api.Infrastructure.Modules
+{
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Autofac;
+    using FeatureToggle;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+    using InfluxDB.Client;
+
+    public class InfluxModule : Module
+    {
+        private readonly IConfiguration _configuration;
+
+        public InfluxModule(
+            IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        protected override void Load(ContainerBuilder containerBuilder)
+        {
+            var influxEndpoint = _configuration.GetValue<Uri>("InfluxDb:Endpoint");
+            var token = _configuration.GetValue<string>("InfluxDb:Token");
+
+            // TODO: What is the usage pattern for influxdbclient?
+            containerBuilder
+                .Register(context =>
+                {
+                    return InfluxDBClientFactory.Create(
+                        influxEndpoint.ToString(),
+                        token.ToCharArray());
+                })
+                .SingleInstance()
+                .As<InfluxDBClient>();
+
+            containerBuilder
+                .Register<Func<WriteApi>>(context =>
+                {
+                    var influxDbClient = context.Resolve<InfluxDBClient>();
+
+                    var writeOptions = WriteOptions
+                        .CreateNew()
+                        .BatchSize(5000)
+                        .FlushInterval(1000)
+                        .JitterInterval(1000)
+                        .RetryInterval(5000)
+                        .Build();
+
+                    return () => influxDbClient.GetWriteApi(writeOptions);
+                })
+                .As<Func<WriteApi>>();
+        }
+    }
+}

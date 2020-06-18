@@ -20,6 +20,8 @@ nuget Autofac.Extensions.DependencyInjection 6.0.0
 
 nuget FeatureToggle 4.0.2
 
+nuget InfluxDB.Client 1.8.0
+
 nuget Serilog.Sinks.Seq 4.0.0
 
 // BASE REGISTRIES STUFF

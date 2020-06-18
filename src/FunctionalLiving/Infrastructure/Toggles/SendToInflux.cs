@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Api.Infrastructure.Toggles
+namespace FunctionalLiving.Infrastructure.Toggles
 {
     using FeatureToggle;
 

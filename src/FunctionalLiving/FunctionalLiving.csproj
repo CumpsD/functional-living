@@ -10,5 +10,11 @@
     <ProjectReference Include="..\FunctionalLiving.Knx\FunctionalLiving.Knx.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="FeatureToggle.Common">
+      <HintPath>..\..\packages\FeatureToggle.Common\lib\netstandard1.4\FeatureToggle.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

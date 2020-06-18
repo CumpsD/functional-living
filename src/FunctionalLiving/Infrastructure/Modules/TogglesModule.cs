@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Api.Infrastructure.Modules
+namespace FunctionalLiving.Infrastructure.Modules
 {
     using System;
     using System.Linq;
@@ -27,7 +27,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
             containerBuilder
                 .RegisterToggle<SendToInflux>(
                     SendToInflux.ConfigurationPath,
-                    _configuration[SendToInflux.ConfigurationPath],
+                    _configuration.GetValue<bool>(SendToInflux.ConfigurationPath),
                     _logger);
         }
     }
@@ -37,26 +37,19 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
         public static ContainerBuilder RegisterToggle<T>(
             this ContainerBuilder containerBuilder,
             string configurationPath,
-            string value,
+            bool toggleEnabled,
             ILogger? logger) where T : IFeatureToggle
         {
-            if (bool.TryParse(value, out var toggleEnabled))
-            {
-                var toggleConstructor = CreateConstructor(typeof(T), typeof(bool));
-                var toggle = toggleConstructor(toggleEnabled);
-                containerBuilder
-                    .RegisterInstance(toggle)
-                    .As<T>();
+            var toggleConstructor = CreateConstructor(typeof(T), typeof(bool));
+            var toggle = toggleConstructor(toggleEnabled);
+            containerBuilder
+                .RegisterInstance(toggle)
+                .As<T>();
 
-                logger?.LogDebug(
-                    "Registered Toggle '{ToggleType}' with value '{ToggleValue}'.",
-                    typeof(T).Name,
-                    toggleEnabled);
-            }
-            else
-            {
-                throw new Exception($"Toggle '{typeof(T).Name}' not configured! Nothing found at '{configurationPath}'.");
-            }
+            logger?.LogDebug(
+                "Registered Toggle '{ToggleType}' with value '{ToggleValue}'.",
+                typeof(T).Name,
+                toggleEnabled);
 
             return containerBuilder;
         }

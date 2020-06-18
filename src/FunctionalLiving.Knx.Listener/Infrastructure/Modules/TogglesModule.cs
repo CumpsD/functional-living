@@ -27,27 +27,27 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
             containerBuilder
                 .RegisterToggle<SendToApi>(
                     SendToApi.ConfigurationPath,
-                    _configuration[SendToApi.ConfigurationPath],
+                    _configuration.GetValue<bool>(SendToApi.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<SendToLog>(
                     SendToLog.ConfigurationPath,
-                    _configuration[SendToLog.ConfigurationPath],
+                    _configuration.GetValue<bool>(SendToLog.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<DebugKnxCemi>(
                     DebugKnxCemi.ConfigurationPath,
-                    _configuration[DebugKnxCemi.ConfigurationPath],
+                    _configuration.GetValue<bool>(DebugKnxCemi.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<UseKnxConnectionRouting>(
                     UseKnxConnectionRouting.ConfigurationPath,
-                    _configuration[UseKnxConnectionRouting.ConfigurationPath],
+                    _configuration.GetValue<bool>(UseKnxConnectionRouting.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<UseKnxConnectionTunneling>(
                     UseKnxConnectionTunneling.ConfigurationPath,
-                    _configuration[UseKnxConnectionTunneling.ConfigurationPath],
+                    _configuration.GetValue<bool>(UseKnxConnectionTunneling.ConfigurationPath),
                     _logger);
         }
     }
@@ -57,26 +57,19 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
         public static ContainerBuilder RegisterToggle<T>(
             this ContainerBuilder containerBuilder,
             string configurationPath,
-            string value,
+            bool toggleEnabled,
             ILogger? logger) where T : IFeatureToggle
         {
-            if (bool.TryParse(value, out var toggleEnabled))
-            {
-                var toggleConstructor = CreateConstructor(typeof(T), typeof(bool));
-                var toggle = toggleConstructor(toggleEnabled);
-                containerBuilder
-                    .RegisterInstance(toggle)
-                    .As<T>();
+            var toggleConstructor = CreateConstructor(typeof(T), typeof(bool));
+            var toggle = toggleConstructor(toggleEnabled);
+            containerBuilder
+                .RegisterInstance(toggle)
+                .As<T>();
 
-                logger?.LogDebug(
-                    "Registered Toggle '{ToggleType}' with value '{ToggleValue}'.",
-                    typeof(T).Name,
-                    toggleEnabled);
-            }
-            else
-            {
-                throw new Exception($"Toggle '{typeof(T).Name}' not configured! Nothing found at '{configurationPath}'.");
-            }
+            logger?.LogDebug(
+                "Registered Toggle '{ToggleType}' with value '{ToggleValue}'.",
+                typeof(T).Name,
+                toggleEnabled);
 
             return containerBuilder;
         }

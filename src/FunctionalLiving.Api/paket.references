@@ -4,6 +4,8 @@ Be.Vlaanderen.Basisregisters.EventHandling.Autofac
 Microsoft.Extensions.Http
 Microsoft.Extensions.Http.Polly
 
+InfluxDB.Client
+
 Serilog.Sinks.Seq
 
 SourceLink.Embed.AllSourceFiles

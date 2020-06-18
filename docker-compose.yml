@@ -9,7 +9,7 @@ services:
       Features__SendToInflux: 'true'
       KnxSender__Endpoint: http://functional-living-knx-sender:9001
       InfluxDb__Endpoint: http://functional-living-influx:9999
-      InfluxDb_Token: ODWCQ0YnLUPb9Gw321z5ONnzoBSHpthbsdve3QLAxbPGl5ytcK0gMK9XjiAnmy5c7Iq0nIF3YDNyqTL0hVrn2A==
+      InfluxDb__Token: JBU-kgjsFW2q9lKmklFgHaVSHs8kp1nff6iMUxg_Xuj-KeuuY2Dc2LFDfJ5HDDvbvWqQeSEeb5c62Flr9X6QVA==
       InfluxDb__Bucket: functional-living
       InfluxDb__Organisation: cumps
       InfluxDb__LogLevel: None
@@ -95,6 +95,7 @@ services:
 
 volumes:
   influxdb:
+    name: functional-living-influx
 
 # docker exec -it influxdb /bin/bash
 # influx setup

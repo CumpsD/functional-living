@@ -109,10 +109,13 @@ namespace FunctionalLiving.Knx
                             value);
 
                         if (sendToInflux.FeatureEnabled)
-                            WriteTemperature(
+                            Write(
                                 influxWrite,
-                                description,
-                                functionalTemp);
+                                new Temperature
+                                {
+                                    Location = description,
+                                    Value = functionalTemp
+                                });
                     }
                     else if (LightStrength.TryGetValue(groupAddress, out description))
                     {
@@ -125,6 +128,15 @@ namespace FunctionalLiving.Knx
                             "LUX",
                             description,
                             value);
+
+                        if (sendToInflux.FeatureEnabled)
+                            Write(
+                                influxWrite,
+                                new Lux
+                                {
+                                    Location = description,
+                                    Value = functionalLightStrength
+                                });
                     }
                     else if (Times.TryGetValue(groupAddress, out description))
                     {
@@ -201,23 +213,15 @@ namespace FunctionalLiving.Knx
                 value);
         }
 
-        private static void WriteTemperature(
+        private static void Write<T>(
             Func<WriteApi> writeApi,
-            string location,
-            double value)
+            T measurement)
         {
-            var temperature = new Temperature
-            {
-                Location = location,
-                Value = value,
-                Time = DateTime.UtcNow
-            };
-
             using (var writeClient = writeApi())
             {
                 writeClient.WriteMeasurement(
                     WritePrecision.Ns,
-                    temperature);
+                    measurement);
 
                 writeClient.Flush();
             }

@@ -3,8 +3,8 @@ namespace FunctionalLiving.Measurements
     using System;
     using InfluxDB.Client.Core;
 
-    [Measurement("temperature")]
-    public class Temperature
+    [Measurement("lux")]
+    public class Lux
     {
         [Column("location", IsTag = true)]
         public string Location { get; set; }

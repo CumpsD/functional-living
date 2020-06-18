@@ -8,15 +8,22 @@ services:
     environment:
       Features__SendToInflux: 'true'
       KnxSender__Endpoint: http://functional-living-knx-sender:9001
+      InfluxDb__Endpoint: http://functional-living-influx:9999
+      InfluxDb_Token: ODWCQ0YnLUPb9Gw321z5ONnzoBSHpthbsdve3QLAxbPGl5ytcK0gMK9XjiAnmy5c7Iq0nIF3YDNyqTL0hVrn2A==
+      InfluxDb__Bucket: functional-living
+      InfluxDb__Organisation: cumps
+      InfluxDb__LogLevel: None
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
       - "9000:9000"
     depends_on:
       - seq
+      - influx
       - knx-sender
     links:
       - seq
+      - influx
       - knx-sender
 
   knx-listener:
@@ -75,3 +82,27 @@ services:
     ports:
       - "9010:80"
       - "9011:5341"
+
+  influx:
+    image: quay.io/influxdb/influxdb:2.0.0-beta
+    container_name: functional-living-influx
+    hostname: functional-living-influx
+    ports:
+      - "9015:9999"
+    volumes:
+      - influxdb:/var/lib/influxdb2
+    command: influxd run --reporting-disabled --bolt-path /var/lib/influxdb2/influxd.bolt --engine-path /var/lib/influxdb2/engine --store bolt
+
+volumes:
+  influxdb:
+
+# docker exec -it influxdb /bin/bash
+# influx setup
+# * Enter a primary username.
+# * Enter a password for your user.
+# * Confirm your password by entering it again.
+# * Enter a name for your primary organization.
+# * Enter a name for your primary bucket.
+# * Enter a retention period (in hours) for your primary bucket. Enter nothing for an infinite retention period.
+# * Confirm the details for your primary user, organization, and bucket.
+# * Go to http://localhost:9999/ to get your token

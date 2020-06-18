@@ -215,10 +215,7 @@ namespace FunctionalLiving.Knx
 
             using (var writeClient = writeApi())
             {
-                // TODO: Get bucket and org from config
                 writeClient.WriteMeasurement(
-                    "functional-living",
-                    "cumps",
                     WritePrecision.Ns,
                     temperature);
 

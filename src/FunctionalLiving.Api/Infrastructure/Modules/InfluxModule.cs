@@ -23,14 +23,31 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
         {
             var influxEndpoint = _configuration.GetValue<Uri>("InfluxDb:Endpoint");
             var token = _configuration.GetValue<string>("InfluxDb:Token");
+            var bucket = _configuration.GetValue<string>("InfluxDb:Bucket");
+            var org = _configuration.GetValue<string>("InfluxDb:Organisation");
+            var logLevel = _configuration.GetValue<InfluxDB.Client.Core.LogLevel>("InfluxDb:LogLevel");
+
+            // None = 0,
+            // Basic = 1,
+            // Headers = 2,
+            // Body = 3
 
             // TODO: What is the usage pattern for influxdbclient?
             containerBuilder
                 .Register(context =>
                 {
-                    return InfluxDBClientFactory.Create(
-                        influxEndpoint.ToString(),
-                        token.ToCharArray());
+                    var influxDbClientOptions = InfluxDBClientOptions
+                        .Builder
+                        .CreateNew()
+                        .Url(influxEndpoint.ToString())
+                        .AuthenticateToken(token.ToCharArray())
+                        .Org(org)
+                        .Bucket(bucket)
+                        .LogLevel(logLevel)
+                        .AddDefaultTag("application", "FunctionalLiving.Api")
+                        .Build();
+
+                    return InfluxDBClientFactory.Create(influxDbClientOptions);
                 })
                 .SingleInstance()
                 .As<InfluxDBClient>();

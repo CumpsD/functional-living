@@ -9,3 +9,17 @@ content-type: application/json
   destinationAddress: "0/3/11",
   state: "0x4402"
 }
+
+###
+
+# Functional Living Knx Listener Test
+# Send a datagram from Knx to the Api
+
+POST http://127.0.0.1:9000/v1/knx HTTP/1.1
+content-type: application/json
+
+{
+  sourceAddress: "1.1.24",
+  destinationAddress: "0/4/11",
+  state: "0x0602"
+}

@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/cumpsd/functional-living/compare/v1.10.0...v1.10.1) (2020-06-18)
+
+
+### Bug Fixes
+
+* add more docker compose params ([9db3ee4](https://github.com/cumpsd/functional-living/commit/9db3ee4d6d6e683a146380b1983c81265b39030b))
+
 # [1.10.0](https://github.com/cumpsd/functional-living/compare/v1.9.0...v1.10.0) (2020-06-18)
 
 

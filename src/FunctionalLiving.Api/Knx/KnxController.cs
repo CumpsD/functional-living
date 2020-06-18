@@ -41,7 +41,7 @@ namespace FunctionalLiving.Api.Knx
         [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(KnxResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        public async Task<IActionResult> Post(
+        public async Task<IActionResult> ProcessKnxMessage(
             [FromServices] ICommandHandlerResolver bus,
             [FromBody] KnxRequest request,
             CancellationToken cancellationToken = default)

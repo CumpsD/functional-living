@@ -11,7 +11,7 @@ namespace FunctionalLiving.Knx
     using Infrastructure.Toggles;
     using Measurements;
     using Microsoft.Extensions.Logging;
-    using static Domain.GroupAddresses;
+    using static Domain.FeedbackGroupAddresses;
 
     public sealed class KnxCommandHandlerModule : CommandHandlerModule
     {
@@ -62,7 +62,7 @@ namespace FunctionalLiving.Knx
                         state,
                         (description, value) => SendToLog(groupAddress, "PERCENTAGE", description, $"{value} %"));
 
-                    GroupAddresses.Duration.ProcessKnx2ByteUnsignedValue(
+                    FeedbackGroupAddresses.Duration.ProcessKnx2ByteUnsignedValue(
                         groupAddress,
                         state,
                         (description, value) => SendToLog(groupAddress, "DURATION", description, $"{value} h"));
@@ -113,7 +113,7 @@ namespace FunctionalLiving.Knx
                         state,
                         (description, value) => SendToLog(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}"));
 
-                    GroupAddresses.Speed.ProcessKnx2ByteFloatValue(
+                    FeedbackGroupAddresses.Speed.ProcessKnx2ByteFloatValue(
                         groupAddress,
                         state,
                         (description, value) =>

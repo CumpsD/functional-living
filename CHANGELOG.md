@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/cumpsd/functional-living/compare/v1.9.0...v1.10.0) (2020-06-18)
+
+
+### Features
+
+* add httpclient to api ([4a6dbce](https://github.com/cumpsd/functional-living/commit/4a6dbce2ea9d990c1f3cfadc0f5ec7db820fb595))
+
 # [1.9.0](https://github.com/cumpsd/functional-living/compare/v1.8.0...v1.9.0) (2020-06-17)
 
 

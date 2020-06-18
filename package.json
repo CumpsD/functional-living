@@ -1,6 +1,6 @@
 {
   "name": "functional-living",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Home automation integrating various technologies.",
   "author": "Cumps Consulting",
   "license": "EUPL-1.2",
@@ -47,7 +47,10 @@
     ]
   },
   "release": {
-    "branches": [ "master", "main" ],
+    "branches": [
+      "master",
+      "main"
+    ],
     "verifyConditions": [
       "@semantic-release/changelog",
       "@semantic-release/git",

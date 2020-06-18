@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
+namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using System;
     using System.Net.Http;
@@ -11,7 +11,7 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
 
     public class HttpModule : Module
     {
-        public static string HttpClientName = "KnxListener";
+        public static string HttpClientName = "KnxSender";
 
         public HttpModule(
             IConfiguration configuration,
@@ -26,8 +26,8 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
             services
                 .AddHttpClient(HttpClientName, client =>
                 {
-                    client.BaseAddress = configuration.GetValue<Uri>("Api:Endpoint");
-                    client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "FunctionalLiving.Knx.Listener");
+                    client.BaseAddress = configuration.GetValue<Uri>("KnxSender:Endpoint");
+                    client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "FunctionalLiving.Api");
                 })
 
                 .SetHandlerLifetime(TimeSpan.FromMinutes(lifeTimeInMinutes))

@@ -11,6 +11,7 @@ namespace FunctionalLiving.Knx
     using InfluxDB.Client.Api.Domain;
     using Parser;
     using static GroupAddresses;
+    using FunctionalLiving.Measurements;
 
     public sealed class KnxCommandHandlerModule : CommandHandlerModule
     {
@@ -109,7 +110,7 @@ namespace FunctionalLiving.Knx
 
                         if (sendToInflux.FeatureEnabled)
                             WriteTemperature(
-                                influxWrite(),
+                                influxWrite,
                                 description,
                                 functionalTemp);
                     }
@@ -201,17 +202,28 @@ namespace FunctionalLiving.Knx
         }
 
         private static void WriteTemperature(
-            WriteApi writeApi,
+            Func<WriteApi> writeApi,
             string location,
             double value)
         {
-            var point = PointData.Measurement("temperature")
-                .Tag("location", location)
-                .Field("value", value)
-                .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
+            var temperature = new Temperature
+            {
+                Location = location,
+                Value = value,
+                Time = DateTime.UtcNow
+            };
 
-            // TODO: Get bucket and org from config
-            writeApi.WritePoint("functional-living", "cumps", point);
+            using (var writeClient = writeApi())
+            {
+                // TODO: Get bucket and org from config
+                writeClient.WriteMeasurement(
+                    "functional-living",
+                    "cumps",
+                    WritePrecision.Ns,
+                    temperature);
+
+                writeClient.Flush();
+            }
         }
     }
 }

@@ -8,18 +8,18 @@ namespace FunctionalLiving.Knx
     public static class ProcessKnxExtensions
     {
         public static void ProcessKnxMessage(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             Action<string> processAction)
         {
-            if (!groupAddresses.TryGetValue(groupAddress.ToString()!, out var description))
+            if (!groupAddresses.TryGetValue(groupAddress, out var description))
                 return;
 
             processAction(description);
         }
 
         public static void ProcessKnxSingleBit(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, bool?> processAction)
@@ -38,7 +38,7 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnxScaling(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, double> processAction)
@@ -49,7 +49,7 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnx2ByteUnsignedValue(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, double> processAction)
@@ -60,7 +60,7 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnx2ByteFloatValue(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, double> processAction)
@@ -71,10 +71,10 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnxTime(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<string, Domain.Day?, TimeSpan> processAction)
+            Action<string, Parser.Domain.Day?, TimeSpan> processAction)
         {
             groupAddresses.ProcessKnxMessage(
                 groupAddress,
@@ -87,7 +87,7 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnx4ByteSignedValue(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, long> processAction)
@@ -98,7 +98,7 @@ namespace FunctionalLiving.Knx
         }
 
         public static void ProcessKnxDate(
-            this IDictionary<string, string> groupAddresses,
+            this IDictionary<KnxGroupAddress, string> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
             Action<string, DateTime> processAction)

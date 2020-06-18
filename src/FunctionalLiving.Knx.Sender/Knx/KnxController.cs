@@ -1,9 +1,10 @@
 namespace FunctionalLiving.Knx.Sender
 {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Linq;
+    using Addressing;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Infrastructure;
@@ -13,7 +14,6 @@ namespace FunctionalLiving.Knx.Sender
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
-    using FunctionalLiving.Knx.Addressing;
     using BadRequestResponseExamples = Responses.BadRequestResponseExamples;
     using InternalServerErrorResponseExamples = Responses.InternalServerErrorResponseExamples;
     using ProblemDetails = Be.Vlaanderen.Basisregisters.BasicApiProblem.ProblemDetails;

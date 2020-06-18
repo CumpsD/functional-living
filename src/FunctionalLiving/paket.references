@@ -8,6 +8,9 @@ Be.Vlaanderen.Basisregisters.CommandHandling.SqlStreamStore
 
 Be.Vlaanderen.Basisregisters.EventHandling
 
+Microsoft.Extensions.Http
+Microsoft.Extensions.Http.Polly
+
 InfluxDB.Client
 
 SourceLink.Embed.AllSourceFiles

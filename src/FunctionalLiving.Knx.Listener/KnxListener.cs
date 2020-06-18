@@ -8,7 +8,6 @@ namespace FunctionalLiving.Knx.Listener
     using System.Net.Sockets;
     using System.Text;
     using System.Threading;
-    using System.Threading.Tasks;
     using Addressing;
     using Infrastructure.Modules;
     using Infrastructure.Toggles;
@@ -193,7 +192,7 @@ namespace FunctionalLiving.Knx.Listener
             KnxAddress destinationAddress,
             byte[] state)
         {
-            using (var client = _httpClientFactory.CreateClient(HttpModule.HttpClientName))
+            using (var client = _httpClientFactory.CreateClient(HttpModule.KnxListener))
             using (var request = new HttpRequestMessage(HttpMethod.Post, "v1/knx"))
             using (var httpContent = CreateHttpContent(sourceAddress, destinationAddress, state))
             {

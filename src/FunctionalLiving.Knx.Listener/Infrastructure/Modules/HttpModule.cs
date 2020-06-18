@@ -11,7 +11,7 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
 
     public class HttpModule : Module
     {
-        public static string HttpClientName = "KnxListener";
+        public static string KnxListener = "KnxListener";
 
         public HttpModule(
             IConfiguration configuration,
@@ -24,7 +24,7 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
 
             // https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory
             services
-                .AddHttpClient(HttpClientName, client =>
+                .AddHttpClient(KnxListener, client =>
                 {
                     client.BaseAddress = configuration.GetValue<Uri>("Api:Endpoint");
                     client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "FunctionalLiving.Knx.Listener");

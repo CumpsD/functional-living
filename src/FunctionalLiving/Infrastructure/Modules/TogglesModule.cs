@@ -25,6 +25,11 @@ namespace FunctionalLiving.Infrastructure.Modules
         protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
+                .RegisterToggle<SendToLog>(
+                    SendToLog.ConfigurationPath,
+                    _configuration.GetValue<bool>(SendToLog.ConfigurationPath),
+                    _logger)
+
                 .RegisterToggle<SendToInflux>(
                     SendToInflux.ConfigurationPath,
                     _configuration.GetValue<bool>(SendToInflux.ConfigurationPath),

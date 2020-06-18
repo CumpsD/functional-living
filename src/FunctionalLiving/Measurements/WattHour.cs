@@ -4,8 +4,8 @@ namespace FunctionalLiving.Measurements
     using InfluxDB.Client.Core;
     using Knx.Addressing;
 
-    [Measurement("lux")]
-    public class Lux
+    [Measurement("watt_hour")]
+    public class WattHour
     {
         [Column("address", IsTag = true)]
         public string Address { get; }
@@ -19,7 +19,7 @@ namespace FunctionalLiving.Measurements
         [Column(IsTimestamp = true)]
         public DateTime Time { get; } = DateTime.UtcNow;
 
-        public Lux(KnxGroupAddress address, string location, double value)
+        public WattHour(KnxGroupAddress address, string location, long value)
         {
             Address = address.ToString()!;
             Location = location;

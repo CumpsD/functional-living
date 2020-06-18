@@ -6,6 +6,7 @@ services:
     container_name: functional-living-api
     hostname: functional-living-api
     environment:
+      Features__SendToLog: 'true'
       Features__SendToInflux: 'true'
       KnxSender__Endpoint: http://functional-living-knx-sender:9001
       InfluxDb__Endpoint: http://functional-living-influx:9999

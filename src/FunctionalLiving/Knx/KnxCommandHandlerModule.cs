@@ -1,211 +1,141 @@
 namespace FunctionalLiving.Knx
 {
     using System;
+    using Addressing;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
+    using InfluxDB.Client;
+    using InfluxDB.Client.Api.Domain;
     using Infrastructure;
     using Infrastructure.Toggles;
+    using Measurements;
     using Microsoft.Extensions.Logging;
-    using InfluxDB.Client;
-    using InfluxDB.Client.Writes;
-    using InfluxDB.Client.Api.Domain;
-    using Parser;
     using static GroupAddresses;
-    using FunctionalLiving.Measurements;
 
     public sealed class KnxCommandHandlerModule : CommandHandlerModule
     {
+        private readonly ILogger<KnxCommand> _knxCommandLogger;
+        private readonly Func<WriteApi> _influxWrite;
+        private readonly SendToLog _sendToLog;
+        private readonly SendToInflux _sendToInflux;
+
         public KnxCommandHandlerModule(
             ILogger<KnxCommandHandlerModule> logger,
             ILogger<KnxCommand> knxCommandLogger,
             Func<WriteApi> influxWrite,
+            SendToLog sendToLog,
             SendToInflux sendToInflux)
         {
+            _knxCommandLogger = knxCommandLogger;
+            _influxWrite = influxWrite;
+            _sendToLog = sendToLog;
+            _sendToInflux = sendToInflux;
+
             For<KnxCommand>()
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
-                    var groupAddress = message.Command.Group.ToString(); // e.g. 1/0/1
+                    var groupAddress = message.Command.Group; // e.g. 1/0/1
                     var state = message.Command.State;
 
-                    if (Switches.TryGetValue(groupAddress, out var description))
-                    {
-                        var functionalToggle = Category1_SingleBit.parseSingleBit(state[0]);
-                        var value = functionalToggle.Exists()
-                            ? functionalToggle.Value.Text
-                            : "N/A";
+                    Switches.ProcessKnxSingleBit(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "ON/OFF", description, value);
+                            SendToInflux(new Toggle(groupAddress, description, value));
+                        });
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "ON/OFF",
-                            description,
-                            value);
-                    }
-                    else if (Toggles.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalToggle = Category1_SingleBit.parseSingleBit(state[0]);
-                        var value = functionalToggle.Exists()
-                            ? functionalToggle.Value.IsOff
-                                ? "False"
-                                : functionalToggle.Value.IsOn
-                                    ? "True"
-                                    : "N/A"
-                            : "N/A";
+                    Toggles.ProcessKnxSingleBit(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "TRUE/FALSE", description, value);
+                            SendToInflux(new Toggle(groupAddress, description, value));
+                        });
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "TRUE/FALSE",
-                            description,
-                            value);
-                    }
-                    else if (Percentages.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalPercentage = Category5_Scaling.parseScaling(0, 100, state[0]);
-                        var value = $"{functionalPercentage} %";
+                    Percentages.ProcessKnxScaling(
+                        groupAddress,
+                        state,
+                        (description, value) => SendToLog(groupAddress, "PERCENTAGE", description, $"{value} %"));
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "PERCENTAGE",
-                            description,
-                            value);
-                    }
-                    else if (GroupAddresses.Duration.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalDuration = Category7_2ByteUnsignedValue.parseTwoByteUnsigned(1, state[0], state[1]);
-                        var value = $"{functionalDuration} h";
+                    GroupAddresses.Duration.ProcessKnx2ByteUnsignedValue(
+                        groupAddress,
+                        state,
+                        (description, value) => SendToLog(groupAddress, "DURATION", description, $"{value} h"));
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "DURATION",
-                            description,
-                            value);
-                    }
-                    else if (Current.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalCurrent = Category7_2ByteUnsignedValue.parseTwoByteUnsigned(1, state[0], state[1]);
-                        var value = $"{functionalCurrent} mA";
+                    Current.ProcessKnx2ByteUnsignedValue(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "ENERGY", description, $"{value} mA");
+                            SendToInflux(new MilliAmpere(groupAddress, description, value));
+                        });
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "ENERGY",
-                            description,
-                            value);
-                    }
-                    else if (Temperatures.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalTemp = Category9_2ByteFloatValue.parseTwoByteFloat(state[0], state[1]);
-                        var value = $"{functionalTemp} °C";
+                    Temperatures.ProcessKnx2ByteFloatValue(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "TEMP", description, $"{value} °C");
+                            SendToInflux(new TemperatureCelcius(groupAddress, description, value));
+                        });
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "TEMP",
-                            description,
-                            value);
+                    LightStrength.ProcessKnx2ByteFloatValue(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "LUX", description, $"{value} Lux");
+                            SendToInflux(new Lux(groupAddress, description, value));
+                        });
 
-                        if (sendToInflux.FeatureEnabled)
-                            Write(
-                                influxWrite,
-                                new Temperature
-                                {
-                                    Location = description,
-                                    Value = functionalTemp
-                                });
-                    }
-                    else if (LightStrength.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalLightStrength = Category9_2ByteFloatValue.parseTwoByteFloat(state[0], state[1]);
-                        var value = $"{functionalLightStrength} Lux";
+                    Times.ProcessKnxTime(
+                        groupAddress,
+                        state,
+                        (description, day, time) => SendToLog(groupAddress, "TIME", description, $"{day?.Text}, {time:c}"));
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "LUX",
-                            description,
-                            value);
+                    EnergyWattHour.ProcessKnx4ByteSignedValue(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "ENERGY", description, $"{value} Wh");
+                            SendToInflux(new WattHour(groupAddress, description, value));
+                        });
 
-                        if (sendToInflux.FeatureEnabled)
-                            Write(
-                                influxWrite,
-                                new Lux
-                                {
-                                    Location = description,
-                                    Value = functionalLightStrength
-                                });
-                    }
-                    else if (Times.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalTime = Category10_Time.parseTime(state[0], state[1], state[2]);
-                        var value = $"{(functionalTime.Item1.Exists() ? functionalTime.Item1.Value.Text : string.Empty)}, {functionalTime.Item2:c}";
+                    Dates.ProcessKnxDate(
+                        groupAddress,
+                        state,
+                        (description, value) => SendToLog(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}"));
 
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "TIME",
-                            description,
-                            value);
-                    }
-                    else if (EnergyWattHour.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalWattHour = Category13_4ByteSignedValue.parseFourByteSigned(state[0], state[1], state[2], state[3]);
-                        var value = $"{functionalWattHour} Wh";
-
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "ENERGY",
-                            description,
-                            value);
-                    }
-                    else if (Dates.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalDate = Category11_Date.parseDate(state[0], state[1], state[2]);
-                        var value = $"{functionalDate:dd/MM/yyyy}";
-
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "DATE",
-                            description,
-                            value);
-                    }
-                    else if (Speed.TryGetValue(groupAddress, out description))
-                    {
-                        var functionalSpeed = Category9_2ByteFloatValue.parseTwoByteFloat(state[0], state[1]);
-                        var value = $"{functionalSpeed} m/s";
-
-                        Log(
-                            knxCommandLogger,
-                            groupAddress,
-                            "SPEED",
-                            description,
-                            value);
-                    }
-                    else
-                    {
-                        knxCommandLogger.LogWarning(
-                            "Unknown Address '{GroupAddress}'! Received '{State}'.",
-                            groupAddress,
-                            BitConverter.ToString(state));
-                    }
+                    GroupAddresses.Speed.ProcessKnx2ByteFloatValue(
+                        groupAddress,
+                        state,
+                        (description, value) =>
+                        {
+                            SendToLog(groupAddress, "SPEED", description, $"{value} m/s");
+                            SendToInflux(new MeterPerSecond(groupAddress, description, value));
+                        });
                 });
         }
 
-        private static void Log(
-            ILogger logger,
-            string groupAddress,
+        private void SendToLog<T>(
+            KnxGroupAddress groupAddress,
             string dataType,
             string description,
-            string value)
+            T value)
         {
-            var feedbackAddress = groupAddress.StartsWith("0/") || groupAddress.StartsWith("1/");
+            if (!_sendToLog.FeatureEnabled)
+                return;
 
-            logger.LogInformation(
+            var groupAddressString = groupAddress.ToString()!;
+            var feedbackAddress = groupAddressString.StartsWith("0/") || groupAddressString.StartsWith("1/");
+
+            _knxCommandLogger.LogInformation(
                 "[{Type}] [{DataType}] {Description} ({Value})",
                 feedbackAddress ? "FDBCK" : "CNTRL",
                 dataType,
@@ -213,11 +143,12 @@ namespace FunctionalLiving.Knx
                 value);
         }
 
-        private static void Write<T>(
-            Func<WriteApi> writeApi,
-            T measurement)
+        private void SendToInflux<T>(T measurement)
         {
-            using (var writeClient = writeApi())
+            if (!_sendToInflux.FeatureEnabled)
+                return;
+
+            using (var writeClient = _influxWrite())
             {
                 writeClient.WriteMeasurement(
                     WritePrecision.Ns,

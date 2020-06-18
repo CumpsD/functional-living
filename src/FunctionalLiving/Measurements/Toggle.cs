@@ -4,8 +4,8 @@ namespace FunctionalLiving.Measurements
     using InfluxDB.Client.Core;
     using Knx.Addressing;
 
-    [Measurement("lux")]
-    public class Lux
+    [Measurement("boolean")]
+    public class Toggle
     {
         [Column("address", IsTag = true)]
         public string Address { get; }
@@ -19,11 +19,15 @@ namespace FunctionalLiving.Measurements
         [Column(IsTimestamp = true)]
         public DateTime Time { get; } = DateTime.UtcNow;
 
-        public Lux(KnxGroupAddress address, string location, double value)
+        public Toggle(KnxGroupAddress address, string location, bool? value)
         {
             Address = address.ToString()!;
             Location = location;
-            Value = value;
+            Value = value.HasValue
+                ? value.Value
+                    ? 1
+                    : 0
+                : 0;
         }
     }
 }

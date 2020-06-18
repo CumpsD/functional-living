@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/cumpsd/functional-living/compare/v1.10.3...v1.11.0) (2020-06-18)
+
+
+### Features
+
+* prepare turning lights on and off ([2cf5d4e](https://github.com/cumpsd/functional-living/commit/2cf5d4eff18a9857b1b24d8099101797f75fb323))
+
 ## [1.10.3](https://github.com/cumpsd/functional-living/compare/v1.10.2...v1.10.3) (2020-06-18)
 
 ## [1.10.2](https://github.com/cumpsd/functional-living/compare/v1.10.1...v1.10.2) (2020-06-18)

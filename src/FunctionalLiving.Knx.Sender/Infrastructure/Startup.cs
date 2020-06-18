@@ -85,7 +85,13 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                     });
 
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new ApiModule(_configuration, services, _loggerFactory));
+
+            containerBuilder.RegisterModule(
+                new ApiModule(
+                    _configuration,
+                    services,
+                    _loggerFactory));
+
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);

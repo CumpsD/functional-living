@@ -59,7 +59,20 @@ namespace FunctionalLiving.Knx.Sender
                     knx.Action(groupAddress, boolDatagram);
                     break;
 
-                // TODO: Add more datatypes
+                case "string":
+                    var stringDatagram = request.State;
+                    knx.Action(groupAddress, stringDatagram);
+                    break;
+
+                case "int":
+                    var intDatagram = int.Parse(request.State);
+                    knx.Action(groupAddress, intDatagram);
+                    break;
+
+                case "byte":
+                    var byteDatagram = StringToByteArray(request.State);
+                    knx.Action(groupAddress, byteDatagram[0]);
+                    break;
 
                 case "byte[]":
                     var byteArrayDatagram = StringToByteArray(request.State);

@@ -28,8 +28,15 @@ namespace FunctionalLiving.Api.Infrastructure
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IConfiguration configuration) => _configuration = configuration;
+        public Startup(
+            IConfiguration configuration,
+            ILoggerFactory loggerFactory)
+        {
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
+        }
 
         /// <summary>Configures services for the application.</summary>
         /// <param name="services">The collection of services to configure the application with.</param>
@@ -78,7 +85,13 @@ namespace FunctionalLiving.Api.Infrastructure
                     });
 
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new ApiModule(_configuration, services));
+
+            containerBuilder.RegisterModule(
+                new ApiModule(
+                    _configuration,
+                    services,
+                    _loggerFactory));
+
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);

@@ -135,7 +135,7 @@ namespace FunctionalLiving.Knx.Sender
                 address.ToString(),
                 data);
 
-            _connection.Action(address, data);
+            _connection!.Action(address, data);
         }
 
         public void Action(KnxAddress address, string data)
@@ -145,7 +145,7 @@ namespace FunctionalLiving.Knx.Sender
                 address.ToString(),
                 data);
 
-            _connection.Action(address, data);
+            _connection!.Action(address, data);
         }
 
         public void Action(KnxAddress address, int data)
@@ -155,7 +155,7 @@ namespace FunctionalLiving.Knx.Sender
                 address.ToString(),
                 data);
 
-            _connection.Action(address, data);
+            _connection!.Action(address, data);
         }
 
         public void Action(KnxAddress address, byte data)
@@ -165,7 +165,7 @@ namespace FunctionalLiving.Knx.Sender
                 address.ToString(),
                 "0x" + BitConverter.ToString(new byte[] { data }).Replace("-", string.Empty));
 
-            _connection.Action(address, data);
+            _connection!.Action(address, data);
         }
 
         public void Action(KnxAddress address, byte[] data)
@@ -175,7 +175,7 @@ namespace FunctionalLiving.Knx.Sender
                 address.ToString(),
                 "0x" + BitConverter.ToString(data).Replace("-", string.Empty));
 
-            _connection.Action(address, data);
+            _connection!.Action(address, data);
         }
 
         private void Connected()

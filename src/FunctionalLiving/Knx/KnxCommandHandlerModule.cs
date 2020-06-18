@@ -21,11 +21,11 @@ namespace FunctionalLiving.Knx
                     var groupAddress = message.Command.Group.ToString(); // e.g. 1/0/1
                     var state = message.Command.State;
 
-                    Print(knxCommandLogger, groupAddress!, state);
+                    Log(knxCommandLogger, groupAddress!, state);
                 });
         }
 
-        private static void Print(
+        private static void Log(
             ILogger logger,
             string groupAddress,
             byte[] state)
@@ -112,11 +112,6 @@ namespace FunctionalLiving.Knx
             string description,
             string value)
         {
-            //const int categoryWidth = 15;
-            //const int descriptionWidth = -60;
-
-            //Console.WriteLine($"[{type,categoryWidth}] {description,descriptionWidth} ({value})");
-
             var feedbackAddress = groupAddress.StartsWith("0/") || groupAddress.StartsWith("1/");
 
             logger.LogInformation(

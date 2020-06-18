@@ -19,7 +19,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
         {
             _configuration = configuration;
             _services = services;
-            _loggerFactory = _loggerFactory;
+            _loggerFactory = loggerFactory;
         }
 
         protected override void Load(ContainerBuilder containerBuilder)

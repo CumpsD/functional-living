@@ -6,14 +6,18 @@ services:
     container_name: functional-living-api
     hostname: functional-living-api
     environment:
+      Features__SendToInflux: 'true'
+      KnxSender__Endpoint: http://functional-living-knx-sender:9001
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
       - "9000:9000"
     depends_on:
       - seq
+      - knx-sender
     links:
       - seq
+      - knx-sender
 
   knx-listener:
     build: dist/FunctionalLiving.Knx.Listener/linux/
@@ -24,6 +28,8 @@ services:
       Features__SendToLog: 'true'
       Features__SendToApi: 'true'
       Features__UseKnxConnectionTunneling: 'true'
+      Features__UseKnxConnectionRouting: 'false'
+      Features__DebugKnxCemi: 'false'
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3672
@@ -45,8 +51,9 @@ services:
     hostname: functional-living-knx-sender
     network_mode: host
     environment:
-      Features__SendToLog: 'true'
       Features__UseKnxConnectionTunneling: 'true'
+      Features__UseKnxConnectionRouting: 'false'
+      Features__DebugKnxCemi: 'false'
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3671
@@ -57,7 +64,6 @@ services:
     depends_on:
       - seq
     extra_hosts:
-      - "functional-living-api:127.0.0.1"
       - "functional-living-seq:127.0.0.1"
 
   seq:

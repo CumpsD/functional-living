@@ -1,11 +1,16 @@
-namespace FunctionalLiving.Knx.Domain
+namespace FunctionalLiving.Domain.Knx
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Addressing;
+    using FunctionalLiving.Knx.Addressing;
 
     public static class FeedbackGroupAddresses
     {
+        public static readonly IDictionary<KnxGroupAddress, KnxObject> All =
+            CustomerData.KnxObjects
+                .Where(x => x.KnxControlType == KnxControlType.Feedback)
+                .ToDictionary(x => x.Address, x => x);
+
         // 1.001 Switches
         public static readonly IDictionary<KnxGroupAddress, string> Switches =
             CustomerData.KnxObjects

@@ -1,7 +1,7 @@
-namespace FunctionalLiving.Knx.Domain
+namespace FunctionalLiving.Domain.Knx
 {
     using System.Collections.Generic;
-    using Addressing;
+    using FunctionalLiving.Knx.Addressing;
 
     public static class CustomerData
     {
@@ -54,40 +54,40 @@ namespace FunctionalLiving.Knx.Domain
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/1/10"), "Verlichting - Tuin - Zijmuur - Aan/Uit"),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/1/11"), "Verlichting - Tuin - Terras - Aan/Uit"),
 
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/1"), "Verlichting - Inkomhal - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/2"), "Verlichting - Toilet Beneden - Wastafel - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/10"), "Verlichting - Leefruimte - Eettafel - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/11"), "Verlichting - Leefruimte - Spots Piano - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/12"), "Verlichting - Leefruimte - Spots TV - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/13"), "Verlichting - Leefruimte - Spots Zetel - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/1"), "Verlichting - Inkomhal - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/12")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/2"), "Verlichting - Toilet Beneden - Wastafel - Aan/Uit", KnxGroupAddress.Parse("0/1/13")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/10"), "Verlichting - Leefruimte - Eettafel - Aan/Uit", KnxGroupAddress.Parse("0/1/14")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/11"), "Verlichting - Leefruimte - Spots Piano - Aan/Uit", KnxGroupAddress.Parse("0/1/2")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/12"), "Verlichting - Leefruimte - Spots TV - Aan/Uit", KnxGroupAddress.Parse("0/1/0")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/13"), "Verlichting - Leefruimte - Spots Zetel - Aan/Uit", KnxGroupAddress.Parse("0/1/1")),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/14"), "Verlichting - Leefruimte - Spots TV + Zetel - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/15"), "Verlichting - Leefruimte - Spots Dressoir - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/20"), "Verlichting - Keuken - Eiland - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/21"), "Verlichting - Keuken - Spots - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/30"), "Verlichting - Berging - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/40"), "Verlichting - Garage - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/41"), "Verlichting - Garage - Onder Trap - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/15"), "Verlichting - Leefruimte - Spots Dressoir - Aan/Uit", KnxGroupAddress.Parse("0/1/24")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/20"), "Verlichting - Keuken - Eiland - Aan/Uit", KnxGroupAddress.Parse("0/1/23")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/21"), "Verlichting - Keuken - Spots - Aan/Uit", KnxGroupAddress.Parse("0/1/3")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/30"), "Verlichting - Berging - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/11")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/40"), "Verlichting - Garage - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/10")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/2/41"), "Verlichting - Garage - Onder Trap - Aan/Uit", KnxGroupAddress.Parse("0/1/20")),
 
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/1"), "Verlichting - Trap - Spots - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/1"), "Verlichting - Trap - Spots - Aan/Uit", KnxGroupAddress.Parse("0/1/4")),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/2"), "Verlichting - Trap - Muur - Aan/Uit"),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/3"), "Verlichting - Trap - Spots + Muur - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/10"), "Verlichting - Nachthal - Spots - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/10"), "Verlichting - Nachthal - Spots - Aan/Uit", KnxGroupAddress.Parse("0/1/5")),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/11"), "Verlichting - Trap + Nachthal - Spots - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/20"), "Verlichting - Badkamer - Spots - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/21"), "Verlichting - Badkamer - Spiegel - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/22"), "Verlichting - Badkamer - Makeup - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/30"), "Verlichting - Bureau - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/31"), "Verlichting - Bureau - Spots Buitencirkel - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/32"), "Verlichting - Bureau - Spots Binnencirkel - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/20"), "Verlichting - Badkamer - Spots - Aan/Uit", KnxGroupAddress.Parse("0/1/6")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/21"), "Verlichting - Badkamer - Spiegel - Aan/Uit", KnxGroupAddress.Parse("0/1/19")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/22"), "Verlichting - Badkamer - Makeup - Aan/Uit", KnxGroupAddress.Parse("0/1/15")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/30"), "Verlichting - Bureau - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/22")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/31"), "Verlichting - Bureau - Spots Buitencirkel - Aan/Uit", KnxGroupAddress.Parse("0/1/7")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/32"), "Verlichting - Bureau - Spots Binnencirkel - Aan/Uit", KnxGroupAddress.Parse("0/1/8")),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/33"), "Verlichting - Bureau - Spots - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/40"), "Verlichting - David - Centraal - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/40"), "Verlichting - David - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/18")),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/41"), "Verlichting - David - Bed Links - Aan/Uit"),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/42"), "Verlichting - David - Bed Rechts - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/50"), "Verlichting - Opslag - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/60"), "Verlichting - Abby - Centraal - Aan/Uit"),
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/70"), "Verlichting - Toilet Boven - Spot - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/50"), "Verlichting - Opslag - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/17")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/60"), "Verlichting - Abby - Centraal - Aan/Uit", KnxGroupAddress.Parse("0/1/16")),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/3/70"), "Verlichting - Toilet Boven - Spot - Aan/Uit", KnxGroupAddress.Parse("0/1/9")),
 
-            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/4/1"), "Verlichting - Trap - Wand - Aan/Uit"),
+            new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("2/4/1"), "Verlichting - Zoldertrap - Wand - Aan/Uit", KnxGroupAddress.Parse("0/1/21")),
 
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("5/1/0"), "Toestellen - Stopcontacten Buiten - Aan/Uit"),
             new KnxObject(KnxControlType.Control, KnxDataType.Switch, KnxGroupAddress.Parse("5/2/0"), "Toestellen - Dampkap - Aan/Uit"),

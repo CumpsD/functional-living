@@ -5,13 +5,14 @@ namespace FunctionalLiving.Knx
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
     using Domain;
+    using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;
     using InfluxDB.Client.Api.Domain;
     using Infrastructure;
     using Infrastructure.Toggles;
     using Measurements;
     using Microsoft.Extensions.Logging;
-    using static Domain.FeedbackGroupAddresses;
+    using static Domain.Knx.FeedbackGroupAddresses;
 
     public sealed class KnxCommandHandlerModule : CommandHandlerModule
     {

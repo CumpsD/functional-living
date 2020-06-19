@@ -1,6 +1,6 @@
-namespace FunctionalLiving.Knx.Domain
+namespace FunctionalLiving.Domain.Knx
 {
-    using Addressing;
+    using FunctionalLiving.Knx.Addressing;
 
     public class KnxObject
     {
@@ -12,6 +12,8 @@ namespace FunctionalLiving.Knx.Domain
 
         public string Description { get; }
 
+        public KnxGroupAddress? FeedbackAddress { get; }
+
         public KnxObject(
             KnxControlType controlType,
             KnxDataType dataType,
@@ -22,6 +24,20 @@ namespace FunctionalLiving.Knx.Domain
             KnxDataType = dataType;
             Address = address;
             Description = description;
+        }
+        public KnxObject(
+            KnxControlType controlType,
+            KnxDataType dataType,
+            KnxGroupAddress address,
+            string description,
+            KnxGroupAddress? feedbackAddress)
+            : this(
+                controlType,
+                dataType,
+                address,
+                description)
+        {
+            FeedbackAddress = feedbackAddress;
         }
     }
 }

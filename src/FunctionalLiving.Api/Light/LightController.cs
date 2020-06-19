@@ -6,6 +6,7 @@ namespace FunctionalLiving.Api.Light
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
+    using FunctionalLiving.Domain.Repositories;
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,20 @@ namespace FunctionalLiving.Api.Light
     public class LightController : FunctionalLivingController
     {
         /// <summary>
-        /// Turn on a light
+        /// Gets all the lights.
+        /// </summary>
+        /// <param name="lightsRepository"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="200">If the list has been retreived.</response>
+        /// <response code="500">If an internal error has occured.</response>
+        /// <returns></returns>
+        public IActionResult ListLights(
+            [FromServices] LightsRepository lightsRepository,
+            CancellationToken cancellationToken = default)
+            => Ok(new ListLightsResponse(lightsRepository.Lights));
+
+        /// <summary>
+        /// Turn on a light.
         /// </summary>
         /// <param name="bus"></param>
         /// <param name="request"></param>
@@ -55,7 +69,7 @@ namespace FunctionalLiving.Api.Light
         }
 
         /// <summary>
-        /// Turn off a light
+        /// Turn off a light.
         /// </summary>
         /// <param name="bus"></param>
         /// <param name="request"></param>

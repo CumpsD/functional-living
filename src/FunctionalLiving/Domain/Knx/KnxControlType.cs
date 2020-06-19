@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Knx.Domain
+namespace FunctionalLiving.Domain.Knx
 {
     public enum KnxControlType
     {

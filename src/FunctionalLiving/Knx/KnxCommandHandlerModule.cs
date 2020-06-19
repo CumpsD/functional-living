@@ -1,12 +1,9 @@
 namespace FunctionalLiving.Knx
 {
     using System;
-    using System.Linq;
     using Addressing;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
-    using Domain;
-    using Domain.Repositories;
     using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;
     using InfluxDB.Client.Api.Domain;
@@ -28,20 +25,12 @@ namespace FunctionalLiving.Knx
             ILogger<KnxCommand> knxCommandLogger,
             Func<WriteApi> influxWrite,
             SendToLog sendToLog,
-            SendToInflux sendToInflux,
-            LightsRepository lightsRepository)
+            SendToInflux sendToInflux)
         {
             _knxCommandLogger = knxCommandLogger;
             _influxWrite = influxWrite;
             _sendToLog = sendToLog;
             _sendToInflux = sendToInflux;
-
-            var lights = lightsRepository
-                .Lights
-                .Where(x =>
-                    x.BackendType == HomeAutomationBackendType.Knx &&
-                    x.KnxFeedbackObject?.FeedbackAddress != null)
-                .ToDictionary(x => x.KnxFeedbackObject!.FeedbackAddress!, x => x);
 
             For<KnxCommand>()
                 .AddLogging(logger)
@@ -51,19 +40,6 @@ namespace FunctionalLiving.Knx
                     var state = message.Command.State;
 
                     ProcessKnxMessageBasedOnDataType(groupAddress, state);
-
-                    lights.ProcessKnxSingleBit(
-                        groupAddress,
-                        state,
-                        (light, value) =>
-                        {
-                            light.Status = value switch
-                            {
-                                true => LightStatus.On,
-                                false => LightStatus.Off,
-                                null => LightStatus.Unknown
-                            };
-                        });
                 });
         }
 

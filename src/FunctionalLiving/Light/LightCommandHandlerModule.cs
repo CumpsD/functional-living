@@ -11,7 +11,9 @@ namespace FunctionalLiving.Light
     using Domain.Repositories;
     using Infrastructure;
     using Infrastructure.Modules;
+    using Knx;
     using Knx.Addressing;
+    using Knx.Commands;
     using Microsoft.Extensions.Logging;
 
     public sealed class LightCommandHandlerModule : CommandHandlerModule
@@ -26,6 +28,13 @@ namespace FunctionalLiving.Light
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+
+            var knxLights = lightsRepository
+                .Lights
+                .Where(x =>
+                    IsKnxLight(x) &&
+                    x.KnxFeedbackObject?.FeedbackAddress != null)
+                .ToDictionary(x => x.KnxFeedbackObject!.FeedbackAddress!, x => x);
 
             For<TurnOnLightCommand>()
                 .AddLogging(logger)
@@ -45,6 +54,27 @@ namespace FunctionalLiving.Light
 
                     if (IsKnxLight(light))
                         await SendToKnx(light.KnxObject!.Address, false);
+                });
+
+            For<KnxCommand>()
+                .AddLogging(logger)
+                .Handle(async (message, ct) =>
+                {
+                    var groupAddress = message.Command.Group; // e.g. 1/0/1
+                    var state = message.Command.State;
+
+                    knxLights.ProcessKnxSingleBit(
+                        groupAddress,
+                        state,
+                        (light, value) =>
+                        {
+                            light.Status = value switch
+                            {
+                                true => LightStatus.On,
+                                false => LightStatus.Off,
+                                null => LightStatus.Unknown
+                            };
+                        });
                 });
         }
 

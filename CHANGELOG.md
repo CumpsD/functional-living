@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/cumpsd/functional-living/compare/v1.12.0...v1.13.0) (2020-06-19)
+
+
+### Features
+
+* add indicator for rain ([a29ac52](https://github.com/cumpsd/functional-living/commit/a29ac522d3697f78260b721726794131698c0449))
+
 # [1.12.0](https://github.com/cumpsd/functional-living/compare/v1.11.0...v1.12.0) (2020-06-19)
 
 

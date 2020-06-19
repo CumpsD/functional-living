@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/cumpsd/functional-living/compare/v1.13.0...v1.14.0) (2020-06-19)
+
+
+### Features
+
+* add verwarmingsinstallatie dashboard ([02f2842](https://github.com/cumpsd/functional-living/commit/02f2842fdda2d889edff4865bb629d07e71a36f3))
+
 # [1.13.0](https://github.com/cumpsd/functional-living/compare/v1.12.0...v1.13.0) (2020-06-19)
 
 

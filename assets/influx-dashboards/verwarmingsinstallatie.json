@@ -522,6 +522,27 @@
         "hex": "#00C9FF",
         "name": "laser",
         "value": 0
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
+        "value": 0
        }
       ],
       "prefix": "",
@@ -600,6 +621,27 @@
         "type": "text",
         "hex": "#00C9FF",
         "name": "laser",
+        "value": 0
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
         "value": 0
        }
       ],
@@ -680,6 +722,27 @@
         "hex": "#00C9FF",
         "name": "laser",
         "value": 0
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
+        "value": 0
        }
       ],
       "prefix": "",
@@ -758,6 +821,27 @@
         "type": "text",
         "hex": "#00C9FF",
         "name": "laser",
+        "value": 0
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
         "value": 0
        }
       ],
@@ -838,6 +922,27 @@
         "hex": "#00C9FF",
         "name": "laser",
         "value": 0
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
+        "value": 0
        }
       ],
       "prefix": "",
@@ -912,11 +1017,81 @@
       "legend": {},
       "colors": [
        {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
+        "type": "scale",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
+        "type": "scale",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
+        "type": "scale",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
+        "value": 0
+       },
+       {
         "id": "base",
         "type": "text",
-        "hex": "#00C9FF",
-        "name": "laser",
+        "hex": "#ffffff",
+        "name": "white",
         "value": 0
+       },
+       {
+        "id": "7b3a33c4-081c-4686-b877-0100927e518a",
+        "type": "text",
+        "hex": "#9394FF",
+        "name": "comet",
+        "value": 5
+       },
+       {
+        "id": "eb1523df-ee90-49d4-b328-0dc6bab35b19",
+        "type": "text",
+        "hex": "#4591ED",
+        "name": "ocean",
+        "value": 10
+       },
+       {
+        "id": "643c2376-fee0-40a8-b561-29349fbd1575",
+        "type": "text",
+        "hex": "#7CE490",
+        "name": "honeydew",
+        "value": 15
+       },
+       {
+        "id": "96e17a66-f6e0-4ad2-9a27-e83f0294efd5",
+        "type": "text",
+        "hex": "#FFD255",
+        "name": "thunder",
+        "value": 20
+       },
+       {
+        "id": "38035636-b1a1-4df4-8146-df8480fcae45",
+        "type": "text",
+        "hex": "#F48D38",
+        "name": "tiger",
+        "value": 25
+       },
+       {
+        "id": "01cad097-7bee-48fc-a30a-6b82057b54e2",
+        "type": "text",
+        "hex": "#F95F53",
+        "name": "curacao",
+        "value": 30
+       },
+       {
+        "id": "f2e2b9f5-dc0f-4d49-a2c4-92d3aa7041d5",
+        "type": "text",
+        "hex": "#BF3D5E",
+        "name": "ruby",
+        "value": 40
        }
       ],
       "prefix": "",

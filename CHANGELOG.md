@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/cumpsd/functional-living/compare/v1.17.0...v1.18.0) (2020-06-19)
+
+
+### Features
+
+* add home automation domain and lights endpoint ([fefefdd](https://github.com/cumpsd/functional-living/commit/fefefddd9d121bb6f8cbbdb3831ee26c2190530b))
+
 # [1.17.0](https://github.com/cumpsd/functional-living/compare/v1.16.0...v1.17.0) (2020-06-19)
 
 

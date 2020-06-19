@@ -1,3 +1,12 @@
+# [1.15.0](https://github.com/cumpsd/functional-living/compare/v1.14.1...v1.15.0) (2020-06-19)
+
+
+### Features
+
+* add light dashboard ([9d9e162](https://github.com/cumpsd/functional-living/commit/9d9e16235af7ced27f1f3bf89bf4b996a2698e1e))
+* add temperature rooms ([20fc32e](https://github.com/cumpsd/functional-living/commit/20fc32e4c8e9e73d1012aa12779fc81e12dfbcae))
+* add wind speed ([45f1242](https://github.com/cumpsd/functional-living/commit/45f1242b62adb140c446e1215a46da6485d95bcf))
+
 ## [1.14.1](https://github.com/cumpsd/functional-living/compare/v1.14.0...v1.14.1) (2020-06-19)
 
 # [1.14.0](https://github.com/cumpsd/functional-living/compare/v1.13.0...v1.14.0) (2020-06-19)

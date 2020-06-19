@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/cumpsd/functional-living/compare/v1.11.0...v1.12.0) (2020-06-19)
+
+
+### Features
+
+* add dashboards ([1e60078](https://github.com/cumpsd/functional-living/commit/1e60078cbc3fd5592f0b29bb25ed9fa6e6a87101))
+
 # [1.11.0](https://github.com/cumpsd/functional-living/compare/v1.10.3...v1.11.0) (2020-06-18)
 
 

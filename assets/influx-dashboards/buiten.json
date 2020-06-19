@@ -238,29 +238,78 @@
        {
         "id": "base",
         "type": "text",
-        "hex": "#00C9FF",
-        "name": "laser",
+        "hex": "#ffffff",
+        "name": "white",
         "value": 0
        },
        {
-        "id": "e464ac98-6e9d-4020-bc62-0c58288e31ab",
+        "id": "9edf8927-ad63-47af-9e7c-ad962391faab",
+        "type": "text",
+        "hex": "#9394FF",
+        "name": "comet",
+        "value": 5
+       },
+       {
+        "id": "aad46da9-b92f-4707-885d-5d9eb52982fc",
+        "type": "text",
+        "hex": "#4591ED",
+        "name": "ocean",
+        "value": 10
+       },
+       {
+        "id": "3d2a2ae8-3d72-4b20-aca0-8291c2673e60",
+        "type": "text",
+        "hex": "#7CE490",
+        "name": "honeydew",
+        "value": 15
+       },
+       {
+        "id": "04c96e1c-64b5-4126-b711-6c2d046f6974",
+        "type": "text",
+        "hex": "#FFD255",
+        "name": "thunder",
+        "value": 20
+       },
+       {
+        "id": "29734fef-a9ce-4976-b366-75ded63867e9",
+        "type": "text",
+        "hex": "#F48D38",
+        "name": "tiger",
+        "value": 25
+       },
+       {
+        "id": "0562bc9a-0377-4adc-9fb9-8f27862fe739",
+        "type": "text",
+        "hex": "#F95F53",
+        "name": "curacao",
+        "value": 30
+       },
+       {
+        "id": "b8f7dc4b-d439-4632-bc57-cf0b8309b675",
+        "type": "text",
+        "hex": "#BF3D5E",
+        "name": "ruby",
+        "value": 40
+       },
+       {
+        "id": "71a72aa9-b6ae-4ca1-8252-92e2a30a2095",
         "type": "scale",
-        "hex": "#31C0F6",
-        "name": "Nineteen Eighty Four",
+        "hex": "#F6F6F8",
+        "name": "T-Max 400 Film",
         "value": 0
        },
        {
-        "id": "60253ca1-7f0a-46a8-923c-bdbfabb64e92",
+        "id": "9fddee87-8679-40ce-8bda-c4325ea4acce",
         "type": "scale",
-        "hex": "#A500A5",
-        "name": "Nineteen Eighty Four",
+        "hex": "#A4A8B6",
+        "name": "T-Max 400 Film",
         "value": 0
        },
        {
-        "id": "5a2b253d-67ac-4f9c-9d23-ce0576e3c098",
+        "id": "2438d94c-1586-4621-af27-5180da9fe756",
         "type": "scale",
-        "hex": "#FF7E27",
-        "name": "Nineteen Eighty Four",
+        "hex": "#545667",
+        "name": "T-Max 400 Film",
         "value": 0
        }
       ],

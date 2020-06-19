@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/cumpsd/functional-living/compare/v1.15.0...v1.16.0) (2020-06-19)
+
+
+### Features
+
+* add movement dashboard ([4cd767d](https://github.com/cumpsd/functional-living/commit/4cd767da76f795f514839c77e6267bb1f39e2f5e))
+
 # [1.15.0](https://github.com/cumpsd/functional-living/compare/v1.14.1...v1.15.0) (2020-06-19)
 
 

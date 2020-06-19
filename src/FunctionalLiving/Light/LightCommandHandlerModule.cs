@@ -7,6 +7,7 @@ namespace FunctionalLiving.Light
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
+    using Domain;
     using Domain.Repositories;
     using Infrastructure;
     using Infrastructure.Modules;
@@ -25,15 +26,15 @@ namespace FunctionalLiving.Light
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+
             For<TurnOnLightCommand>()
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
                     var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
 
-                    // TODO: Map Light Id to KNX group address
-                    if (light != null)
-                        await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), true);
+                    if (IsKnxLight(light))
+                        await SendToKnx(light.KnxObject!.Address, true);
                 });
 
             For<TurnOffLightCommand>()
@@ -42,11 +43,15 @@ namespace FunctionalLiving.Light
                 {
                     var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
 
-                    // TODO: Map Light Id to KNX group address
-                    if (light != null)
-                        await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), false);
+                    if (IsKnxLight(light))
+                        await SendToKnx(light.KnxObject!.Address, false);
                 });
         }
+
+        private static bool IsKnxLight(Light light)
+            => light != null &&
+               light.BackendType == HomeAutomationBackendType.Knx &&
+               light.KnxObject != null;
 
         private async Task SendToKnx(
             KnxGroupAddress address,

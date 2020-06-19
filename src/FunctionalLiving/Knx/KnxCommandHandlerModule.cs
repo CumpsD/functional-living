@@ -1,10 +1,12 @@
 namespace FunctionalLiving.Knx
 {
     using System;
+    using System.Linq;
     using Addressing;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
     using Domain;
+    using Domain.Repositories;
     using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;
     using InfluxDB.Client.Api.Domain;
@@ -20,18 +22,21 @@ namespace FunctionalLiving.Knx
         private readonly Func<WriteApi> _influxWrite;
         private readonly SendToLog _sendToLog;
         private readonly SendToInflux _sendToInflux;
+        private readonly LightsRepository _lightsRepository;
 
         public KnxCommandHandlerModule(
             ILogger<KnxCommandHandlerModule> logger,
             ILogger<KnxCommand> knxCommandLogger,
             Func<WriteApi> influxWrite,
             SendToLog sendToLog,
-            SendToInflux sendToInflux)
+            SendToInflux sendToInflux,
+            LightsRepository lightsRepository)
         {
             _knxCommandLogger = knxCommandLogger;
             _influxWrite = influxWrite;
             _sendToLog = sendToLog;
             _sendToInflux = sendToInflux;
+            _lightsRepository = lightsRepository;
 
             For<KnxCommand>()
                 .AddLogging(logger)
@@ -47,6 +52,7 @@ namespace FunctionalLiving.Knx
                         {
                             SendToLog(groupAddress, "ON/OFF", description, value);
                             SendToInflux(new Toggle(groupAddress, description, value));
+                            UpdateLightStatus(groupAddress, value);
                         });
 
                     Toggles.ProcessKnxSingleBit(
@@ -114,7 +120,7 @@ namespace FunctionalLiving.Knx
                         state,
                         (description, value) => SendToLog(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}"));
 
-                    FeedbackGroupAddresses.Speed.ProcessKnx2ByteFloatValue(
+                    Speed.ProcessKnx2ByteFloatValue(
                         groupAddress,
                         state,
                         (description, value) =>
@@ -123,6 +129,26 @@ namespace FunctionalLiving.Knx
                             SendToInflux(new MeterPerSecond(groupAddress, description, value));
                         });
                 });
+        }
+
+        private void UpdateLightStatus(
+            KnxGroupAddress groupAddress,
+            bool? value)
+        {
+            var light = _lightsRepository
+                .Lights
+                .SingleOrDefault(x =>
+                    x.BackendType == HomeAutomationBackendType.Knx &&
+                    x.KnxFeedbackObject != null &&
+                    Equals(x.KnxFeedbackObject.Address, groupAddress));
+
+            if (light != null)
+                light.Status = value switch
+                {
+                    true => LightStatus.On,
+                    false => LightStatus.Off,
+                    null => LightStatus.Unknown
+                };
         }
 
         private void SendToLog<T>(

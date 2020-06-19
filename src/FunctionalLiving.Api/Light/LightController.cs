@@ -1,6 +1,7 @@
 namespace FunctionalLiving.Api.Light
 {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
@@ -14,6 +15,7 @@ namespace FunctionalLiving.Api.Light
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
+    using ValueObjects;
 
     [ApiVersion("1.0")]
     [AdvertiseApiVersions("1.0")]
@@ -39,6 +41,43 @@ namespace FunctionalLiving.Api.Light
             [FromServices] LightsRepository lightsRepository,
             CancellationToken cancellationToken = default)
             => Ok(new ListLightsResponse(lightsRepository.Lights));
+
+        /// <summary>
+        /// Gets a light.
+        /// </summary>
+        /// <param name="lightsRepository"></param>
+        /// <param name="lightId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="200">If the light has been retreived.</response>
+        /// <response code="404">If the light cannot be found.</response>
+        /// <response code="500">If an internal error has occured.</response>
+        /// <returns></returns>
+        [HttpGet("{lightId}")]
+        [ProducesResponseType(typeof(GetLightResponse), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [SwaggerRequestExample(typeof(GetLightRequest), typeof(GetLightRequestExample))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(GetLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        public async Task<IActionResult> GetLight(
+            [FromServices] LightsRepository lightsRepository,
+            [FromRoute] Guid lightId,
+            CancellationToken cancellationToken = default)
+        {
+            var request = new GetLightRequest
+            {
+                LightId = lightId
+            };
+
+            await new GetLightRequestValidator()
+                .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
+
+            var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == request.LightId);
+            if (light == null)
+                throw new ApiException("Light not found.", StatusCodes.Status404NotFound);
+
+            return Ok(new GetLightResponse(light));
+        }
 
         /// <summary>
         /// Turn on a light.

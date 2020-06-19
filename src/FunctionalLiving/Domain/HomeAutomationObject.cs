@@ -19,6 +19,7 @@ namespace FunctionalLiving.Domain
         public string Description { get; }
 
         internal KnxObject? KnxObject { get; }
+        internal KnxObject? KnxFeedbackObject { get; }
 
         public HomeAutomationObject(
             T id,
@@ -43,6 +44,7 @@ namespace FunctionalLiving.Domain
                 knxObject.Description)
         {
             KnxObject = knxObject;
+            KnxFeedbackObject = knxFeedbackObject;
         }
     }
 }

@@ -3,6 +3,7 @@ namespace FunctionalLiving.Api.Light.Responses
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Domain;
     using ValueObjects;
     using Swashbuckle.AspNetCore.Filters;
 
@@ -11,7 +12,7 @@ namespace FunctionalLiving.Api.Light.Responses
     {
         public List<ListLightsItemResponse> Lights { get; }
 
-        public ListLightsResponse(IEnumerable<Domain.Light> lights)
+        public ListLightsResponse(IEnumerable<Light> lights)
         {
             Lights = lights
                 .Select(x => new ListLightsItemResponse(x))
@@ -26,10 +27,13 @@ namespace FunctionalLiving.Api.Light.Responses
 
         public string Description { get; }
 
-        public ListLightsItemResponse(Domain.Light light)
+        public string Status { get; }
+
+        public ListLightsItemResponse(Light light)
         {
             Id = light.Id;
             Description = light.Description;
+            Status = light.MapLightStatus();
         }
     }
 

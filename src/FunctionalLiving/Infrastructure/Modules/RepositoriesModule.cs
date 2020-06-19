@@ -1,7 +1,7 @@
 namespace FunctionalLiving.Infrastructure.Modules
 {
     using Autofac;
-    using FunctionalLiving.Domain.Repositories;
+    using Domain.Repositories;
 
     public class RepositoriesModule : Module
     {

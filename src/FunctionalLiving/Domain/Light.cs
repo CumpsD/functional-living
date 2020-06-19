@@ -1,7 +1,7 @@
 namespace FunctionalLiving.Domain
 {
-    using FunctionalLiving.Domain.Knx;
-    using FunctionalLiving.ValueObjects;
+    using Knx;
+    using ValueObjects;
 
     public class Light : HomeAutomationObject<LightId>
     {

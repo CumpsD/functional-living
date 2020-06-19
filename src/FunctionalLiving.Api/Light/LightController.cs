@@ -6,7 +6,7 @@ namespace FunctionalLiving.Api.Light
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
-    using FunctionalLiving.Domain.Repositories;
+    using Domain.Repositories;
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

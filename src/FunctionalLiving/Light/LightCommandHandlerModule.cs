@@ -1,11 +1,13 @@
 namespace FunctionalLiving.Light
 {
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Mime;
     using System.Text;
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
+    using Domain.Repositories;
     using Infrastructure;
     using Infrastructure.Modules;
     using Knx.Addressing;
@@ -18,6 +20,7 @@ namespace FunctionalLiving.Light
 
         public LightCommandHandlerModule(
             ILogger<LightCommandHandlerModule> logger,
+            LightsRepository lightsRepository,
             IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
@@ -26,16 +29,22 @@ namespace FunctionalLiving.Light
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
+                    var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
+
                     // TODO: Map Light Id to KNX group address
-                    await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), true);
+                    if (light != null)
+                        await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), true);
                 });
 
             For<TurnOffLightCommand>()
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
+                    var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
+
                     // TODO: Map Light Id to KNX group address
-                    await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), false);
+                    if (light != null)
+                        await SendToKnx(new KnxThreeLevelGroupAddress(2, 2, 10), false);
                 });
         }
 

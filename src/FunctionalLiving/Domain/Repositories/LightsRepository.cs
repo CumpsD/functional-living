@@ -2,7 +2,7 @@ namespace FunctionalLiving.Domain.Repositories
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Domain.Knx;
+    using Knx;
 
     public class LightsRepository
     {

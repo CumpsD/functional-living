@@ -5,9 +5,10 @@ namespace FunctionalLiving.ValueObjects
     using System.Linq.Expressions;
     using Be.Vlaanderen.Basisregisters.AggregateSource;
     using Be.Vlaanderen.Basisregisters.Generators.Guid;
-    using FunctionalLiving.Knx.Addressing;
+    using Knx.Addressing;
     using Newtonsoft.Json;
 
+    [JsonConverter(typeof(SingleValueObjectConverter<HomeAutomationObjectId>))]
     public class HomeAutomationObjectId : GuidValueObject<HomeAutomationObjectId>
     {
         private static readonly Guid HomeAutomationObjectIdNamespace = new Guid("ab78132d-c26c-440a-b9c0-ba7d5715c19c");

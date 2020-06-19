@@ -10,7 +10,7 @@
    "type": "dashboard",
    "attributes": {
     "name": "Beweging",
-    "description": "Status van bewging."
+    "description": "Opvolgen van beweging."
    },
    "relationships": {
     "label": {

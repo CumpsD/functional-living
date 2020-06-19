@@ -1,3 +1,5 @@
+## [1.19.1](https://github.com/cumpsd/functional-living/compare/v1.19.0...v1.19.1) (2020-06-19)
+
 # [1.19.0](https://github.com/cumpsd/functional-living/compare/v1.18.2...v1.19.0) (2020-06-19)
 
 

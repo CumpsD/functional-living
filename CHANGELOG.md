@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/cumpsd/functional-living/compare/v1.16.0...v1.17.0) (2020-06-19)
+
+
+### Features
+
+* add lightstrength dashboard ([5f980fe](https://github.com/cumpsd/functional-living/commit/5f980fe01d404ba97ac8d8ba60d227e5a3c99867))
+
 # [1.16.0](https://github.com/cumpsd/functional-living/compare/v1.15.0...v1.16.0) (2020-06-19)
 
 

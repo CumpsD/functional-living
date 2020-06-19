@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/cumpsd/functional-living/compare/v1.18.2...v1.19.0) (2020-06-19)
+
+
+### Features
+
+* add light status ([e87bbf0](https://github.com/cumpsd/functional-living/commit/e87bbf0ba24f22c63999af1f64e6d0847f02e801))
+
 ## [1.18.2](https://github.com/cumpsd/functional-living/compare/v1.18.1...v1.18.2) (2020-06-19)
 
 

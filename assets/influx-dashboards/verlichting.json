@@ -1080,7 +1080,7 @@
     "type": "view",
     "id": "05df0cc36d2cc000",
     "attributes": {
-     "name": "Nachthal - Spots",
+     "name": "Nachthal",
      "properties": {
       "shape": "chronograf-v2",
       "type": "single-stat",
@@ -1138,7 +1138,7 @@
     "type": "view",
     "id": "05df0cc5dbacc000",
     "attributes": {
-     "name": "Trap - Spots",
+     "name": "Trap",
      "properties": {
       "shape": "chronograf-v2",
       "type": "single-stat",

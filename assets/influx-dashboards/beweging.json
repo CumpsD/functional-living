@@ -1,0 +1,672 @@
+{
+ "meta": {
+  "version": "1",
+  "type": "dashboard",
+  "name": "Beweging-Template",
+  "description": "template created from dashboard: Beweging"
+ },
+ "content": {
+  "data": {
+   "type": "dashboard",
+   "attributes": {
+    "name": "Beweging",
+    "description": "Status van bewging."
+   },
+   "relationships": {
+    "label": {
+     "data": []
+    },
+    "cell": {
+     "data": [
+      {
+       "type": "cell",
+       "id": "05df15af996cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afb06cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afbd6cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afcbacc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afcc6cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afcd6cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15afd72cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df15aff56cc000"
+      }
+     ]
+    },
+    "variable": {
+     "data": []
+    }
+   }
+  },
+  "included": [
+   {
+    "id": "05df15af996cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 0,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15af996cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afb06cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 2,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afb06cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afbd6cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 4,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afbd6cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afcbacc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 6,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afcbacc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afcc6cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 0,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afcc6cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afcd6cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 6,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afcd6cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15afd72cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 2,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15afd72cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df15aff56cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 4,
+     "w": 6,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df15aff56cc000"
+      }
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15af996cc000",
+    "attributes": {
+     "name": "Toilet Beneden",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in toilet beneden\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afb06cc000",
+    "attributes": {
+     "name": "Berging",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in berging\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afbd6cc000",
+    "attributes": {
+     "name": "Nachthal Bureau",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in nachthal trap\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afcbacc000",
+    "attributes": {
+     "name": "Toilet Boven",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in toilet boven\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afcc6cc000",
+    "attributes": {
+     "name": "Inkomhal",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in inkomhal\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afcd6cc000",
+    "attributes": {
+     "name": "Badkamer",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in badkamer\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15afd72cc000",
+    "attributes": {
+     "name": "Garage",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in garage\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df15aff56cc000",
+    "attributes": {
+     "name": "Nachthal Badkamer",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Beweging in nachthal badkamer\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   }
+  ]
+ },
+ "labels": []
+}

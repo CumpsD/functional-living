@@ -29,6 +29,12 @@ namespace FunctionalLiving.Api.Light
         /// <response code="200">If the list has been retreived.</response>
         /// <response code="500">If an internal error has occured.</response>
         /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(ListLightsResponse), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [SwaggerRequestExample(typeof(ListLightsRequest), typeof(ListLightsRequestExample))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(ListLightsResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public IActionResult ListLights(
             [FromServices] LightsRepository lightsRepository,
             CancellationToken cancellationToken = default)
@@ -38,13 +44,13 @@ namespace FunctionalLiving.Api.Light
         /// Turn on a light.
         /// </summary>
         /// <param name="bus"></param>
-        /// <param name="request"></param>
+        /// <param name="lightId"></param>
         /// <param name="cancellationToken"></param>
         /// <response code="202">If the message is accepted.</response>
         /// <response code="400">If the message contains invalid data.</response>
         /// <response code="500">If an internal error has occured.</response>
         /// <returns></returns>
-        [HttpPost("on")]
+        [HttpGet("{lightId}/on")]
         [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -54,9 +60,14 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOnLight(
             [FromServices] ICommandHandlerResolver bus,
-            [FromBody] TurnOnLightRequest request,
+            [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
+            var request = new TurnOnLightRequest
+            {
+                LightId = lightId
+            };
+
             await new TurnOnLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
@@ -72,13 +83,13 @@ namespace FunctionalLiving.Api.Light
         /// Turn off a light.
         /// </summary>
         /// <param name="bus"></param>
-        /// <param name="request"></param>
+        /// <param name="lightId"></param>
         /// <param name="cancellationToken"></param>
         /// <response code="202">If the message is accepted.</response>
         /// <response code="400">If the message contains invalid data.</response>
         /// <response code="500">If an internal error has occured.</response>
         /// <returns></returns>
-        [HttpPost("off")]
+        [HttpGet("{lightId}/off")]
         [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -88,16 +99,21 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOffLight(
             [FromServices] ICommandHandlerResolver bus,
-            [FromBody] TurnOnLightRequest request,
+            [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
-            await new TurnOnLightRequestValidator()
+            var request = new TurnOffLightRequest
+            {
+                LightId = lightId
+            };
+
+            await new TurnOffLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
             return Accepted(
                 await bus.Dispatch(
                     Guid.NewGuid(),
-                    TurnOnLightRequestMapping.Map(request),
+                    TurnOffLightRequestMapping.Map(request),
                     GetMetadata(),
                     cancellationToken));
         }

@@ -1,21 +1,21 @@
 # Functional Living Api Test
-# Turn on a light
+# Get all lights
 
-POST http://127.0.0.1:9000/v1/lights/on HTTP/1.1
+GET http://127.0.0.1:9000/v1/lights HTTP/1.1
 content-type: application/json
-
-{
-  lightId: "a6123e83-2e8f-4179-8b0a-e6600690e012",
-}
 
 ###
 
 # Functional Living Api Test
 # Turn on a light
 
-POST http://127.0.0.1:9000/v1/lights/off HTTP/1.1
+GET http://127.0.0.1:9000/v1/lights/a6123e83-2e8f-4179-8b0a-e6600690e012/on HTTP/1.1
 content-type: application/json
 
-{
-  lightId: "a6123e83-2e8f-4179-8b0a-e6600690e012",
-}
+###
+
+# Functional Living Api Test
+# Turn on a light
+
+GET http://127.0.0.1:9000/v1/lights/a6123e83-2e8f-4179-8b0a-e6600690e012/off HTTP/1.1
+content-type: application/json

@@ -3,6 +3,7 @@ namespace FunctionalLiving
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Autofac;
     using Knx;
+    using Light;
 
     public class FunctionalLivingCommandHandlerModule : Module
     {
@@ -11,6 +12,11 @@ namespace FunctionalLiving
             containerBuilder
                 .RegisterType<KnxCommandHandlerModule>()
                 .Named<CommandHandlerModule>(typeof(KnxCommandHandlerModule).FullName)
+                .As<CommandHandlerModule>();
+
+            containerBuilder
+                .RegisterType<LightCommandHandlerModule>()
+                .Named<CommandHandlerModule>(typeof(LightCommandHandlerModule).FullName)
                 .As<CommandHandlerModule>();
 
             containerBuilder

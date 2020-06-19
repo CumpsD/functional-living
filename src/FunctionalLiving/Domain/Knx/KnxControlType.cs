@@ -1,6 +1,6 @@
 namespace FunctionalLiving.Domain.Knx
 {
-    public enum KnxControlType
+    internal enum KnxControlType
     {
         Feedback,
         Control

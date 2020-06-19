@@ -4,7 +4,7 @@ namespace FunctionalLiving.Domain.Knx
     using System.Linq;
     using FunctionalLiving.Knx.Addressing;
 
-    public static class ControlGroupAddresses
+    internal static class ControlGroupAddresses
     {
         public static readonly IDictionary<KnxGroupAddress, KnxObject> All =
             CustomerData.KnxObjects

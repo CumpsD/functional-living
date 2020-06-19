@@ -3,11 +3,6 @@ namespace FunctionalLiving.Domain
     using Knx;
     using ValueObjects;
 
-    public enum HomeAutomationBackendType
-    {
-        Knx
-    }
-
     public class HomeAutomationObject<T> where T : HomeAutomationObjectId
     {
         public T Id { get; }
@@ -18,10 +13,10 @@ namespace FunctionalLiving.Domain
 
         public string Description { get; }
 
-        internal KnxObject? KnxObject { get; }
-        internal KnxObject? KnxFeedbackObject { get; }
+        internal KnxObject? KnxObject { get; set; }
+        internal KnxObject? KnxFeedbackObject { get; set; }
 
-        public HomeAutomationObject(
+        protected HomeAutomationObject(
             T id,
             HomeAutomationObjectType objectType,
             HomeAutomationBackendType backendType,
@@ -31,20 +26,6 @@ namespace FunctionalLiving.Domain
             ObjectType = objectType;
             BackendType = backendType;
             Description = description;
-        }
-
-        protected HomeAutomationObject(
-            HomeAutomationObjectType objectType,
-            KnxObject knxObject,
-            KnxObject? knxFeedbackObject)
-            : this(
-                HomeAutomationObjectId.CreateDeterministicId<T>(knxObject.Address),
-                objectType,
-                HomeAutomationBackendType.Knx,
-                knxObject.Description)
-        {
-            KnxObject = knxObject;
-            KnxFeedbackObject = knxFeedbackObject;
         }
     }
 }

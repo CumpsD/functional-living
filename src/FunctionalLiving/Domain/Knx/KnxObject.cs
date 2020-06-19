@@ -2,7 +2,7 @@ namespace FunctionalLiving.Domain.Knx
 {
     using FunctionalLiving.Knx.Addressing;
 
-    public class KnxObject
+    internal class KnxObject
     {
         public KnxControlType KnxControlType { get; }
 

@@ -3,7 +3,7 @@ namespace FunctionalLiving.Domain.Knx
     using System.Collections.Generic;
     using FunctionalLiving.Knx.Addressing;
 
-    public static class CustomerData
+    internal static class CustomerData
     {
         public static readonly List<KnxObject> KnxObjects = new List<KnxObject>
         {

@@ -8,10 +8,18 @@ namespace FunctionalLiving.Domain
     {
         public LightStatus Status { get; set; } = LightStatus.Unknown;
 
-        public Light(
+        internal Light(
             KnxObject knxObject,
             KnxObject? knxFeedbackObject)
-            : base(HomeAutomationObjectType.Light, knxObject, knxFeedbackObject) { }
+            : base(
+                HomeAutomationObjectId.CreateDeterministicId<LightId>(knxObject.Address),
+                HomeAutomationObjectType.Light,
+                HomeAutomationBackendType.Knx,
+                knxObject.Description)
+        {
+            KnxObject = knxObject;
+            KnxFeedbackObject = knxFeedbackObject;
+        }
     }
 
     public static class MapLightStatusExtension

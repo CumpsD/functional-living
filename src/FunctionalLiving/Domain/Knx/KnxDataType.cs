@@ -1,6 +1,6 @@
 namespace FunctionalLiving.Domain.Knx
 {
-    public enum KnxDataType
+    internal enum KnxDataType
     {
         Switch,
         Toggle,

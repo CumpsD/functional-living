@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/cumpsd/functional-living/compare/v1.18.1...v1.18.2) (2020-06-19)
+
+
+### Bug Fixes
+
+* register http module and light commandhandler ([138b673](https://github.com/cumpsd/functional-living/commit/138b6731f2be21ad12f85e8b0976d07bd777142d))
+
 ## [1.18.1](https://github.com/cumpsd/functional-living/compare/v1.18.0...v1.18.1) (2020-06-19)
 
 # [1.18.0](https://github.com/cumpsd/functional-living/compare/v1.17.0...v1.18.0) (2020-06-19)

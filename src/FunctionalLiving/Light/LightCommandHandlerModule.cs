@@ -29,7 +29,7 @@ namespace FunctionalLiving.Light
             _logger = logger;
             _httpClientFactory = httpClientFactory;
 
-            var knxLights = lightsRepository
+            var knxLightsFeedback = lightsRepository
                 .Lights
                 .Where(x =>
                     IsKnxLight(x) &&
@@ -40,7 +40,7 @@ namespace FunctionalLiving.Light
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
-                    var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
+                    var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == message.Command.LightId);
 
                     if (IsKnxLight(light))
                         await SendToKnx(light.KnxObject!.Address, true);
@@ -50,7 +50,7 @@ namespace FunctionalLiving.Light
                 .AddLogging(logger)
                 .Handle(async (message, ct) =>
                 {
-                    var light = lightsRepository.Lights.FirstOrDefault(x => x.Id == message.Command.LightId);
+                    var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == message.Command.LightId);
 
                     if (IsKnxLight(light))
                         await SendToKnx(light.KnxObject!.Address, false);
@@ -63,7 +63,7 @@ namespace FunctionalLiving.Light
                     var groupAddress = message.Command.Group; // e.g. 1/0/1
                     var state = message.Command.State;
 
-                    knxLights.ProcessKnxSingleBit(
+                    knxLightsFeedback.ProcessKnxSingleBit(
                         groupAddress,
                         state,
                         (light, value) =>

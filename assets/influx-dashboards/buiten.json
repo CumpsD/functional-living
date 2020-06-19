@@ -25,6 +25,10 @@
       {
        "type": "cell",
        "id": "05de5108dc729000"
+      },
+      {
+       "type": "cell",
+       "id": "05dee18858acc000"
       }
      ]
     },
@@ -58,7 +62,7 @@
     "attributes": {
      "x": 0,
      "y": 0,
-     "w": 12,
+     "w": 10,
      "h": 2
     },
     "relationships": {
@@ -66,6 +70,24 @@
       "data": {
        "type": "view",
        "id": "05de5108dc729000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05dee18858acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 10,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05dee18858acc000"
       }
      }
     }
@@ -255,6 +277,64 @@
       "shadeBelow": true,
       "position": "overlaid",
       "timeFormat": ""
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05dee18858acc000",
+    "attributes": {
+     "name": "Regent het?",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Neerslag buiten\")\n",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#FFD255",
+        "name": "thunder",
+        "value": 0
+       },
+       {
+        "id": "014ec6ef-540f-49fd-83ef-49cd062056d6",
+        "type": "background",
+        "hex": "#4591ED",
+        "name": "ocean",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
      }
     }
    }

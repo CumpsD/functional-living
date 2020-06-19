@@ -1,0 +1,1952 @@
+{
+ "meta": {
+  "version": "1",
+  "type": "dashboard",
+  "name": "Verlichting-Template",
+  "description": "template created from dashboard: Verlichting"
+ },
+ "content": {
+  "data": {
+   "type": "dashboard",
+   "attributes": {
+    "name": "Verlichting",
+    "description": "Status van de verlichting."
+   },
+   "relationships": {
+    "label": {
+     "data": []
+    },
+    "cell": {
+     "data": [
+      {
+       "type": "cell",
+       "id": "05df0c1909acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cb164acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cb33eecc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cb4f96cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cb7726cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cbb3a6cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cbcc5acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cbe262cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cbfba6cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cc36d2cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cc5dbacc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0cc7842cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eab4eacc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eadb06cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eafe4ecc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eb1a2acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eb3a5acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0eb59facc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f4953ecc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f4ae3acc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f4c7facc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f4e1a2cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f4fae2cc000"
+      },
+      {
+       "type": "cell",
+       "id": "05df0f51956cc000"
+      }
+     ]
+    },
+    "variable": {
+     "data": []
+    }
+   }
+  },
+  "included": [
+   {
+    "id": "05df0c1909acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 2,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0c1909acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cb164acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cb164acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cb33eecc000",
+    "type": "cell",
+    "attributes": {
+     "x": 8,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cb33eecc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cb4f96cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 4,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cb4f96cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cb7726cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cb7726cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cbb3a6cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cbb3a6cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cbcc5acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 2,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cbcc5acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cbe262cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 4,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cbe262cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cbfba6cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 8,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cbfba6cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cc36d2cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 10,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cc36d2cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cc5dbacc000",
+    "type": "cell",
+    "attributes": {
+     "x": 8,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cc5dbacc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0cc7842cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 2,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0cc7842cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eab4eacc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eab4eacc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eadb06cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eadb06cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eafe4ecc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eafe4ecc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eb1a2acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 8,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eb1a2acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eb3a5acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 4,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eb3a5acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0eb59facc000",
+    "type": "cell",
+    "attributes": {
+     "x": 6,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0eb59facc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f4953ecc000",
+    "type": "cell",
+    "attributes": {
+     "x": 2,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f4953ecc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f4ae3acc000",
+    "type": "cell",
+    "attributes": {
+     "x": 10,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f4ae3acc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f4c7facc000",
+    "type": "cell",
+    "attributes": {
+     "x": 10,
+     "y": 6,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f4c7facc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f4e1a2cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 0,
+     "y": 4,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f4e1a2cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f4fae2cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 4,
+     "y": 2,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f4fae2cc000"
+      }
+     }
+    }
+   },
+   {
+    "id": "05df0f51956cc000",
+    "type": "cell",
+    "attributes": {
+     "x": 10,
+     "y": 0,
+     "w": 2,
+     "h": 2
+    },
+    "relationships": {
+     "view": {
+      "data": {
+       "type": "view",
+       "id": "05df0f51956cc000"
+      }
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0c1909acc000",
+    "attributes": {
+     "name": "Leefruimte - TV",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Leefruimte - Spots TV - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cb164acc000",
+    "attributes": {
+     "name": "Berging",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Berging - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cb33eecc000",
+    "attributes": {
+     "name": "Garage - Centraal",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Garage - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cb4f96cc000",
+    "attributes": {
+     "name": "Leefruimte - Zetel",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Leefruimte - Spots Zetel - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cb7726cc000",
+    "attributes": {
+     "name": "Badkamer - Spots",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Badkamer - Spots - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cbb3a6cc000",
+    "attributes": {
+     "name": "Toilet Boven",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Toilet Boven - Spot - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cbcc5acc000",
+    "attributes": {
+     "name": "Bureau - Spots Buiten",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Bureau - Spots Buitencirkel - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cbe262cc000",
+    "attributes": {
+     "name": "Bureau - Spots Binnen",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Bureau - Spots Binnencirkel - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cbfba6cc000",
+    "attributes": {
+     "name": "Leefruimte - Piano",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Leefruimte - Spots Piano - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cc36d2cc000",
+    "attributes": {
+     "name": "Nachthal - Spots",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Nachthal - Spots - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cc5dbacc000",
+    "attributes": {
+     "name": "Trap - Spots",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Trap - Spots - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0cc7842cc000",
+    "attributes": {
+     "name": "Keuken - Spots",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Keuken - Spots - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eab4eacc000",
+    "attributes": {
+     "name": "Inkomhal",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Inkomhal - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eadb06cc000",
+    "attributes": {
+     "name": "Toilet Beneden",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Toilet Beneden - Wastafel - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eafe4ecc000",
+    "attributes": {
+     "name": "Leefruimte - Eettafel",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Leefruimte - Eettafel - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eb1a2acc000",
+    "attributes": {
+     "name": "Badkamer - Makeup",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Badkamer - Makeup - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eb3a5acc000",
+    "attributes": {
+     "name": "Slaapkamer Abby",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Abby - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0eb59facc000",
+    "attributes": {
+     "name": "Opslag",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Opslag - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f4953ecc000",
+    "attributes": {
+     "name": "Slaapkamer David",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - David - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f4ae3acc000",
+    "attributes": {
+     "name": "Garage - Onder Trap",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Garage - Onder Trap - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f4c7facc000",
+    "attributes": {
+     "name": "Zoldertrap",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Zoldertrap - Wand - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f4e1a2cc000",
+    "attributes": {
+     "name": "Bureau - Centraal",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Bureau - Centraal - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f4fae2cc000",
+    "attributes": {
+     "name": "Keuken - Eiland",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Keuken - Eiland - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   },
+   {
+    "type": "view",
+    "id": "05df0f51956cc000",
+    "attributes": {
+     "name": "Leefruimte - Dressoir",
+     "properties": {
+      "shape": "chronograf-v2",
+      "type": "single-stat",
+      "queries": [
+       {
+        "text": "from(bucket: \"functional-living\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"boolean\")\n  |> filter(fn: (r) => r[\"location\"] == \"Verlichting - Leefruimte - Spots Dressoir - Aan/Uit\")",
+        "editMode": "advanced",
+        "name": "",
+        "builderConfig": {
+         "buckets": [],
+         "tags": [
+          {
+           "key": "_measurement",
+           "values": [],
+           "aggregateFunctionType": "filter"
+          }
+         ],
+         "functions": [],
+         "aggregateWindow": {
+          "period": "auto"
+         }
+        }
+       }
+      ],
+      "prefix": "",
+      "tickPrefix": "",
+      "suffix": "",
+      "tickSuffix": "",
+      "colors": [
+       {
+        "id": "base",
+        "type": "background",
+        "hex": "#545667",
+        "name": "graphite",
+        "value": 0
+       },
+       {
+        "id": "07077dc6-a87d-4efc-a788-b644b6535401",
+        "type": "background",
+        "hex": "#4ED8A0",
+        "name": "rainforest",
+        "value": 1
+       }
+      ],
+      "decimalPlaces": {
+       "isEnforced": true,
+       "digits": 0
+      },
+      "note": "",
+      "showNoteWhenEmpty": false
+     }
+    }
+   }
+  ]
+ },
+ "labels": []
+}

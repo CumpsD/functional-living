@@ -6,6 +6,12 @@ Microsoft.Extensions.Http.Polly
 
 InfluxDB.Client
 
+OpenTelemetry
+OpenTelemetry.Adapter.AspNetCore
+OpenTelemetry.Adapter.Dependencies
+OpenTelemetry.Exporter.Jaeger
+OpenTelemetry.Extensions.Hosting
+
 Serilog.Sinks.Seq
 
 SourceLink.Embed.AllSourceFiles

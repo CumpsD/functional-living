@@ -1,7 +1,6 @@
 namespace FunctionalLiving
 {
     using System;
-    using Be.Vlaanderen.Basisregisters.AggregateSource;
 
     public abstract class FunctionalLivingKnxException : Exception
     {

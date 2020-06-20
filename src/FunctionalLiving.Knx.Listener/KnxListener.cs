@@ -1,6 +1,7 @@
 namespace FunctionalLiving.Knx.Listener
 {
     using System;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Mime;
@@ -157,11 +158,20 @@ namespace FunctionalLiving.Knx.Listener
             KnxAddress destinationAddress,
             byte[] state)
         {
-            if (_sendToLog.FeatureEnabled)
-                Print(sourceAddress, destinationAddress, state);
+            var activity = new Activity("IncomingKnxMessage").Start();
 
-            if (_sendToApi.FeatureEnabled)
-                SendToApi(sourceAddress, destinationAddress, state);
+            try
+            {
+                if (_sendToLog.FeatureEnabled)
+                    Print(sourceAddress, destinationAddress, state);
+
+                if (_sendToApi.FeatureEnabled)
+                    SendToApi(sourceAddress, destinationAddress, state);
+            }
+            finally
+            {
+                activity.Stop();
+            }
         }
 
         private void Print(

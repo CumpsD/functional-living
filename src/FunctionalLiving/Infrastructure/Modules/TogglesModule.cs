@@ -25,14 +25,16 @@ namespace FunctionalLiving.Infrastructure.Modules
         protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
-                .RegisterToggle<SendToLog>(
-                    SendToLog.ConfigurationPath,
-                    _configuration.GetValue<bool>(SendToLog.ConfigurationPath),
+                .RegisterToggle<SendToInflux>(
+                    _configuration.GetValue<bool>(SendToInflux.ConfigurationPath),
                     _logger)
 
-                .RegisterToggle<SendToInflux>(
-                    SendToInflux.ConfigurationPath,
-                    _configuration.GetValue<bool>(SendToInflux.ConfigurationPath),
+                .RegisterToggle<SendToKnxSender>(
+                    _configuration.GetValue<bool>(SendToKnxSender.ConfigurationPath),
+                    _logger)
+
+                .RegisterToggle<SendToLog>(
+                    _configuration.GetValue<bool>(SendToLog.ConfigurationPath),
                     _logger);
         }
     }
@@ -41,7 +43,6 @@ namespace FunctionalLiving.Infrastructure.Modules
     {
         public static ContainerBuilder RegisterToggle<T>(
             this ContainerBuilder containerBuilder,
-            string configurationPath,
             bool toggleEnabled,
             ILogger? logger) where T : IFeatureToggle
         {

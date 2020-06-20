@@ -1,8 +1,5 @@
 namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
 {
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
     using Autofac;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

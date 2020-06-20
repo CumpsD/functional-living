@@ -1,6 +1,7 @@
 namespace FunctionalLiving.Knx.Listener
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -89,6 +90,7 @@ namespace FunctionalLiving.Knx.Listener
                 .Configure<KnxConfiguration>(configuration.GetSection(KnxConfiguration.ConfigurationPath));
 
             builder
+                .RegisterModule(new TracingModule(configuration, services))
                 .RegisterModule(new HttpModule(configuration, services, loggerFactory))
                 .RegisterModule(new TogglesModule(configuration, loggerFactory));
 

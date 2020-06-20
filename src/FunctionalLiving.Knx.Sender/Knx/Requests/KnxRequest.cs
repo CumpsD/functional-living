@@ -1,6 +1,5 @@
 namespace FunctionalLiving.Knx.Sender.Requests
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
     using FluentValidation;
     using Swashbuckle.AspNetCore.Filters;

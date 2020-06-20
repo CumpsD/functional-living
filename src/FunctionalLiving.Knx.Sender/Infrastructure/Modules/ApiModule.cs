@@ -26,6 +26,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
         {
             containerBuilder
                 .RegisterModule(new LoggingModule(_configuration, _services))
+                .RegisterModule(new TracingModule(_configuration, _services))
                 .RegisterModule(new TogglesModule(_configuration, _loggerFactory))
                 .RegisterModule(new KnxSenderModule(_configuration, _services));
 

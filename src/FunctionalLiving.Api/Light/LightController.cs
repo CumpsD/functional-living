@@ -1,6 +1,7 @@
 namespace FunctionalLiving.Api.Light
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -11,11 +12,11 @@ namespace FunctionalLiving.Api.Light
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Converters;
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
-    using ValueObjects;
 
     [ApiVersion("1.0")]
     [AdvertiseApiVersions("1.0")]
@@ -98,10 +99,13 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOnLight(
+            [FromServices] ILogger<LightController> logger,
             [FromServices] ICommandHandlerResolver bus,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
+            logger.LogInformation("Activity: {Activity} || Parent: {ParentActivity}", Activity.Current.Id, Activity.Current.ParentId);
+
             var request = new TurnOnLightRequest
             {
                 LightId = lightId

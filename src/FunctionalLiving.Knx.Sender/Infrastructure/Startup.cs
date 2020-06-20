@@ -18,6 +18,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
     using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
     using Modules;
+    using Toggles;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
@@ -104,6 +105,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
             IHostApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider,
+            ConnectToKnx connectToKnx,
             KnxSender knxSender)
         {
             app.UseDefaultForApi(new StartupUseOptions
@@ -145,7 +147,8 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                 }
             });
 
-            knxSender.Start();
+            if (connectToKnx.FeatureEnabled)
+                knxSender.Start();
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)

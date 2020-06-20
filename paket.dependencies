@@ -22,6 +22,12 @@ nuget FeatureToggle 4.0.2
 
 nuget InfluxDB.Client 1.9.0
 
+nuget OpenTelemetry 0.2.0-alpha.275
+nuget OpenTelemetry.Adapter.AspNetCore 0.2.0-alpha.275
+nuget OpenTelemetry.Adapter.Dependencies 0.2.0-alpha.275
+nuget OpenTelemetry.Exporter.Jaeger 0.2.0-alpha.275
+nuget OpenTelemetry.Extensions.Hosting 0.2.0-alpha.275
+
 nuget Serilog.Sinks.Seq 4.0.0
 
 // BASE REGISTRIES STUFF

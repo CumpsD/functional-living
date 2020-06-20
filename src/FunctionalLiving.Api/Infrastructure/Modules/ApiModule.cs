@@ -27,6 +27,7 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
         {
             containerBuilder
                 .RegisterModule(new LoggingModule(_configuration, _services))
+                .RegisterModule(new TracingModule(_configuration, _services))
                 .RegisterModule(new TogglesModule(_configuration, _loggerFactory))
                 .RegisterModule(new InfluxModule(_configuration))
                 .RegisterModule(new HttpModule(_configuration, _services, _loggerFactory))

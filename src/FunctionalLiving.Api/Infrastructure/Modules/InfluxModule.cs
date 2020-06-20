@@ -1,12 +1,8 @@
 namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using System;
-    using System.Linq;
-    using System.Linq.Expressions;
     using Autofac;
-    using FeatureToggle;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
     using InfluxDB.Client;
 
     public class InfluxModule : Module

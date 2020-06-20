@@ -9,7 +9,7 @@ content-type: application/json
 # Functional Living Api Test
 # Turn on a light
 
-GET http://127.0.0.1:9000/v1/lights/a6123e83-2e8f-4179-8b0a-e6600690e012/on HTTP/1.1
+GET http://127.0.0.1:9000/v1/lights/82395c55-aea8-5218-a707-7b438c69b5bd/on HTTP/1.1
 content-type: application/json
 
 ###
@@ -17,5 +17,5 @@ content-type: application/json
 # Functional Living Api Test
 # Turn on a light
 
-GET http://127.0.0.1:9000/v1/lights/a6123e83-2e8f-4179-8b0a-e6600690e012/off HTTP/1.1
+GET http://127.0.0.1:9000/v1/lights/82395c55-aea8-5218-a707-7b438c69b5bd/off HTTP/1.1
 content-type: application/json

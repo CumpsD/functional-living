@@ -2,15 +2,10 @@ namespace FunctionalLiving.Knx.Sender
 {
     using System;
     using System.Net;
-    using System.Net.Http;
-    using System.Net.Mime;
     using System.Net.NetworkInformation;
     using System.Net.Sockets;
-    using System.Text;
     using System.Threading;
-    using System.Threading.Tasks;
     using Addressing;
-    using Infrastructure.Modules;
     using Infrastructure.Toggles;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;

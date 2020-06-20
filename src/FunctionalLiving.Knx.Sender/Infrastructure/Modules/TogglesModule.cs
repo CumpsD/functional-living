@@ -25,18 +25,19 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
         protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
+                .RegisterToggle<ConnectToKnx>(
+                    _configuration.GetValue<bool>(ConnectToKnx.ConfigurationPath),
+                    _logger)
+
                 .RegisterToggle<DebugKnxCemi>(
-                    DebugKnxCemi.ConfigurationPath,
                     _configuration.GetValue<bool>(DebugKnxCemi.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<UseKnxConnectionRouting>(
-                    UseKnxConnectionRouting.ConfigurationPath,
                     _configuration.GetValue<bool>(UseKnxConnectionRouting.ConfigurationPath),
                     _logger)
 
                 .RegisterToggle<UseKnxConnectionTunneling>(
-                    UseKnxConnectionTunneling.ConfigurationPath,
                     _configuration.GetValue<bool>(UseKnxConnectionTunneling.ConfigurationPath),
                     _logger);
         }
@@ -46,7 +47,6 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
     {
         public static ContainerBuilder RegisterToggle<T>(
             this ContainerBuilder containerBuilder,
-            string configurationPath,
             bool toggleEnabled,
             ILogger? logger) where T : IFeatureToggle
         {

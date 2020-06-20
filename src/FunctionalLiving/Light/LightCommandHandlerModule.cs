@@ -56,26 +56,26 @@ namespace FunctionalLiving.Light
                         await SendToKnx(light.KnxObject!.Address, false);
                 });
 
-            For<KnxCommand>()
-                .AddLogging(logger)
-                .Handle(async (message, ct) =>
-                {
-                    var groupAddress = message.Command.Group; // e.g. 1/0/1
-                    var state = message.Command.State;
+            //For<KnxCommand>()
+            //    .AddLogging(logger)
+            //    .Handle(async (message, ct) =>
+            //    {
+            //        var groupAddress = message.Command.Group; // e.g. 1/0/1
+            //        var state = message.Command.State;
 
-                    knxLightsFeedback.ProcessKnxSingleBit(
-                        groupAddress,
-                        state,
-                        (light, value) =>
-                        {
-                            light.Status = value switch
-                            {
-                                true => LightStatus.On,
-                                false => LightStatus.Off,
-                                null => LightStatus.Unknown
-                            };
-                        });
-                });
+            //        knxLightsFeedback.ProcessKnxSingleBit(
+            //            groupAddress,
+            //            state,
+            //            (light, value) =>
+            //            {
+            //                light.Status = value switch
+            //                {
+            //                    true => LightStatus.On,
+            //                    false => LightStatus.Off,
+            //                    null => LightStatus.Unknown
+            //                };
+            //            });
+            //    });
         }
 
         private static bool IsKnxLight(Light light)

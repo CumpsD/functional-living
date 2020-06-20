@@ -13,6 +13,12 @@ Microsoft.Net.Http.Headers
 
 Autofac.Extensions.DependencyInjection
 
+OpenTelemetry
+OpenTelemetry.Adapter.AspNetCore
+OpenTelemetry.Adapter.Dependencies
+OpenTelemetry.Exporter.Jaeger
+OpenTelemetry.Extensions.Hosting
+
 Serilog
 Serilog.Sinks.Console
 Serilog.Sinks.File

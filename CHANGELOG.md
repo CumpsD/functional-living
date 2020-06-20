@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/cumpsd/functional-living/compare/v1.20.0...v1.21.0) (2020-06-20)
+
+
+### Features
+
+* add distributed tracing to knx listener ([10dbab1](https://github.com/cumpsd/functional-living/commit/10dbab1ad27b2bdd92bce48c813a8fe17925cd5b))
+
 # [1.20.0](https://github.com/cumpsd/functional-living/compare/v1.19.1...v1.20.0) (2020-06-20)
 
 

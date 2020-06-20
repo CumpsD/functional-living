@@ -6,6 +6,7 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
     using Microsoft.Extensions.DependencyInjection;
     using OpenTelemetry.Trace.Configuration;
     using OpenTelemetry.Trace.Samplers;
+    using Tracing;
 
     public class TracingModule : Module
     {
@@ -27,7 +28,7 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
                         jaeger.AgentPort = configuration.GetValue<int>("Tracing:Port");
                         jaeger.ServiceName = configuration.GetValue<string>("Tracing:ServiceName");
                     })
-                    .AddRequestAdapter()
+                    .AddKnxListenerAdapter()
                     .AddDependencyAdapter()
                     .SetSampler(new AlwaysOnSampler()));
         }

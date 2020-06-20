@@ -11,6 +11,7 @@ namespace FunctionalLiving.Knx.Listener
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using OpenTelemetry.Trace;
     using Serilog;
 
     public class Program
@@ -47,6 +48,7 @@ namespace FunctionalLiving.Knx.Listener
                 .Build();
 
             var container = ConfigureServices(configuration);
+            var openTelemetry = container.GetRequiredService<TracerFactoryBase>();
             var logger = container.GetRequiredService<ILogger<Program>>();
 
             logger.LogInformation("Starting FunctionalLiving.Knx.Listener");
@@ -97,7 +99,7 @@ namespace FunctionalLiving.Knx.Listener
             builder
                 .RegisterType<KnxListener>()
                 .SingleInstance();
-
+            
             builder
                 .Populate(services);
 

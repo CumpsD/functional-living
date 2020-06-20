@@ -12,6 +12,7 @@ namespace FunctionalLiving.Knx.Listener
     using Addressing;
     using Infrastructure.Modules;
     using Infrastructure.Toggles;
+    using Infrastructure.Tracing;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
@@ -27,6 +28,9 @@ namespace FunctionalLiving.Knx.Listener
 
     public class KnxListener
     {
+        private static readonly DiagnosticSource DiagnosticListener
+            = new DiagnosticListener(TracingConstants.ActivityName);
+
         private readonly ILogger<KnxListener> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -158,7 +162,11 @@ namespace FunctionalLiving.Knx.Listener
             KnxAddress destinationAddress,
             byte[] state)
         {
-            var activity = new Activity("IncomingKnxMessage").Start();
+            var activity = DiagnosticListener
+                .StartActivity(
+                    TracingConstants.ActivityName,
+                    BeforeSendMessage.EventName,
+                    new BeforeSendMessage());
 
             try
             {
@@ -170,10 +178,10 @@ namespace FunctionalLiving.Knx.Listener
             }
             finally
             {
-                activity.Stop();
+                DiagnosticListener.StopActivity(activity);
             }
         }
-
+        
         private void Print(
             KnxAddress sourceAddress,
             KnxAddress destinationAddress,

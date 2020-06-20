@@ -33,6 +33,8 @@ services:
       - jaeger
       - influx
       - knx-sender
+    extra_hosts:
+      - "functional-living-knx-sender:10.0.1.9"
 
   knx-listener:
     build: dist/FunctionalLiving.Knx.Listener/linux/
@@ -41,7 +43,7 @@ services:
     network_mode: host
     environment:
       Features__EnableTracing: 'true'
-      Features__ConnectToKnx: 'false'
+      Features__ConnectToKnx: 'true'
       Features__DebugKnxCemi: 'false'
       Features__SendToApi: 'true'
       Features__SendToLog: 'true'
@@ -74,7 +76,7 @@ services:
     network_mode: host
     environment:
       Features__EnableTracing: 'true'
-      Features__ConnectToKnx: 'false'
+      Features__ConnectToKnx: 'true'
       Features__DebugKnxCemi: 'false'
       Features__UseKnxConnectionRouting: 'false'
       Features__UseKnxConnectionTunneling: 'true'
@@ -116,7 +118,7 @@ services:
       BADGER_DIRECTORY_KEY: /badger/key
     ports:
       - "9015:16686"
-      - "9016:6831"
+      - "9016:6831/udp"
     volumes:
       - jaeger:/badger
 

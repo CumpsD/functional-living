@@ -1,3 +1,16 @@
+# [1.22.0](https://github.com/cumpsd/functional-living/compare/v1.21.0...v1.22.0) (2020-06-20)
+
+
+### Bug Fixes
+
+* allow api to reach knx sender on local ip ([e8d8a21](https://github.com/cumpsd/functional-living/commit/e8d8a21bf4287bfcdfaa88cdcb8f64f1930b838f))
+
+
+### Features
+
+* add connext to knx toggle for listener ([4295523](https://github.com/cumpsd/functional-living/commit/4295523446808f224ffc2344f9a3e4f147b73ead))
+* add jaeger to docker compose ([b6044e1](https://github.com/cumpsd/functional-living/commit/b6044e17335bcfc52897170d1a45ba315c700479))
+
 # [1.21.0](https://github.com/cumpsd/functional-living/compare/v1.20.0...v1.21.0) (2020-06-20)
 
 

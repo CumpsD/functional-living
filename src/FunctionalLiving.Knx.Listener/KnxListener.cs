@@ -34,6 +34,7 @@ namespace FunctionalLiving.Knx.Listener
         private readonly ILogger<KnxListener> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
 
+        private readonly ConnectToKnx _connectToKnx;
         private readonly SendToLog _sendToLog;
         private readonly SendToApi _sendToApi;
 
@@ -44,6 +45,7 @@ namespace FunctionalLiving.Knx.Listener
             ILogger<KnxListener> logger,
             IHttpClientFactory httpClientFactory,
             IOptions<KnxConfiguration> knxConfiguration,
+            ConnectToKnx connectToKnx,
             SendToLog sendToLog,
             SendToApi sendToApi,
             UseKnxConnectionRouting useKnxConnectionRouting,
@@ -53,6 +55,7 @@ namespace FunctionalLiving.Knx.Listener
             _logger = logger;
             _httpClientFactory = httpClientFactory;
 
+            _connectToKnx = connectToKnx;
             _sendToLog = sendToLog;
             _sendToApi = sendToApi;
 
@@ -143,7 +146,10 @@ namespace FunctionalLiving.Knx.Listener
         }
 
         public void Start()
-            => _connection!.Connect();
+        {
+            if (_connectToKnx.FeatureEnabled)
+                _connection!.Connect();
+        }
 
         private void Event(
             KnxAddress sourceAddress,
@@ -181,7 +187,7 @@ namespace FunctionalLiving.Knx.Listener
                 DiagnosticListener.StopActivity(activity);
             }
         }
-        
+
         private void Print(
             KnxAddress sourceAddress,
             KnxAddress destinationAddress,

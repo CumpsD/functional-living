@@ -25,6 +25,10 @@ namespace FunctionalLiving.Knx.Listener.Infrastructure.Modules
         protected override void Load(ContainerBuilder containerBuilder)
         {
             containerBuilder
+                .RegisterToggle<ConnectToKnx>(
+                    _configuration.GetValue<bool>(ConnectToKnx.ConfigurationPath),
+                    _logger)
+
                 .RegisterToggle<DebugKnxCemi>(
                     _configuration.GetValue<bool>(DebugKnxCemi.ConfigurationPath),
                     _logger)

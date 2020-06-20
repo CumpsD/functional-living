@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/cumpsd/functional-living/compare/v1.19.1...v1.20.0) (2020-06-20)
+
+
+### Features
+
+* add start of distributed tracing ([4df741c](https://github.com/cumpsd/functional-living/commit/4df741c936cd6dc35bca874bda65b11d8973e919))
+
 ## [1.19.1](https://github.com/cumpsd/functional-living/compare/v1.19.0...v1.19.1) (2020-06-19)
 
 # [1.19.0](https://github.com/cumpsd/functional-living/compare/v1.18.2...v1.19.0) (2020-06-19)

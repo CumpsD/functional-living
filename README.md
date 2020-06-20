@@ -17,12 +17,22 @@
 
 ### Getting started
 
-TODO: More to come :)
+Build the application and run it with docker-compose:
 
 ```bash
 ./build.sh Publish
-docker-compose -f docker-compose.yml up
+docker-compose -f docker-compose.yml up --build
 ```
+
+After everything has started, you can visit the following services:
+
+| Service                     |              Address |
+|-----------------------------|----------------------|
+| FunctionalLiving.Api        | http://127.0.01:9000 |
+| FunctionalLiving.Knx.Sender | http://127.0.01:9001 |
+| Seq                         | http://127.0.01:9010 |
+| Jaeger                      | http://127.0.01:9015 |
+| InfluxDb                    | http://127.0.01:9020 |
 
 ### Possible build targets
 

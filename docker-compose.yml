@@ -6,24 +6,31 @@ services:
     container_name: functional-living-api
     hostname: functional-living-api
     environment:
-      Features__SendToLog: 'true'
+      Features__EnableTracing: 'true'
       Features__SendToInflux: 'true'
+      Features__SendToKnxSender: 'true'
+      Features__SendToLog: 'true'
       KnxSender__Endpoint: http://functional-living-knx-sender:9001
       InfluxDb__Endpoint: http://functional-living-influx:9999
       InfluxDb__Token: JBU-kgjsFW2q9lKmklFgHaVSHs8kp1nff6iMUxg_Xuj-KeuuY2Dc2LFDfJ5HDDvbvWqQeSEeb5c62Flr9X6QVA==
       InfluxDb__Bucket: functional-living
       InfluxDb__Organisation: cumps
       InfluxDb__LogLevel: None
+      Tracing__Host: functional-living-jaeger
+      Tracing__Port: 6831
+      Tracing__ServiceName: FunctionalLiving.Api
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
       - "9000:9000"
     depends_on:
       - seq
+      - jaeger
       - influx
       - knx-sender
     links:
       - seq
+      - jaeger
       - influx
       - knx-sender
 
@@ -33,25 +40,32 @@ services:
     hostname: functional-living-knx-listener
     network_mode: host
     environment:
-      Features__SendToLog: 'true'
-      Features__SendToApi: 'true'
-      Features__UseKnxConnectionTunneling: 'true'
-      Features__UseKnxConnectionRouting: 'false'
+      Features__EnableTracing: 'true'
+      Features__ConnectToKnx: 'false'
       Features__DebugKnxCemi: 'false'
+      Features__SendToApi: 'true'
+      Features__SendToLog: 'true'
+      Features__UseKnxConnectionRouting: 'false'
+      Features__UseKnxConnectionTunneling: 'true'
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3672
       Api__Endpoint: http://functional-living-api:9000
+      Tracing__Host: functional-living-jaeger
+      Tracing__Port: 9016
+      Tracing__ServiceName: FunctionalLiving.Knx.Listener
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxListener: Debug
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9011
     depends_on:
       - seq
+      - jaeger
       - api
     extra_hosts:
-      - "functional-living-api:127.0.0.1"
       - "functional-living-seq:127.0.0.1"
+      - "functional-living-jaeger:127.0.0.1"
+      - "functional-living-api:127.0.0.1"
 
   knx-sender:
     build: dist/FunctionalLiving.Knx.Sender/linux/
@@ -59,20 +73,27 @@ services:
     hostname: functional-living-knx-sender
     network_mode: host
     environment:
-      Features__UseKnxConnectionTunneling: 'true'
-      Features__UseKnxConnectionRouting: 'false'
+      Features__EnableTracing: 'true'
+      Features__ConnectToKnx: 'false'
       Features__DebugKnxCemi: 'false'
+      Features__UseKnxConnectionRouting: 'false'
+      Features__UseKnxConnectionTunneling: 'true'
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3671
+      Tracing__Host: functional-living-jaeger
+      Tracing__Port: 9016
+      Tracing__ServiceName: FunctionalLiving.Knx.Sender
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxSender: Debug
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9011
     depends_on:
       - seq
+      - jaeger
     extra_hosts:
       - "functional-living-seq:127.0.0.1"
+      - "functional-living-jaeger:127.0.0.1"
 
   seq:
     image: datalust/seq
@@ -84,12 +105,27 @@ services:
       - "9010:80"
       - "9011:5341"
 
+  jaeger:
+    image: jaegertracing/all-in-one:1.18
+    container_name: functional-living-jaeger
+    hostname: functional-living-jaeger
+    environment:
+      SPAN_STORAGE_TYPE: badger
+      BADGER_EPHEMERAL: 'false'
+      BADGER_DIRECTORY_VALUE: /badger/data
+      BADGER_DIRECTORY_KEY: /badger/key
+    ports:
+      - "9015:16686"
+      - "9016:6831"
+    volumes:
+      - jaeger:/badger
+
   influx:
     image: quay.io/influxdb/influxdb:2.0.0-beta
     container_name: functional-living-influx
     hostname: functional-living-influx
     ports:
-      - "9015:9999"
+      - "9020:9999"
     volumes:
       - influxdb:/var/lib/influxdb2
     command: influxd run --reporting-disabled --bolt-path /var/lib/influxdb2/influxd.bolt --engine-path /var/lib/influxdb2/engine --store bolt
@@ -97,6 +133,8 @@ services:
 volumes:
   influxdb:
     name: functional-living-influx
+  jaeger:
+    name: functional-living-jaeger
 
 # docker exec -it influxdb /bin/bash
 # influx setup

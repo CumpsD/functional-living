@@ -6,7 +6,7 @@ namespace FunctionalLiving.Domain.Repositories
 
     public class LightsRepository
     {
-        public IEnumerable<Light> Lights { get; }
+        public List<Light> Lights { get; }
 
         public LightsRepository()
         {
@@ -22,7 +22,8 @@ namespace FunctionalLiving.Domain.Repositories
                         x,
                         x.FeedbackAddress != null && FeedbackGroupAddresses.All.ContainsKey(x.FeedbackAddress)
                             ? FeedbackGroupAddresses.All[x.FeedbackAddress]
-                            : null));
+                            : null))
+                .ToList();
         }
     }
 }

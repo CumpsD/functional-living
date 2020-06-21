@@ -2,11 +2,28 @@
 <head>
   <title>Functional Living</title>
 
-  <script src="/js/signalr/dist/browser/signalr.js"></script>
+  <script src="/js/signalr/dist/browser/signalr.min.js"></script>
   <script src="/js/knx.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Roboto'), local('Roboto-Regular'),
+          url('/fonts/roboto-v20-latin-regular.woff2') format('woff2'),
+          url('/fonts/roboto-v20-latin-regular.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Roboto Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: local(''),
+          url('../fonts/roboto-mono-v8-latin-regular.woff2') format('woff2'),
+          url('../fonts/roboto-mono-v8-latin-regular.woff') format('woff');
+    }
+
     html,
     body {
       height: 100%;

@@ -13,6 +13,8 @@ connection.start().then(function () {
   return console.error(err.toString());
 });
 
+// TODO: Add code when signalr disconnect to display a message and change background color
+
 function logMessage(message) {
   var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   var now = new Date();

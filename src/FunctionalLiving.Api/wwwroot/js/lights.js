@@ -17,6 +17,8 @@ connection.start().catch(function (err) {
   return console.error(err.toString());
 });
 
+// TODO: Add code when signalr disconnect to display a message and change background color
+
 function getLights() {
   fetch("/v1/lights")
     .then(function(response) {

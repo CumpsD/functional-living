@@ -2,6 +2,11 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/light-hub").build();
 
+connection.on("ReceiveLightTurnedUnknownMessage", function (lightId) {
+  var lightDiv = document.getElementById("light-" + lightId);
+  setLightStatus(lightDiv, "unknown");
+});
+
 connection.on("ReceiveLightTurnedOnMessage", function (lightId) {
   var lightDiv = document.getElementById("light-" + lightId);
   setLightStatus(lightDiv, "on");

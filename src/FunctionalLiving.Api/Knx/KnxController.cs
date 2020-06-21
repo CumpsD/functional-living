@@ -5,7 +5,7 @@ namespace FunctionalLiving.Api.Knx
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
-    using Be.Vlaanderen.Basisregisters.CommandHandling;
+    using FunctionalLiving.Infrastructure.CommandHandling;
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -42,19 +42,20 @@ namespace FunctionalLiving.Api.Knx
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> ProcessKnxMessage(
-            [FromServices] ICommandHandlerResolver bus,
+            [FromServices] IBus bus,
             [FromBody] KnxRequest request,
             CancellationToken cancellationToken = default)
         {
             await new KnxRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
-            return Accepted(
-                await bus.Dispatch(
-                    Guid.NewGuid(),
-                    KnxRequestMapping.Map(request),
-                    GetMetadata(),
-                    cancellationToken));
+            await bus.Dispatch(
+                Guid.NewGuid(),
+                KnxRequestMapping.Map(request),
+                GetMetadata(),
+                cancellationToken);
+
+            return Accepted();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace FunctionalLiving.Api.Light
 
     public interface ILightClient
     {
+        Task ReceiveLightTurnedUnknownMessage(string lightId);
         Task ReceiveLightTurnedOnMessage(string lightId);
         Task ReceiveLightTurnedOffMessage(string lightId);
     }
@@ -17,6 +18,9 @@ namespace FunctionalLiving.Api.Light
 
         public LightHubSender(IHubContext<LightHub, ILightClient> hubContext)
             => _hubContext = hubContext;
+
+        public async Task SendLightTurnedUnknownMessage(LightId lightId)
+            => await _hubContext.Clients.All.ReceiveLightTurnedUnknownMessage(lightId.ToString());
 
         public async Task SendLightTurnedOnMessage(LightId lightId)
             => await _hubContext.Clients.All.ReceiveLightTurnedOnMessage(lightId.ToString());

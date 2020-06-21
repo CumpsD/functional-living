@@ -1,18 +1,16 @@
 namespace FunctionalLiving.Api.Light
 {
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
-    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Domain.Repositories;
+    using FunctionalLiving.Infrastructure.CommandHandling;
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Converters;
     using Requests;
     using Responses;
@@ -99,7 +97,7 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOnLight(
-            [FromServices] ICommandHandlerResolver bus,
+            [FromServices] IBus bus,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
@@ -111,12 +109,13 @@ namespace FunctionalLiving.Api.Light
             await new TurnOnLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
-            return Accepted(
-                await bus.Dispatch(
-                    Guid.NewGuid(),
-                    TurnOnLightRequestMapping.Map(request),
-                    GetMetadata(),
-                    cancellationToken));
+            await bus.Dispatch(
+                Guid.NewGuid(),
+                TurnOnLightRequestMapping.Map(request),
+                GetMetadata(),
+                cancellationToken);
+
+            return Accepted();
         }
 
         /// <summary>
@@ -138,7 +137,7 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOffLight(
-            [FromServices] ICommandHandlerResolver bus,
+            [FromServices] IBus bus,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
@@ -150,12 +149,13 @@ namespace FunctionalLiving.Api.Light
             await new TurnOffLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
-            return Accepted(
-                await bus.Dispatch(
-                    Guid.NewGuid(),
-                    TurnOffLightRequestMapping.Map(request),
-                    GetMetadata(),
-                    cancellationToken));
+            await bus.Dispatch(
+                Guid.NewGuid(),
+                TurnOffLightRequestMapping.Map(request),
+                GetMetadata(),
+                cancellationToken);
+
+            return Accepted();
         }
     }
 }

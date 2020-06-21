@@ -2,6 +2,7 @@ namespace FunctionalLiving
 {
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Autofac;
+    using Infrastructure.CommandHandling;
     using Knx;
     using Light;
 
@@ -20,8 +21,9 @@ namespace FunctionalLiving
                 .As<CommandHandlerModule>();
 
             containerBuilder
-                .RegisterType<CommandHandlerResolver>()
-                .As<ICommandHandlerResolver>();
+                .RegisterType<FunctionalLivingCommandHandlerResolver>()
+                .As<IFunctionalLivingCommandHandlerResolver>()
+                .As<IBus>();
         }
     }
 }

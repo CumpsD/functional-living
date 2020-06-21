@@ -5,6 +5,7 @@ namespace FunctionalLiving.Light
 
     public interface ILightHub
     {
+        Task SendLightTurnedUnknownMessage(LightId lightId);
         Task SendLightTurnedOnMessage(LightId lightId);
         Task SendLightTurnedOffMessage(LightId lightId);
     }

@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/cumpsd/functional-living/compare/v1.23.0...v1.23.1) (2020-06-21)
+
+
+### Bug Fixes
+
+* dont crash listener if tracing is not enabled ([abf8c10](https://github.com/cumpsd/functional-living/commit/abf8c10cd291b958802d60828cf574fc91c1f6ab))
+
 # [1.23.0](https://github.com/cumpsd/functional-living/compare/v1.22.0...v1.23.0) (2020-06-21)
 
 

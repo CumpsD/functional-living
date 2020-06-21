@@ -2,7 +2,6 @@
 
 var apiName = "Functional Living Lights Api";
 var retryMatrix = [0, 200, 200, 5000];
-var itemsPerRow = 4;
 
 var connection = buildConnection(logMessage, "light-hub");
 
@@ -44,17 +43,30 @@ function getLights() {
           })
           .forEach(light => addLight(light.id, light.description, light.status));
 
-        var numberOfLights = data.lights.length;
-        var fillerSlots = itemsPerRow - (numberOfLights % itemsPerRow);
-        if (fillerSlots === itemsPerRow) fillerSlots = 0;
-        for (var i = 0; i < fillerSlots; i++) {
-          addFiller();
-        }
+        fillUpGrid();
       });
     })
     .catch(function(err) {
       logMessage("Failed to fetch lights", err);
     });
+}
+
+function fillUpGrid() {
+  var grid = Array.from(document.getElementById("lights").children);
+  var numberOfLights = document.querySelectorAll(".light").length;
+
+  var baseOffset = grid[0].offsetTop;
+  var breakIndex = grid.findIndex(item => item.offsetTop > baseOffset);
+  var itemsPerRow = (breakIndex === -1 ? grid.length : breakIndex);
+
+  var existingFillers = document.querySelectorAll(".filler");
+  existingFillers.forEach(element => existingFillers.remove());
+
+  var fillerSlots = itemsPerRow - (numberOfLights % itemsPerRow);
+  if (fillerSlots === itemsPerRow) fillerSlots = 0;
+  for (var i = 0; i < fillerSlots; i++) {
+    addFiller();
+  }
 }
 
 function addFiller() {
@@ -126,3 +138,5 @@ window.onload = function () {
   start(logMessage);
   getLights();
 };
+
+window.onresize = fillUpGrid;

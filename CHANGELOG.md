@@ -1,3 +1,12 @@
+## [1.25.3](https://github.com/cumpsd/functional-living/compare/v1.25.2...v1.25.3) (2020-06-21)
+
+
+### Bug Fixes
+
+* correct flexbox fillers ([2c6512a](https://github.com/cumpsd/functional-living/commit/2c6512a8f59f1459185f600198612794ac3ff013))
+* make repository save items ([d0442ea](https://github.com/cumpsd/functional-living/commit/d0442ea608007c26bd5b0c781516055d491c44b9))
+* use correct feedback address ([d032121](https://github.com/cumpsd/functional-living/commit/d03212172e7826c1dbd3f605c9cba6d046c7246c))
+
 ## [1.25.2](https://github.com/cumpsd/functional-living/compare/v1.25.1...v1.25.2) (2020-06-21)
 
 ## [1.25.1](https://github.com/cumpsd/functional-living/compare/v1.25.0...v1.25.1) (2020-06-21)

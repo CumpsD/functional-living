@@ -1,3 +1,15 @@
+# [1.24.0](https://github.com/cumpsd/functional-living/compare/v1.23.1...v1.24.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* add signalr and fonts ([4c8ae8d](https://github.com/cumpsd/functional-living/commit/4c8ae8d66896f35cfa51dba8c6dc51d1f4f1d7a4))
+
+
+### Features
+
+* add start of lights page ([5a12eb4](https://github.com/cumpsd/functional-living/commit/5a12eb4a5ffcd2e0dba3743635276ea29d2254af))
+
 ## [1.23.1](https://github.com/cumpsd/functional-living/compare/v1.23.0...v1.23.1) (2020-06-21)
 
 

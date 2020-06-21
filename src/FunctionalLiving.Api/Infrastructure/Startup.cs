@@ -8,6 +8,7 @@ namespace FunctionalLiving.Api.Infrastructure
     using Autofac.Extensions.DependencyInjection;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Broadcast;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -142,7 +143,10 @@ namespace FunctionalLiving.Api.Infrastructure
                 {
                     AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>(),
                 }
-            });
+            })
+
+            .UseRouting()
+            .UseEndpoints(endpoints => endpoints.MapHub<KnxHub>("/knx-hub"));
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)

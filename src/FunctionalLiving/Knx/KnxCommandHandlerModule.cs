@@ -1,8 +1,10 @@
 namespace FunctionalLiving.Knx
 {
     using System;
+    using System.Threading.Tasks;
     using Addressing;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
+    using Broadcast;
     using Commands;
     using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;
@@ -17,20 +19,28 @@ namespace FunctionalLiving.Knx
     {
         private readonly ILogger<KnxCommand> _knxCommandLogger;
         private readonly Func<WriteApi> _influxWrite;
-        private readonly SendToLog _sendToLog;
+        private readonly IKnxHub _knxHub;
+
         private readonly SendToInflux _sendToInflux;
+        private readonly SendToLog _sendToLog;
+        private readonly SendToSignalR _sendToSignalR;
 
         public KnxCommandHandlerModule(
             ILogger<KnxCommandHandlerModule> logger,
             ILogger<KnxCommand> knxCommandLogger,
             Func<WriteApi> influxWrite,
+            IKnxHub knxHub,
+            SendToInflux sendToInflux,
             SendToLog sendToLog,
-            SendToInflux sendToInflux)
+            SendToSignalR sendToSignalR)
         {
             _knxCommandLogger = knxCommandLogger;
             _influxWrite = influxWrite;
-            _sendToLog = sendToLog;
+            _knxHub = knxHub;
+
             _sendToInflux = sendToInflux;
+            _sendToLog = sendToLog;
+            _sendToSignalR = sendToSignalR;
 
             For<KnxCommand>()
                 .AddLogging(logger)
@@ -39,96 +49,134 @@ namespace FunctionalLiving.Knx
                     var groupAddress = message.Command.Group; // e.g. 1/0/1
                     var state = message.Command.State;
 
-                    ProcessKnxMessageBasedOnDataType(groupAddress, state);
+                    await ProcessKnxMessageBasedOnDataType(groupAddress, state);
                 });
         }
 
-        private void ProcessKnxMessageBasedOnDataType(
+        private async Task ProcessKnxMessageBasedOnDataType(
             KnxGroupAddress groupAddress,
             byte[] state)
         {
-            Switches.ProcessKnxSingleBit(
+            await Switches.ProcessKnxSingleBit(
                 groupAddress,
                 state,
-                (description, value) =>
+                async (description, value) =>
                 {
+                    SendToInflux(new Toggle(groupAddress, description, value));
                     SendToLog(groupAddress, "ON/OFF", description, value);
-                    SendToInflux(new Toggle(groupAddress, description, value));
+                    await SendToSignalR(groupAddress, "ON/OFF", description, value);
                 });
 
-            Toggles.ProcessKnxSingleBit(
+            await Toggles.ProcessKnxSingleBit(
                 groupAddress,
                 state,
-                (description, value) =>
+                async (description, value) =>
                 {
+                    SendToInflux(new Toggle(groupAddress, description, value));
                     SendToLog(groupAddress, "TRUE/FALSE", description, value);
-                    SendToInflux(new Toggle(groupAddress, description, value));
+                    await SendToSignalR(groupAddress, "TRUE/FALSE", description, value);
                 });
 
-            Percentages.ProcessKnxScaling(
+            await Percentages.ProcessKnxScaling(
                 groupAddress,
                 state,
-                (description, value) => SendToLog(groupAddress, "PERCENTAGE", description, $"{value} %"));
-
-            FeedbackGroupAddresses.Duration.ProcessKnx2ByteUnsignedValue(
-                groupAddress,
-                state,
-                (description, value) => SendToLog(groupAddress, "DURATION", description, $"{value} h"));
-
-            Current.ProcessKnx2ByteUnsignedValue(
-                groupAddress,
-                state,
-                (description, value) =>
+                async (description, value) =>
                 {
-                    SendToLog(groupAddress, "ENERGY", description, $"{value} mA");
+                    SendToLog(groupAddress, "PERCENTAGE", description, $"{value} %");
+                    await SendToSignalR(groupAddress, "PERCENTAGE", description, $"{value} %");
+                });
+
+            await FeedbackGroupAddresses.Duration.ProcessKnx2ByteUnsignedValue(
+                groupAddress,
+                state,
+                async (description, value) =>
+                {
+                    SendToLog(groupAddress, "DURATION", description, $"{value} h");
+                    await SendToSignalR(groupAddress, "DURATION", description, $"{value} h");
+                });
+
+            await Current.ProcessKnx2ByteUnsignedValue(
+                groupAddress,
+                state,
+                async (description, value) =>
+                {
                     SendToInflux(new MilliAmpere(groupAddress, description, value));
+                    SendToLog(groupAddress, "ENERGY", description, $"{value} mA");
+                    await SendToSignalR(groupAddress, "ENERGY", description, $"{value} mA");
                 });
 
-            Temperatures.ProcessKnx2ByteFloatValue(
+            await Temperatures.ProcessKnx2ByteFloatValue(
                 groupAddress,
                 state,
-                (description, value) =>
+                async (description, value) =>
                 {
-                    SendToLog(groupAddress, "TEMP", description, $"{value} °C");
                     SendToInflux(new TemperatureCelcius(groupAddress, description, value));
+                    SendToLog(groupAddress, "TEMP", description, $"{value} °C");
+                    await SendToSignalR(groupAddress, "TEMP", description, $"{value} °C");
                 });
 
-            LightStrength.ProcessKnx2ByteFloatValue(
+            await LightStrength.ProcessKnx2ByteFloatValue(
                 groupAddress,
                 state,
-                (description, value) =>
+                async (description, value) =>
                 {
-                    SendToLog(groupAddress, "LUX", description, $"{value} Lux");
                     SendToInflux(new Lux(groupAddress, description, value));
+                    SendToLog(groupAddress, "LUX", description, $"{value} Lux");
+                    await SendToSignalR(groupAddress, "LUX", description, $"{value} Lux");
                 });
 
-            Times.ProcessKnxTime(
+            await Times.ProcessKnxTime(
                 groupAddress,
                 state,
-                (description, day, time) => SendToLog(groupAddress, "TIME", description, $"{day?.Text}, {time:c}"));
-
-            EnergyWattHour.ProcessKnx4ByteSignedValue(
-                groupAddress,
-                state,
-                (description, value) =>
+                async (description, day, time) =>
                 {
-                    SendToLog(groupAddress, "ENERGY", description, $"{value} Wh");
+                    SendToLog(groupAddress, "TIME", description, $"{day?.Text}, {time:c}");
+                    await SendToSignalR(groupAddress, "TIME", description, $"{day?.Text}, {time:c}");
+                });
+
+            await EnergyWattHour.ProcessKnx4ByteSignedValue(
+                groupAddress,
+                state,
+                async (description, value) =>
+                {
                     SendToInflux(new WattHour(groupAddress, description, value));
+                    SendToLog(groupAddress, "ENERGY", description, $"{value} Wh");
+                    await SendToSignalR(groupAddress, "ENERGY", description, $"{value} Wh");
                 });
 
-            Dates.ProcessKnxDate(
+            await Dates.ProcessKnxDate(
                 groupAddress,
                 state,
-                (description, value) => SendToLog(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}"));
-
-            Speed.ProcessKnx2ByteFloatValue(
-                groupAddress,
-                state,
-                (description, value) =>
+                async (description, value) =>
                 {
-                    SendToLog(groupAddress, "SPEED", description, $"{value} m/s");
-                    SendToInflux(new MeterPerSecond(groupAddress, description, value));
+                    SendToLog(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}");
+                    await SendToSignalR(groupAddress, "DATE", description, $"{value:dd/MM/yyyy}");
                 });
+
+            await Speed.ProcessKnx2ByteFloatValue(
+                groupAddress,
+                state,
+                async (description, value) =>
+                {
+                    SendToInflux(new MeterPerSecond(groupAddress, description, value));
+                    SendToLog(groupAddress, "SPEED", description, $"{value} m/s");
+                    await SendToSignalR(groupAddress, "SPEED", description, $"{value} m/s");
+                });
+        }
+
+        private void SendToInflux<T>(T measurement)
+        {
+            if (!_sendToInflux.FeatureEnabled)
+                return;
+
+            using (var writeClient = _influxWrite())
+            {
+                writeClient.WriteMeasurement(
+                    WritePrecision.Ns,
+                    measurement);
+
+                writeClient.Flush();
+            }
         }
 
         private void SendToLog<T>(
@@ -151,19 +199,20 @@ namespace FunctionalLiving.Knx
                 value);
         }
 
-        private void SendToInflux<T>(T measurement)
+        private async Task SendToSignalR<T>(
+            KnxGroupAddress groupAddress,
+            string dataType,
+            string description,
+            T value)
         {
-            if (!_sendToInflux.FeatureEnabled)
+            if (!_sendToSignalR.FeatureEnabled)
                 return;
 
-            using (var writeClient = _influxWrite())
-            {
-                writeClient.WriteMeasurement(
-                    WritePrecision.Ns,
-                    measurement);
+            var groupAddressString = groupAddress.ToString()!;
+            var feedbackAddress = groupAddressString.StartsWith("0/") || groupAddressString.StartsWith("1/");
 
-                writeClient.Flush();
-            }
+            await _knxHub.SendKnxMessage(
+                $"[{(feedbackAddress ? "FDBCK" : "CNTRL")}] [{dataType}] {description} ({value})");
         }
     }
 }

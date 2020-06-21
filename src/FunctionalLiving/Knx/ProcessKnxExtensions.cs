@@ -2,110 +2,111 @@ namespace FunctionalLiving.Knx
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Addressing;
     using Parser;
 
     public static class ProcessKnxExtensions
     {
-        public static void ProcessKnxMessage<T>(
+        public static async Task ProcessKnxMessageAsync<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
-            Action<T> processAction)
+            Func<T, Task> processAction)
         {
             if (!groupAddresses.TryGetValue(groupAddress, out var o))
                 return;
 
-            processAction(o);
+            await processAction(o);
         }
 
-        public static void ProcessKnxSingleBit<T>(
+        public static async Task ProcessKnxSingleBit<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, bool?> processAction)
+            Func<T, bool?, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o =>
+                async o =>
                 {
                     var functionalToggle = Category1_SingleBit.parseSingleBit(state[0]);
                     var value = functionalToggle.Exists()
                         ? functionalToggle.Value.IsOn
                         : (bool?) null;
 
-                    processAction(o, value);
+                    await processAction(o, value);
                 });
         }
 
-        public static void ProcessKnxScaling<T>(
+        public static async Task ProcessKnxScaling<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, double> processAction)
+            Func<T, double, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o => processAction(o, Category5_Scaling.parseScaling(0, 100, state[0])));
+                async o => await processAction(o, Category5_Scaling.parseScaling(0, 100, state[0])));
         }
 
-        public static void ProcessKnx2ByteUnsignedValue<T>(
+        public static async Task ProcessKnx2ByteUnsignedValue<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, double> processAction)
+            Func<T, double, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o => processAction(o, Category7_2ByteUnsignedValue.parseTwoByteUnsigned(1, state[0], state[1])));
+                async o => await processAction(o, Category7_2ByteUnsignedValue.parseTwoByteUnsigned(1, state[0], state[1])));
         }
 
-        public static void ProcessKnx2ByteFloatValue<T>(
+        public static async Task ProcessKnx2ByteFloatValue<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, double> processAction)
+            Func<T, double, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o => processAction(o, Category9_2ByteFloatValue.parseTwoByteFloat(state[0], state[1])));
+                async o => await processAction(o, Category9_2ByteFloatValue.parseTwoByteFloat(state[0], state[1])));
         }
 
-        public static void ProcessKnxTime<T>(
+        public static async Task ProcessKnxTime<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, Domain.Day?, TimeSpan> processAction)
+            Func<T, Domain.Day?, TimeSpan, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o =>
+                async o =>
                 {
                     var (day, timeSpan) = Category10_Time.parseTime(state[0], state[1], state[2]);
                     
-                    processAction(o, day.Exists() ? day.Value : null, timeSpan);
+                    await processAction(o, day.Exists() ? day.Value : null, timeSpan);
                 });
         }
 
-        public static void ProcessKnx4ByteSignedValue<T>(
+        public static async Task ProcessKnx4ByteSignedValue<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, long> processAction)
+            Func<T, long, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o => processAction(o, Category13_4ByteSignedValue.parseFourByteSigned(state[0], state[1], state[2], state[3])));
+                async o => await processAction(o, Category13_4ByteSignedValue.parseFourByteSigned(state[0], state[1], state[2], state[3])));
         }
 
-        public static void ProcessKnxDate<T>(
+        public static async Task ProcessKnxDate<T>(
             this IDictionary<KnxGroupAddress, T> groupAddresses,
             KnxGroupAddress groupAddress,
             byte[] state,
-            Action<T, DateTime> processAction)
+            Func<T, DateTime, Task> processAction)
         {
-            groupAddresses.ProcessKnxMessage(
+            await groupAddresses.ProcessKnxMessageAsync(
                 groupAddress,
-                o => processAction(o, Category11_Date.parseDate(state[0], state[1], state[2])));
+                async o => await processAction(o, Category11_Date.parseDate(state[0], state[1], state[2])));
         }
     }
 }

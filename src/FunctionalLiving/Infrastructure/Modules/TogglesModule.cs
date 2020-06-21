@@ -35,6 +35,10 @@ namespace FunctionalLiving.Infrastructure.Modules
 
                 .RegisterToggle<SendToLog>(
                     _configuration.GetValue<bool>(SendToLog.ConfigurationPath),
+                    _logger)
+
+                .RegisterToggle<SendToSignalR>(
+                    _configuration.GetValue<bool>(SendToSignalR.ConfigurationPath),
                     _logger);
         }
     }

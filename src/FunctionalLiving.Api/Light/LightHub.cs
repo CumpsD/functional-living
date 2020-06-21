@@ -2,7 +2,7 @@ namespace FunctionalLiving.Api.Light
 {
     using System.Threading.Tasks;
     using FunctionalLiving.Light;
-    using FunctionalLiving.ValueObjects;
+    using ValueObjects;
     using Microsoft.AspNetCore.SignalR;
 
     public interface ILightClient

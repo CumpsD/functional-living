@@ -3,7 +3,6 @@ namespace FunctionalLiving.Knx
     using System;
     using System.Threading.Tasks;
     using Addressing;
-    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
     using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;
@@ -14,7 +13,7 @@ namespace FunctionalLiving.Knx
     using Microsoft.Extensions.Logging;
     using static Domain.Knx.FeedbackGroupAddresses;
 
-    public sealed class KnxCommandHandlerModule : CommandHandlerModule
+    public sealed class KnxCommandHandlerModule : FunctionalLivingCommandHandlerModule
     {
         private readonly ILogger<KnxCommand> _knxCommandLogger;
         private readonly Func<WriteApi> _influxWrite;

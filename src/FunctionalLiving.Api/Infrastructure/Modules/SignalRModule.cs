@@ -1,8 +1,8 @@
 namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using Autofac;
-    using FunctionalLiving.Api.Knx;
-    using FunctionalLiving.Api.Light;
+    using Knx;
+    using Light;
     using FunctionalLiving.Knx;
     using FunctionalLiving.Light;
     using Microsoft.Extensions.Configuration;

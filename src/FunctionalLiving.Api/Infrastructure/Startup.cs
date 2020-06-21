@@ -9,8 +9,8 @@ namespace FunctionalLiving.Api.Infrastructure
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Configuration;
-    using FunctionalLiving.Api.Knx;
-    using FunctionalLiving.Api.Light;
+    using Knx;
+    using Light;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;

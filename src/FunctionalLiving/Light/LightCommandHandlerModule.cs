@@ -5,19 +5,16 @@ namespace FunctionalLiving.Light
     using System.Net.Mime;
     using System.Text;
     using System.Threading.Tasks;
-    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Commands;
     using Domain;
     using Domain.Repositories;
-    using FunctionalLiving.Infrastructure.Toggles;
+    using Infrastructure.Toggles;
     using Infrastructure;
     using Infrastructure.Modules;
-    using Knx;
     using Knx.Addressing;
-    using Knx.Commands;
     using Microsoft.Extensions.Logging;
 
-    public sealed class LightCommandHandlerModule : CommandHandlerModule
+    public sealed class LightCommandHandlerModule : FunctionalLivingCommandHandlerModule
     {
         private readonly ILogger<LightCommandHandlerModule> _logger;
         private readonly IHttpClientFactory _httpClientFactory;

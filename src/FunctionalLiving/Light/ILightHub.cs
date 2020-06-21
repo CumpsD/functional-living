@@ -1,7 +1,7 @@
 namespace FunctionalLiving.Light
 {
     using System.Threading.Tasks;
-    using FunctionalLiving.ValueObjects;
+    using ValueObjects;
 
     public interface ILightHub
     {

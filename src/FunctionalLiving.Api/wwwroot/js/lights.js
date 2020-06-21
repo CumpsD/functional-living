@@ -26,7 +26,23 @@ function getLights() {
       }
 
       response.json().then(function(data) {
-        data.lights.forEach(light => addLight(light.id, light.description, light.status));
+        data
+          .lights
+          .sort(function(a, b) {
+            var nameA = a.description.toUpperCase();
+            var nameB = b.description.toUpperCase();
+
+            if (nameA < nameB) {
+              return -1;
+            }
+
+            if (nameA > nameB) {
+             return 1;
+            }
+
+            return 0;
+          })
+          .forEach(light => addLight(light.id, light.description, light.status));
       });
     })
     .catch(function(err) {

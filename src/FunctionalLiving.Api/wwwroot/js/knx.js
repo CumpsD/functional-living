@@ -9,13 +9,14 @@ connection.on("ReceiveKnxMessage", function (message) {
 connection.start().then(function () {
   logMessage("Connected to: Functional Living Knx Api");
 }).catch(function (err) {
+  logMessage("Failed to connect.");
   return console.error(err.toString());
 });
 
 function logMessage(message) {
   var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   var now = new Date();
-  
+
   var p = document.createElement("p");
   p.textContent = "[" + now.toISOString() + "] " + msg;
 

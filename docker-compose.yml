@@ -6,7 +6,7 @@ services:
     container_name: functional-living-api
     hostname: functional-living-api
     environment:
-      Features__EnableTracing: 'true'
+      Features__EnableTracing: 'false'
       Features__SendToInflux: 'true'
       Features__SendToKnxSender: 'true'
       Features__SendToLog: 'true'
@@ -42,7 +42,7 @@ services:
     hostname: functional-living-knx-listener
     network_mode: host
     environment:
-      Features__EnableTracing: 'true'
+      Features__EnableTracing: 'false'
       Features__ConnectToKnx: 'true'
       Features__DebugKnxCemi: 'false'
       Features__SendToApi: 'true'
@@ -75,7 +75,7 @@ services:
     hostname: functional-living-knx-sender
     network_mode: host
     environment:
-      Features__EnableTracing: 'true'
+      Features__EnableTracing: 'false'
       Features__ConnectToKnx: 'true'
       Features__DebugKnxCemi: 'false'
       Features__UseKnxConnectionRouting: 'false'

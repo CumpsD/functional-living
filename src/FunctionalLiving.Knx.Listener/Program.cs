@@ -48,7 +48,7 @@ namespace FunctionalLiving.Knx.Listener
                 .Build();
 
             var container = ConfigureServices(configuration);
-            var openTelemetry = container.GetRequiredService<TracerFactoryBase>();
+            var openTelemetry = container.GetService<TracerFactoryBase>();
             var logger = container.GetRequiredService<ILogger<Program>>();
 
             logger.LogInformation("Starting FunctionalLiving.Knx.Listener");
@@ -99,7 +99,7 @@ namespace FunctionalLiving.Knx.Listener
             builder
                 .RegisterType<KnxListener>()
                 .SingleInstance();
-            
+
             builder
                 .Populate(services);
 

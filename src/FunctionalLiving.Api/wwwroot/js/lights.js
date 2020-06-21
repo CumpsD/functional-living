@@ -46,6 +46,7 @@ function getLights() {
 
         var numberOfLights = data.lights.length;
         var fillerSlots = itemsPerRow - (numberOfLights % itemsPerRow);
+        if (fillerSlots === itemsPerRow) fillerSlots = 0;
         for (var i = 0; i < fillerSlots; i++) {
           addFiller();
         }

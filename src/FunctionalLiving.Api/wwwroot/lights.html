@@ -37,6 +37,14 @@
       background-color: #455D73;
     }
 
+    .connected {
+      background-color: #455D73;
+    }
+
+    .lost-connection {
+      background-color: #F3722C;
+    }
+
     #app {
       display: flex;
       flex-direction: column;
@@ -63,20 +71,23 @@
       border: 1px solid #aaa;
       display: flex;
       flex-wrap: wrap;
+      flex-direction: row;
       align-content: space-between;
+      background-color: #455D73;
     }
 
     #app section#lights .light {
-      height: 4.5em;
       border: 1px solid #ddd;
-      padding: .8em;
       cursor: pointer;
       color: #fff;
       text-align: center;
-      line-height: 4.5em;
-      width: 22.7%;
+      width: 24.7%;
+      height: 12.8%;
       margin: 0.2em;
       user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #app section#lights .light:not(:focus):hover {

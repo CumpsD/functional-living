@@ -1,6 +1,11 @@
 "use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/light-hub").build();
+var apiName = "Functional Living Lights Api";
+
+var connection = new signalR.HubConnectionBuilder()
+  .withUrl("/light-hub")
+  .configureLogging(signalR.LogLevel.Information)
+  .build();
 
 connection.on("ReceiveLightTurnedUnknownMessage", function (lightId) {
   var lightDiv = document.getElementById("light-" + lightId);
@@ -17,18 +22,47 @@ connection.on("ReceiveLightTurnedOffMessage", function (lightId) {
   setLightStatus(lightDiv, "off");
 });
 
-connection.start().catch(function (err) {
-  logMessage("Failed to connect.");
-  return console.error(err.toString());
+function start() {
+  logMessage("Trying to connect to: " + apiName);
+
+  connection
+    .start()
+    .then(function () {
+      logMessage("Connected to: " + apiName);
+      setBackground("connected");
+    }).catch(function () {
+      logMessage("Failed to connect to: " + apiName);
+      setBackground("lost-connection");
+      setTimeout(() => start(), 5000);
+    });
+};
+
+connection.onclose(() => {
+  logMessage("Lost connection: " + apiName);
+  setBackground("lost-connection");
+  start();
 });
 
-// TODO: Add code when signalr disconnect to display a message and change background color
+function setBackground(backgroundClass) {
+  document.body.className = backgroundClass;
+}
+
+function logMessage(message, args) {
+  var now = new Date();
+  if (args) {
+    window.console.log("[" + now.toISOString() + "] " + message, args);
+  } else {
+    window.console.log("[" + now.toISOString() + "] " + message);
+  }
+}
 
 function getLights() {
+  logMessage("Getting Lights from /v1/lights");
+
   fetch("/v1/lights")
     .then(function(response) {
       if (response.status !== 200) {
-        console.log("Looks like there was a problem. Status Code: " + response.status);
+        logMessage("Looks like there was a problem. Status Code: " + response.status);
         return;
       }
 
@@ -39,21 +73,15 @@ function getLights() {
             var nameA = a.description.toUpperCase();
             var nameB = b.description.toUpperCase();
 
-            if (nameA < nameB) {
-              return -1;
-            }
-
-            if (nameA > nameB) {
-             return 1;
-            }
-
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
             return 0;
           })
           .forEach(light => addLight(light.id, light.description, light.status));
       });
     })
     .catch(function(err) {
-      console.log("Failed to fetch lights", err);
+      logMessage("Failed to fetch lights", err);
     });
 }
 
@@ -64,50 +92,59 @@ function addLight(lightId, description, status) {
   var lightDiv = document.createElement("div");
   lightDiv.id = "light-" + lightId;
   lightDiv.dataset.lightId = lightId;
-  lightDiv.textContent = description;
   lightDiv.tabIndex = -1;
+
+  var labelDiv = document.createElement("div");
+  labelDiv.textContent = description;
+  lightDiv.append(labelDiv);
 
   setLightStatus(lightDiv, status);
 
+  lightDiv.addEventListener("onmouseout", resetHover, false);
   lightDiv.addEventListener("click", clickLight, false);
-
-  lightDiv.onmouseout = function (e) {
-    var d = e.target;
-    var isFocused = (document.activeElement === d);
-
-    if (isFocused) {
-      d.blur();
-    }
-  }
-
   document.getElementById("lights").appendChild(lightDiv);
 }
 
 function setLightStatus(lightDiv, status) {
+  logMessage("Updating Light '" + lightDiv.dataset.lightId + "' Status: " + status);
   lightDiv.className = "light light-" + status;
   lightDiv.dataset.status = status;
 }
 
+function resetHover(e) {
+  var d = e.currentTarget;
+  var isFocused = (document.activeElement === d);
+
+  if (isFocused) {
+    d.blur();
+  }
+}
+
 function clickLight(e) {
-  var lightElement = e.target;
+  e.stopPropagation();
+
+  var lightElement = e.currentTarget;
   var lightId = lightElement.dataset.lightId;
   var status = lightElement.dataset.status;
-  var desiredStatus = status == "on" ? "off" : "on";
+  var desiredStatus = status === "on" ? "off" : "on";
+
+  logMessage("Updating Light '" + lightId + "' Status: " + desiredStatus);
 
   fetch("/v1/lights/" + lightId + "/" + desiredStatus)
     .then(function(response) {
-      if (response.status !== 200) {
-        console.log("Looks like there was a problem. Status Code: " + response.status);
+      if (response.status !== 202) {
+        logMessage("Looks like there was a problem. Status Code: " + response.status);
         return;
       }
 
-      response.json().then(function(data) {
-        data.lights.forEach(light => addLight(light.id, light.description, light.status));
-      });
+      logMessage("Updated Light '" + lightId + "' Status: " + desiredStatus);
     })
-    .catch(function(err) {
-      console.log("Failed to fetch lights", err);
+    .catch(function (err) {
+      logMessage("Failed to update light", err);
     });
 }
 
-getLights();
+window.onload = function () {
+  start();
+  getLights();
+};

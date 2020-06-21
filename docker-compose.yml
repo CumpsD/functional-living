@@ -12,6 +12,7 @@ services:
       Features__SendToKnxSender: 'true'
       Features__SendToLog: 'true'
       Features__SendToSignalR: 'true'
+      Cors__0: http://localhost:9000
       KnxSender__Endpoint: http://functional-living-knx-sender:9001
       InfluxDb__Endpoint: http://functional-living-influx:9999
       InfluxDb__Token: JBU-kgjsFW2q9lKmklFgHaVSHs8kp1nff6iMUxg_Xuj-KeuuY2Dc2LFDfJ5HDDvbvWqQeSEeb5c62Flr9X6QVA==

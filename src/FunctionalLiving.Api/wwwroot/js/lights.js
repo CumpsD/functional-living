@@ -2,6 +2,7 @@
 
 var apiName = "Functional Living Lights Api";
 var retryMatrix = [0, 200, 200, 5000];
+var itemsPerRow = 4;
 
 var connection = buildConnection(logMessage, "light-hub");
 
@@ -42,11 +43,23 @@ function getLights() {
             return 0;
           })
           .forEach(light => addLight(light.id, light.description, light.status));
+
+        var numberOfLights = data.lights.length;
+        var fillerSlots = itemsPerRow - (numberOfLights % itemsPerRow);
+        for (var i = 0; i < fillerSlots; i++) {
+          addFiller();
+        }
       });
     })
     .catch(function(err) {
       logMessage("Failed to fetch lights", err);
     });
+}
+
+function addFiller() {
+  var fillerDiv = document.createElement("div");
+  fillerDiv.className = "filler";
+  document.getElementById("lights").appendChild(fillerDiv);
 }
 
 function addLight(lightId, description, status) {

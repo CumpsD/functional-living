@@ -1,3 +1,11 @@
+# [1.23.0](https://github.com/cumpsd/functional-living/compare/v1.22.0...v1.23.0) (2020-06-21)
+
+
+### Features
+
+* add signalr knx.html page ([d91f257](https://github.com/cumpsd/functional-living/commit/d91f257552767b8e9ab2ece50c8faeee6a696d2e))
+* add start of signalr integration ([97b5f81](https://github.com/cumpsd/functional-living/commit/97b5f81aede0cf110b72c9c041ac090476d3c3d2))
+
 # [1.22.0](https://github.com/cumpsd/functional-living/compare/v1.21.0...v1.22.0) (2020-06-20)
 
 

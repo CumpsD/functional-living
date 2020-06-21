@@ -8,8 +8,9 @@ namespace FunctionalLiving.Api.Infrastructure
     using Autofac.Extensions.DependencyInjection;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
-    using Broadcast;
     using Configuration;
+    using FunctionalLiving.Api.Knx;
+    using FunctionalLiving.Api.Light;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -147,7 +148,11 @@ namespace FunctionalLiving.Api.Infrastructure
 
             .UseStaticFiles()
             .UseRouting()
-            .UseEndpoints(endpoints => endpoints.MapHub<KnxHub>("/knx-hub"));
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<KnxHub>("/knx-hub");
+                endpoints.MapHub<LightHub>("/light-hub");
+            });
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)

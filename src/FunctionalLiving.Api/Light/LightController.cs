@@ -99,13 +99,10 @@ namespace FunctionalLiving.Api.Light
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOnLight(
-            [FromServices] ILogger<LightController> logger,
             [FromServices] ICommandHandlerResolver bus,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
-            logger.LogInformation("Activity: {Activity} || Parent: {ParentActivity}", Activity.Current.Id, Activity.Current.ParentId);
-
             var request = new TurnOnLightRequest
             {
                 LightId = lightId

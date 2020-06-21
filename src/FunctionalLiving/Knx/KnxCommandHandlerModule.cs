@@ -4,7 +4,6 @@ namespace FunctionalLiving.Knx
     using System.Threading.Tasks;
     using Addressing;
     using Be.Vlaanderen.Basisregisters.CommandHandling;
-    using Broadcast;
     using Commands;
     using FunctionalLiving.Domain.Knx;
     using InfluxDB.Client;

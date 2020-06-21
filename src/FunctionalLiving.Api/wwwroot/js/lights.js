@@ -1,5 +1,22 @@
 "use strict";
 
+var connection = new signalR.HubConnectionBuilder().withUrl("/light-hub").build();
+
+connection.on("ReceiveLightTurnedOnMessage", function (lightId) {
+  var lightDiv = document.getElementById("light-" + lightId);
+  setLightStatus(lightDiv, "on");
+});
+
+connection.on("ReceiveLightTurnedOffMessage", function (lightId) {
+  var lightDiv = document.getElementById("light-" + lightId);
+  setLightStatus(lightDiv, "off");
+});
+
+connection.start().catch(function (err) {
+  logMessage("Failed to connect.");
+  return console.error(err.toString());
+});
+
 function getLights() {
   fetch("/v1/lights")
     .then(function(response) {
@@ -22,13 +39,30 @@ function addLight(lightId, description, status) {
   description = description.replace(" - Aan/Uit", "");
 
   var lightDiv = document.createElement("div");
-  lightDiv.className = "light light-" + status;
-  lightDiv.textContent = description;
+  lightDiv.id = "light-" + lightId;
   lightDiv.dataset.lightId = lightId;
-  lightDiv.dataset.status = status;
+  lightDiv.textContent = description;
+  lightDiv.tabIndex = -1;
+
+  setLightStatus(lightDiv, status);
 
   lightDiv.addEventListener("click", clickLight, false);
+
+  lightDiv.onmouseout = function (e) {
+    var d = e.target;
+    var isFocused = (document.activeElement === d);
+
+    if (isFocused) {
+      d.blur();
+    }
+  }
+
   document.getElementById("lights").appendChild(lightDiv);
+}
+
+function setLightStatus(lightDiv, status) {
+  lightDiv.className = "light light-" + status;
+  lightDiv.dataset.status = status;
 }
 
 function clickLight(e) {

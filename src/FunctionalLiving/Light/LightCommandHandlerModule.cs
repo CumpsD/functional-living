@@ -9,6 +9,7 @@ namespace FunctionalLiving.Light
     using Commands;
     using Domain;
     using Domain.Repositories;
+    using FunctionalLiving.Infrastructure.Toggles;
     using Infrastructure;
     using Infrastructure.Modules;
     using Knx;
@@ -20,14 +21,22 @@ namespace FunctionalLiving.Light
     {
         private readonly ILogger<LightCommandHandlerModule> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILightHub _lightHub;
+
+        private readonly SendToKnxSender _sendToKnxSender;
 
         public LightCommandHandlerModule(
             ILogger<LightCommandHandlerModule> logger,
             LightsRepository lightsRepository,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            ILightHub lightHub,
+            SendToKnxSender sendToKnxSender)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+            _lightHub = lightHub;
+
+            _sendToKnxSender = sendToKnxSender;
 
             var knxLightsFeedback = lightsRepository
                 .Lights
@@ -42,6 +51,9 @@ namespace FunctionalLiving.Light
                 {
                     var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == message.Command.LightId);
 
+                    // TODO: Temp hack!
+                    await _lightHub.SendLightTurnedOnMessage(message.Command.LightId);
+
                     if (IsKnxLight(light))
                         await SendToKnx(light.KnxObject!.Address, true);
                 });
@@ -51,6 +63,9 @@ namespace FunctionalLiving.Light
                 .Handle(async (message, ct) =>
                 {
                     var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == message.Command.LightId);
+
+                    // TODO: Temp hack!
+                    await _lightHub.SendLightTurnedOffMessage(message.Command.LightId);
 
                     if (IsKnxLight(light))
                         await SendToKnx(light.KnxObject!.Address, false);
@@ -87,6 +102,9 @@ namespace FunctionalLiving.Light
             KnxGroupAddress address,
             bool value)
         {
+            if (!_sendToKnxSender.FeatureEnabled)
+                return;
+
             using (var client = _httpClientFactory.CreateClient(HttpModule.KnxSender))
             using (var request = new HttpRequestMessage(HttpMethod.Post, "v1/knx"))
             using (var httpContent = CreateHttpContent(address, value))

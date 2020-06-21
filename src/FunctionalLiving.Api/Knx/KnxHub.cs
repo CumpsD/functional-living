@@ -1,7 +1,7 @@
-namespace FunctionalLiving.Api.Broadcast
+namespace FunctionalLiving.Api.Knx
 {
     using System.Threading.Tasks;
-    using FunctionalLiving.Broadcast;
+    using FunctionalLiving.Knx;
     using Microsoft.AspNetCore.SignalR;
 
     public interface IKnxClient
@@ -17,9 +17,7 @@ namespace FunctionalLiving.Api.Broadcast
             => _hubContext = hubContext;
 
         public async Task SendKnxMessage(string message)
-        {
-            await _hubContext.Clients.All.ReceiveKnxMessage(message);
-        }
+            => await _hubContext.Clients.All.ReceiveKnxMessage(message);
     }
 
     public class KnxHub : Hub<IKnxClient>

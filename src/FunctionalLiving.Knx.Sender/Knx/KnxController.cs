@@ -45,13 +45,10 @@ namespace FunctionalLiving.Knx.Sender
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> Post(
-            [FromServices] ILogger<KnxController> logger,
             [FromServices] KnxSender knx,
             [FromBody] KnxRequest request,
             CancellationToken cancellationToken = default)
         {
-            logger.LogInformation("Activity: {Activity} || Parent: {ParentActivity}", Activity.Current.Id, Activity.Current.ParentId);
-
             await new KnxRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 

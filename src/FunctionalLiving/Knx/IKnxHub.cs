@@ -1,4 +1,4 @@
-namespace FunctionalLiving.Broadcast
+namespace FunctionalLiving.Knx
 {
     using System.Threading.Tasks;
 

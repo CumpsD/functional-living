@@ -5,6 +5,20 @@
   <script src="/js/signalr/dist/browser/signalr.min.js"></script>
   <script src="/js/lights.js"></script>
 
+  <!--
+    Colors:
+    Red: F94144
+    Dark Orange: F3722C
+    Orange: F8961E
+    Yellow: F9C74F
+    Light Green: 90BE6D
+    Dark Green: 43AA8B
+
+    Blue Background: 455D73
+    Blue Hover: 819AB1
+    Gunmetal Disabled: 1F2933
+  -->
+
   <style>
     @font-face {
       font-family: 'Roboto';
@@ -20,7 +34,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background-color: #264653;
+      background-color: #455D73;
     }
 
     #app {
@@ -57,15 +71,20 @@
       border: 1px solid #ddd;
       padding: .8em;
       cursor: pointer;
-      color: #000;
+      color: #fff;
       text-align: center;
-      line-height: 4em;
+      line-height: 4.5em;
       width: 22.7%;
       margin: 0.2em;
+      user-select: none;
     }
 
-    #app section#lights .light:hover {
-      background-color: #2a9d8f;
+    #app section#lights .light:not(:focus):hover {
+      background-color: #819AB1;
+    }
+
+    #app section#lights .light:focus {
+      outline: none;
     }
 
     #app section#lights .light:nth-of-type(4n) {
@@ -77,15 +96,15 @@
     }
 
     #app section#lights .light-unknown {
-      background-color: #e9c46a;
+      background-color: #1F2933;
     }
 
     #app section#lights .light-on {
-      background-color: #2a9d8f;
+      background-color: #43AA8B;
     }
 
     #app section#lights .light-off {
-      background-color: #e76f51;
+      background-color: #F94144;
     }
 
     #app footer {

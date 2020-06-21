@@ -1,8 +1,10 @@
 namespace FunctionalLiving.Api.Infrastructure.Modules
 {
     using Autofac;
-    using Broadcast;
-    using FunctionalLiving.Broadcast;
+    using FunctionalLiving.Api.Knx;
+    using FunctionalLiving.Api.Light;
+    using FunctionalLiving.Knx;
+    using FunctionalLiving.Light;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -25,6 +27,11 @@ namespace FunctionalLiving.Api.Infrastructure.Modules
                 .RegisterType<KnxHubSender>()
                 .SingleInstance()
                 .As<IKnxHub>();
+
+            containerBuilder
+                .RegisterType<LightHubSender>()
+                .SingleInstance()
+                .As<ILightHub>();
         }
     }
 }

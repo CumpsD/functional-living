@@ -1,3 +1,16 @@
+# [1.25.0](https://github.com/cumpsd/functional-living/compare/v1.24.0...v1.25.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* change cors settings ([d55caaf](https://github.com/cumpsd/functional-living/commit/d55caaf26c5d70c3771c3ed8b585f2ce0a3f3394))
+
+
+### Features
+
+* display signalr status ([6eb0c16](https://github.com/cumpsd/functional-living/commit/6eb0c16c006a24159d0eb03e10b5ad9e11d669f1))
+* provide feedback over signalr and update domain ([79d9674](https://github.com/cumpsd/functional-living/commit/79d96740e98423f7e217e41b325dd353fe73d704))
+
 # [1.24.0](https://github.com/cumpsd/functional-living/compare/v1.23.1...v1.24.0) (2020-06-21)
 
 

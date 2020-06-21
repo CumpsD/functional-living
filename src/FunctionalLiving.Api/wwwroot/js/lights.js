@@ -1,11 +1,9 @@
 "use strict";
 
 var apiName = "Functional Living Lights Api";
+var retryMatrix = [0, 200, 200, 5000];
 
-var connection = new signalR.HubConnectionBuilder()
-  .withUrl("/light-hub")
-  .configureLogging(signalR.LogLevel.Information)
-  .build();
+var connection = buildConnection(logMessage, "light-hub");
 
 connection.on("ReceiveLightTurnedUnknownMessage", function (lightId) {
   var lightDiv = document.getElementById("light-" + lightId);
@@ -21,40 +19,6 @@ connection.on("ReceiveLightTurnedOffMessage", function (lightId) {
   var lightDiv = document.getElementById("light-" + lightId);
   setLightStatus(lightDiv, "off");
 });
-
-function start() {
-  logMessage("Trying to connect to: " + apiName);
-
-  connection
-    .start()
-    .then(function () {
-      logMessage("Connected to: " + apiName);
-      setBackground("connected");
-    }).catch(function () {
-      logMessage("Failed to connect to: " + apiName);
-      setBackground("lost-connection");
-      setTimeout(() => start(), 5000);
-    });
-};
-
-connection.onclose(() => {
-  logMessage("Lost connection: " + apiName);
-  setBackground("lost-connection");
-  start();
-});
-
-function setBackground(backgroundClass) {
-  document.body.className = backgroundClass;
-}
-
-function logMessage(message, args) {
-  var now = new Date();
-  if (args) {
-    window.console.log("[" + now.toISOString() + "] " + message, args);
-  } else {
-    window.console.log("[" + now.toISOString() + "] " + message);
-  }
-}
 
 function getLights() {
   logMessage("Getting Lights from /v1/lights");
@@ -145,6 +109,6 @@ function clickLight(e) {
 }
 
 window.onload = function () {
-  start();
+  start(logMessage);
   getLights();
 };

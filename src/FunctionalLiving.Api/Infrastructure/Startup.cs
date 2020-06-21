@@ -145,6 +145,7 @@ namespace FunctionalLiving.Api.Infrastructure
                 }
             })
 
+            .UseStaticFiles()
             .UseRouting()
             .UseEndpoints(endpoints => endpoints.MapHub<KnxHub>("/knx-hub"));
         }

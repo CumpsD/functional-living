@@ -13,8 +13,8 @@ namespace FunctionalLiving.Api.Knx
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
-    using BadRequestResponseExamples = Responses.BadRequestResponseExamples;
-    using InternalServerErrorResponseExamples = Responses.InternalServerErrorResponseExamples;
+    using BadRequestResponseExamples = Infrastructure.Exceptions.BadRequestResponseExamples;
+    using InternalServerErrorResponseExamples = Infrastructure.Exceptions.InternalServerErrorResponseExamples;
     using ProblemDetails = Be.Vlaanderen.Basisregisters.BasicApiProblem.ProblemDetails;
 
     [ApiVersion("1.0")]
@@ -55,7 +55,7 @@ namespace FunctionalLiving.Api.Knx
                 GetMetadata(),
                 cancellationToken);
 
-            return Accepted();
+            return Accepted(new KnxResponse());
         }
     }
 }

@@ -10,6 +10,7 @@ namespace FunctionalLiving.Api.Infrastructure
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware;
+    using Be.Vlaanderen.Basisregisters.AspNetCore.Swagger;
     using Configuration;
     using Knx;
     using Light;
@@ -58,6 +59,10 @@ namespace FunctionalLiving.Api.Infrastructure
                                 .Select(c => c.Value)
                                 .ToArray()
                         },
+                        Server =
+                        {
+                            BaseUrl = _configuration.GetValue<string>("BaseUrl")
+                        },
                         Swagger =
                         {
                             ApiInfo = (provider, description) => new OpenApiInfo
@@ -71,6 +76,12 @@ namespace FunctionalLiving.Api.Infrastructure
                                     Email = "david@cumps.be",
                                     Url = new Uri("https://cumps.be")
                                 }
+                            },
+                            Servers = new []
+                            {
+                                new Server(
+                                    _configuration.GetValue<string>("BaseUrl"),
+                                    _configuration.GetValue<string>("BaseName"))
                             },
                             XmlCommentPaths = new[]
                             {

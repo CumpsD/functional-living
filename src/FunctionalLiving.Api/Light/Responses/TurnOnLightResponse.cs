@@ -8,9 +8,9 @@ namespace FunctionalLiving.Api.Light.Responses
     {
     }
 
-    public class TurnOnLightResponseExamples : IExamplesProvider<object>
+    public class TurnOnLightResponseExamples : IExamplesProvider<TurnOnLightResponse>
     {
-        public object GetExamples()
-            => new object();
+        public TurnOnLightResponse GetExamples()
+            => new TurnOnLightResponse();
     }
 }

@@ -1,7 +1,10 @@
 namespace FunctionalLiving.Api.Light.Responses
 {
     using System;
+    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Be.Vlaanderen.Basisregisters.BasicApiProblem;
     using Domain;
+    using Microsoft.AspNetCore.Http;
     using Swashbuckle.AspNetCore.Filters;
     using Newtonsoft.Json;
 
@@ -45,10 +48,21 @@ namespace FunctionalLiving.Api.Light.Responses
                 LightStatus.On);
     }
 
-    public class LightNotFoundResponseExamples : IExamplesProvider<object>
+    public class LightNotFoundResponseExamples : IExamplesProvider<ProblemDetails>
     {
-        // TODO: Add examples
-        public object GetExamples()
-            => new object();
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public LightNotFoundResponseExamples(IHttpContextAccessor httpContextAccessor)
+            => _httpContextAccessor = httpContextAccessor;
+
+        public ProblemDetails GetExamples()
+            => new ProblemDetails
+            {
+                ProblemTypeUri = "cumps-consulting:functional-living:api:not-found-error",
+                HttpStatus = StatusCodes.Status404NotFound,
+                Title = ProblemDetails.DefaultTitle,
+                Detail = "Light not found.",
+                ProblemInstanceUri = _httpContextAccessor.HttpContext.GetProblemInstanceUri()
+            };
     }
 }

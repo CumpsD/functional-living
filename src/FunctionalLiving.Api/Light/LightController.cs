@@ -6,6 +6,7 @@ namespace FunctionalLiving.Api.Light
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Domain;
     using Domain.Repositories;
     using FunctionalLiving.Infrastructure.CommandHandling;
     using Infrastructure;
@@ -15,6 +16,8 @@ namespace FunctionalLiving.Api.Light
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
+    using BadRequestResponseExamples = Infrastructure.Exceptions.BadRequestResponseExamples;
+    using InternalServerErrorResponseExamples = Infrastructure.Exceptions.InternalServerErrorResponseExamples;
     using ProblemDetails = Be.Vlaanderen.Basisregisters.BasicApiProblem.ProblemDetails;
 
     [ApiVersion("1.0")]
@@ -35,7 +38,7 @@ namespace FunctionalLiving.Api.Light
         [ProducesResponseType(typeof(ListLightsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(ListLightsRequest), typeof(ListLightsRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(ListLightsResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ListLightsResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public IActionResult ListLights(
             [FromServices] LightsRepository lightsRepository,
@@ -54,9 +57,10 @@ namespace FunctionalLiving.Api.Light
         /// <returns></returns>
         [HttpGet("{lightId}")]
         [ProducesResponseType(typeof(GetLightResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(GetLightRequest), typeof(GetLightRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(GetLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(GetLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> GetLight(
@@ -72,9 +76,7 @@ namespace FunctionalLiving.Api.Light
             await new GetLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
-            var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == request.LightId);
-            if (light == null)
-                throw new ApiException("Light not found.", StatusCodes.Status404NotFound);
+            var light = GetLightOrThrow(lightsRepository, request.LightId);
 
             return Ok(new GetLightResponse(light));
         }
@@ -83,22 +85,27 @@ namespace FunctionalLiving.Api.Light
         /// Turn on a light.
         /// </summary>
         /// <param name="bus"></param>
+        /// <param name="lightsRepository"></param>
         /// <param name="lightId">Id of the light to turn on.</param>
         /// <param name="cancellationToken"></param>
         /// <response code="202">If the message is accepted.</response>
         /// <response code="400">If the message contains invalid data.</response>
+        /// <response code="404">If the light cannot be found.</response>
         /// <response code="500">If an internal error has occured.</response>
         /// <returns></returns>
         [HttpGet("{lightId}/on")]
         [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(TurnOnLightRequest), typeof(TurnOnLightRequestExample))]
         [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOnLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOnLight(
             [FromServices] IBus bus,
+            [FromServices] LightsRepository lightsRepository,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
@@ -110,35 +117,42 @@ namespace FunctionalLiving.Api.Light
             await new TurnOnLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
+            GetLightOrThrow(lightsRepository, request.LightId);
+
             await bus.Dispatch(
                 Guid.NewGuid(),
                 TurnOnLightRequestMapping.Map(request),
                 GetMetadata(),
                 cancellationToken);
 
-            return Accepted();
+            return Accepted(new TurnOnLightResponse());
         }
 
         /// <summary>
         /// Turn off a light.
         /// </summary>
         /// <param name="bus"></param>
+        /// <param name="lightsRepository"></param>
         /// <param name="lightId">Id of the light to turn off.</param>
         /// <param name="cancellationToken"></param>
         /// <response code="202">If the message is accepted.</response>
         /// <response code="400">If the message contains invalid data.</response>
+        /// <response code="404">If the light cannot be found.</response>
         /// <response code="500">If an internal error has occured.</response>
         /// <returns></returns>
         [HttpGet("{lightId}/off")]
         [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(TurnOnLightRequest), typeof(TurnOnLightRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOnLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerRequestExample(typeof(TurnOnLightRequest), typeof(TurnOffLightRequestExample))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOffLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         public async Task<IActionResult> TurnOffLight(
             [FromServices] IBus bus,
+            [FromServices] LightsRepository lightsRepository,
             [FromRoute] Guid lightId,
             CancellationToken cancellationToken = default)
         {
@@ -150,13 +164,24 @@ namespace FunctionalLiving.Api.Light
             await new TurnOffLightRequestValidator()
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
+            GetLightOrThrow(lightsRepository, request.LightId);
+
             await bus.Dispatch(
                 Guid.NewGuid(),
                 TurnOffLightRequestMapping.Map(request),
                 GetMetadata(),
                 cancellationToken);
 
-            return Accepted();
+            return Accepted(new TurnOffLightResponse());
+        }
+
+        private static Light GetLightOrThrow(LightsRepository lightsRepository, Guid lightId)
+        {
+            var light = lightsRepository.Lights.SingleOrDefault(x => x.Id == lightId);
+            if (light == null)
+                throw new ApiException("Light not found.", StatusCodes.Status404NotFound);
+
+            return light;
         }
     }
 }

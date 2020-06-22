@@ -1,3 +1,11 @@
+# [1.26.0](https://github.com/cumpsd/functional-living/compare/v1.25.3...v1.26.0) (2020-06-22)
+
+
+### Features
+
+* add examples to api documentation ([154cd82](https://github.com/cumpsd/functional-living/commit/154cd823657cb7bbf3f2587b5861f26bfc14db26))
+* add index.html, fixes [#15](https://github.com/cumpsd/functional-living/issues/15) ([7816bd9](https://github.com/cumpsd/functional-living/commit/7816bd9a443abdc10c1425b3cd85a508a55cd648))
+
 ## [1.25.3](https://github.com/cumpsd/functional-living/compare/v1.25.2...v1.25.3) (2020-06-21)
 
 

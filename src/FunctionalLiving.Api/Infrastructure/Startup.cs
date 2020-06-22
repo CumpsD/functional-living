@@ -8,6 +8,7 @@ namespace FunctionalLiving.Api.Infrastructure
     using Autofac.Extensions.DependencyInjection;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware;
     using Configuration;
     using Knx;
     using Light;
@@ -138,7 +139,8 @@ namespace FunctionalLiving.Api.Infrastructure
                 Server =
                 {
                     PoweredByName = "Cumps Consulting - Functional Living",
-                    ServerName = "Cumps Consulting"
+                    ServerName = "Cumps Consulting",
+                    FrameOptionsDirective = FrameOptionsDirectives.SameOrigin,
                 },
                 MiddlewareHooks =
                 {

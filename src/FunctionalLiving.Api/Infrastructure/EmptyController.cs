@@ -13,7 +13,7 @@ namespace FunctionalLiving.Api.Infrastructure
         [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Get()
             => Request.Headers[HeaderNames.Accept].ToString().Contains("text/html")
-                ? (IActionResult)new RedirectResult("/docs")
+                ? (IActionResult)new RedirectResult("/index.html")
                 : new OkObjectResult($"Welcome to the Functional Living API {Assembly.GetEntryAssembly().GetVersionText()}.");
     }
 }

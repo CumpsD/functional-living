@@ -1,7 +1,6 @@
 namespace FunctionalLiving.Knx.Sender
 {
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -11,7 +10,6 @@ namespace FunctionalLiving.Knx.Sender
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Converters;
     using Requests;
     using Responses;

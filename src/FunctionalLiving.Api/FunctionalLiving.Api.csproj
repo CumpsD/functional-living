@@ -22,6 +22,7 @@
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
     <Content Include="appsettings.*.json" CopyToOutputDirectory="Always" />
     <Content Include="wwwroot/**" CopyToOutputDirectory="Always" />
+    <Content Include="..\FunctionalLiving\bin\$(Configuration)\$(TargetFramework)\FunctionalLiving.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>

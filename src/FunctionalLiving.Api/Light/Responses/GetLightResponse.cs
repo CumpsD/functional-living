@@ -3,36 +3,52 @@ namespace FunctionalLiving.Api.Light.Responses
     using System;
     using Domain;
     using Swashbuckle.AspNetCore.Filters;
-    using ValueObjects;
+    using Newtonsoft.Json;
 
     [Serializable]
     public class GetLightResponse
     {
-        public LightId Id { get; }
+        /// <summary>Id of the light.</summary>
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Guid Id { get; }
 
+        /// <summary>Description of the light.</summary>
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Description { get; }
 
-        public string Status { get; }
+        [JsonProperty(Required = Required.DisallowNull)]
+        public LightStatus Status { get; }
 
         public GetLightResponse(Light light)
+            : this(
+                light.Id,
+                light.Description,
+                light.Status) { }
+
+        internal GetLightResponse(
+            Guid lightId,
+            string description,
+            LightStatus status)
         {
-            Id = light.Id;
-            Description = light.Description;
-            Status = light.MapLightStatus();
+            Id = lightId;
+            Description = description;
+            Status = status;
         }
     }
 
-    public class GetLightResponseExamples : IExamplesProvider<object>
+    public class GetLightResponseExamples : IExamplesProvider<GetLightResponse>
     {
-        // TODO: Add examples
-        public object GetExamples()
-            => new { };
+        public GetLightResponse GetExamples()
+            => new GetLightResponse(
+                Guid.NewGuid(),
+                "Office - Centraal",
+                LightStatus.On);
     }
 
     public class LightNotFoundResponseExamples : IExamplesProvider<object>
     {
         // TODO: Add examples
         public object GetExamples()
-            => new { };
+            => new object();
     }
 }

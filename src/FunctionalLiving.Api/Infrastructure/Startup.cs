@@ -4,6 +4,7 @@ namespace FunctionalLiving.Api.Infrastructure
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
     using Be.Vlaanderen.Basisregisters.Api;
@@ -71,7 +72,11 @@ namespace FunctionalLiving.Api.Infrastructure
                                     Url = new Uri("https://cumps.be")
                                 }
                             },
-                            XmlCommentPaths = new[] {typeof(Startup).GetTypeInfo().Assembly.GetName().Name}
+                            XmlCommentPaths = new[]
+                            {
+                                typeof(Startup).GetTypeInfo().Assembly.GetName().Name,
+                                typeof(DomainAssemblyMarker).GetTypeInfo().Assembly.GetName().Name,
+                            }
                         },
                         Localization =
                         {
@@ -108,6 +113,8 @@ namespace FunctionalLiving.Api.Infrastructure
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider)
         {
+            var version = Assembly.GetEntryAssembly().GetName().Version;
+
             app.UseDefaultForApi(new StartupUseOptions
             {
                 Common =
@@ -122,6 +129,35 @@ namespace FunctionalLiving.Api.Infrastructure
                 {
                     VersionProvider = apiVersionProvider,
                     Info = groupName => $"Cumps Consulting - Functional Living API {groupName}",
+                    Description = _ => "Home automation integrating various technologies.",
+                    ApplicationName = _ => "Functional Living",
+                    HeaderTitle = groupName => "Functional Living",
+                    FooterVersion = $"{version.Minor}.{version.Build}.{version.Revision}",
+                    HeadContent = _ => @"
+                        <style>
+                            input.search-input {
+                                border-bottom: 0px
+                            }
+
+                            ul[role=""navigation""] + div {
+                                display: none;
+                            }
+
+                            div[data-section-id] {
+                                padding: 15px 0px;
+                            }
+
+                            li[data-item-id=""section/Introduction""]
+                            {
+                                border-top: 1px solid rgb(225, 225, 225);
+                                border-bottom: 1px solid rgb(225, 225, 225);
+                            },
+
+                            div[id*='tag/Knx']
+                            {
+                                padding-bottom: 0;
+                            }
+                        </style>",
                     CSharpClientOptions =
                     {
                         ClassName = "FunctionalLivingClient",
@@ -158,6 +194,21 @@ namespace FunctionalLiving.Api.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Right now you are reading the documentation for version {description.ApiVersion} of the Cumps Consulting Functional Living API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}";
+        {
+            var text = new StringBuilder(1000);
+
+            text.Append(
+$@"Right now you are reading the documentation for version {description.ApiVersion} of the Functional Living API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}
+
+# Introduction
+
+This is the hub of integrating various home automation technologies.
+
+Currently supported:
+* Reading KNX messages.
+* Sending KNX messages.");
+
+            return text.ToString();
+        }
     }
 }

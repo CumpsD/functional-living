@@ -6,6 +6,7 @@ namespace FunctionalLiving.Knx.Sender.Responses
     using Be.Vlaanderen.Basisregisters.BasicApiProblem;
     using Microsoft.AspNetCore.Http;
     using Swashbuckle.AspNetCore.Filters;
+    using ProblemDetails = Be.Vlaanderen.Basisregisters.BasicApiProblem.ProblemDetails;
 
     [Serializable]
     public class KnxResponse

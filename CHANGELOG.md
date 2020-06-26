@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/cumpsd/functional-living/compare/v1.26.1...v1.27.0) (2020-06-26)
+
+
+### Features
+
+* add favicon ([a7eb665](https://github.com/cumpsd/functional-living/commit/a7eb665ef6198ae2d7012d13a0fd4d6e81919f18))
+
 ## [1.26.1](https://github.com/cumpsd/functional-living/compare/v1.26.0...v1.26.1) (2020-06-22)
 
 # [1.26.0](https://github.com/cumpsd/functional-living/compare/v1.25.3...v1.26.0) (2020-06-22)

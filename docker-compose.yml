@@ -5,6 +5,7 @@ services:
     build: dist/FunctionalLiving.Api/linux/
     container_name: functional-living-api
     hostname: functional-living-api
+    restart: always
     environment:
       Features__EnableSignalR: 'true'
       Features__EnableTracing: 'false'
@@ -44,6 +45,7 @@ services:
     build: dist/FunctionalLiving.Knx.Listener/linux/
     container_name: functional-living-knx-listener
     hostname: functional-living-knx-listener
+    restart: always
     network_mode: host
     environment:
       Features__EnableTracing: 'false'
@@ -58,12 +60,12 @@ services:
       Knx__LocalPort: 3672
       Api__Endpoint: http://functional-living-api:9000
       Tracing__Host: functional-living-jaeger
-      Tracing__Port: 9016
+      Tracing__Port: 9021
       Tracing__ServiceName: FunctionalLiving.Knx.Listener
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxListener: Debug
       Serilog__WriteTo__1__Name: Seq
-      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9011
+      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9016
     depends_on:
       - seq
       - jaeger
@@ -77,6 +79,7 @@ services:
     build: dist/FunctionalLiving.Knx.Sender/linux/
     container_name: functional-living-knx-sender
     hostname: functional-living-knx-sender
+    restart: always
     network_mode: host
     environment:
       Features__EnableTracing: 'false'
@@ -88,12 +91,12 @@ services:
       Knx__RouterPort: 3671
       Knx__LocalPort: 3671
       Tracing__Host: functional-living-jaeger
-      Tracing__Port: 9016
+      Tracing__Port: 9021
       Tracing__ServiceName: FunctionalLiving.Knx.Sender
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.Infrastructure.Modules.TogglesModule: Debug
       Serilog__MinimumLevel__Override__FunctionalLiving.Knx.Listener.KnxSender: Debug
       Serilog__WriteTo__1__Name: Seq
-      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9011
+      Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:9016
     depends_on:
       - seq
       - jaeger
@@ -101,28 +104,45 @@ services:
       - "functional-living-seq:127.0.0.1"
       - "functional-living-jaeger:127.0.0.1"
 
+  homebridge:
+    image: oznu/homebridge:latest
+    container_name: functional-living-homebridge
+    hostname: functional-living-homebridge
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=Europe/Brussels
+      - HOMEBRIDGE_CONFIG_UI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT=9010
+    volumes:
+      - homebridge:/homebridge
+    depends_on:
+      - api
+
   seq:
     image: datalust/seq
     container_name: functional-living-seq
     hostname: functional-living-seq
+    restart: always
     environment:
       ACCEPT_EULA: Y
     ports:
-      - "9010:80"
-      - "9011:5341"
+      - "9015:80"
+      - "9016:5341"
 
   jaeger:
     image: jaegertracing/all-in-one:1.18
     container_name: functional-living-jaeger
     hostname: functional-living-jaeger
+    restart: always
     environment:
       SPAN_STORAGE_TYPE: badger
       BADGER_EPHEMERAL: 'false'
       BADGER_DIRECTORY_VALUE: /badger/data
       BADGER_DIRECTORY_KEY: /badger/key
     ports:
-      - "9015:16686"
-      - "9016:6831/udp"
+      - "9020:16686"
+      - "9021:6831/udp"
     volumes:
       - jaeger:/badger
 
@@ -130,19 +150,22 @@ services:
     image: quay.io/influxdb/influxdb:2.0.0-beta
     container_name: functional-living-influx
     hostname: functional-living-influx
+    restart: always
     ports:
-      - "9020:9999"
+      - "9025:9999"
     volumes:
       - influxdb:/var/lib/influxdb2
     command: influxd run --reporting-disabled --bolt-path /var/lib/influxdb2/influxd.bolt --engine-path /var/lib/influxdb2/engine --store bolt
 
 volumes:
+  homebridge:
+    name: functional-living-homebridge
   influxdb:
     name: functional-living-influx
   jaeger:
     name: functional-living-jaeger
 
-# docker exec -it influxdb /bin/bash
+# docker exec -it functional-living-influx /bin/bash
 # influx setup
 # * Enter a primary username.
 # * Enter a password for your user.
@@ -152,3 +175,9 @@ volumes:
 # * Enter a retention period (in hours) for your primary bucket. Enter nothing for an infinite retention period.
 # * Confirm the details for your primary user, organization, and bucket.
 # * Go to http://localhost:9999/ to get your token
+
+# docker exec -it functional-living-homebridge /bin/sh
+# npm install --save
+# docker logs -f functional-living-homebridge
+# docker restart functional-living-homebridge
+# or http://localhost:9010 with admin/admin

@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/cumpsd/functional-living/compare/v1.28.0...v1.28.1) (2020-06-26)
+
+
+### Bug Fixes
+
+* update homebridge ([16f0a54](https://github.com/cumpsd/functional-living/commit/16f0a54b91ed4a6db6b68bcba9dbe2ef7298915f))
+
 # [1.28.0](https://github.com/cumpsd/functional-living/compare/v1.27.0...v1.28.0) (2020-06-26)
 
 

@@ -4,6 +4,10 @@
 
 > Home automation integrating various technologies.
 
+## Currently supported
+
+* Knx
+
 ## Getting started
 
 Build the application and run it with docker-compose:

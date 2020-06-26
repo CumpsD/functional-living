@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/cumpsd/functional-living/compare/v1.28.1...v1.29.0) (2020-06-26)
+
+
+### Features
+
+* add dyson ([b657577](https://github.com/cumpsd/functional-living/commit/b657577139aa4f7680bca898906f9bdbcdefe254))
+
 ## [1.28.1](https://github.com/cumpsd/functional-living/compare/v1.28.0...v1.28.1) (2020-06-26)
 
 

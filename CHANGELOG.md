@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/cumpsd/functional-living/compare/v1.27.0...v1.28.0) (2020-06-26)
+
+
+### Features
+
+* add gitcrypt ([9d4de20](https://github.com/cumpsd/functional-living/commit/9d4de2064f887ee2d716f54ad43d71d9fe8286d8))
+
 # [1.27.0](https://github.com/cumpsd/functional-living/compare/v1.26.1...v1.27.0) (2020-06-26)
 
 

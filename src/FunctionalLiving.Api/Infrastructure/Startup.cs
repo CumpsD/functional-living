@@ -17,6 +17,7 @@ namespace FunctionalLiving.Api.Infrastructure
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -126,6 +127,9 @@ namespace FunctionalLiving.Api.Infrastructure
         {
             var version = Assembly.GetEntryAssembly().GetName().Version;
 
+            var provider = new FileExtensionContentTypeProvider();
+            provider.Mappings[".webmanifest"] = "application/manifest+json";
+
             app.UseDefaultForApi(new StartupUseOptions
             {
                 Common =
@@ -195,7 +199,10 @@ namespace FunctionalLiving.Api.Infrastructure
                 }
             })
 
-            .UseStaticFiles()
+            .UseStaticFiles(new StaticFileOptions()
+            {
+                ContentTypeProvider = provider
+            })
             .UseRouting()
             .UseEndpoints(endpoints =>
             {

@@ -114,6 +114,7 @@ services:
       - TZ=Europe/Brussels
       - HOMEBRIDGE_CONFIG_UI=1
       - HOMEBRIDGE_CONFIG_UI_PORT=9010
+      - HOMEBRIDGE_INSECURE=1
     volumes:
       - homebridge:/homebridge
     depends_on:

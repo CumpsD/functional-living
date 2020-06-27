@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/cumpsd/functional-living/compare/v1.29.0...v1.29.1) (2020-06-27)
+
+
+### Bug Fixes
+
+* serve webmanifest ([7a4c2dd](https://github.com/cumpsd/functional-living/commit/7a4c2ddc350e3310ca4d726ddf81b1feadf16977))
+
 # [1.29.0](https://github.com/cumpsd/functional-living/compare/v1.28.1...v1.29.0) (2020-06-26)
 
 

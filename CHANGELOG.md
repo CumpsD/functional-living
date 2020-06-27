@@ -1,3 +1,10 @@
+## [1.29.2](https://github.com/cumpsd/functional-living/compare/v1.29.1...v1.29.2) (2020-06-27)
+
+
+### Bug Fixes
+
+* allow homebridge in insecure mode for alexa ([c3924df](https://github.com/cumpsd/functional-living/commit/c3924df44c93df0569594224898d70851c11a585))
+
 ## [1.29.1](https://github.com/cumpsd/functional-living/compare/v1.29.0...v1.29.1) (2020-06-27)
 
 

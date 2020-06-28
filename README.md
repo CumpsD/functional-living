@@ -28,6 +28,42 @@ After everything has started, you can visit the following services:
 | Jaeger                      | http://127.0.01:9020 |
 | InfluxDb                    | http://127.0.01:9025 |
 
+## Useful additions
+
+### Alexa
+
+#### Connect Control for Spotify
+
+* Skill: [Control Spotify Connect devices with Alexa](https://www.amazon.com/Lawrence-Thorpe-Connect-Control-Spotify/dp/B074KFNWFD)
+* Source: [thorpelawrence/alexa-spotify-connect](https://github.com/thorpelawrence/alexa-spotify-connect)
+* Fork: [CumpsD/alexa-spotify-connect](https://github.com/CumpsD/alexa-spotify-connect)
+
+##### Commands
+
+* `list devices`: will tell you all the currently available devices and a number for each one of them
+* `play on device N`: will change the device playing Spotify to the device N as indicated by `list devices`
+* `pause` or `resume`: allows you to pause or resume the song (it seems that there is not `play` nor `stop`
+* `skip forward` or `skip backwards`: allow you to jump to the next or previous song
+* `set volume to N`: set volume to N that should be between 0 to 10
+
+##### Usage
+
+First of all:
+
+> Alexa, Ask Connect Control to list devices
+
+When you have the list
+
+> Alexa, Ask Connect Control to play on device **number**
+
+1. Living Dot
+2. Skully
+3. Slaapkamer
+4. Badkamer
+5. Office Dot
+6. Abby
+7. Receiver
+
 ## License
 
 [European Union Public Licence (EUPL)](https://joinup.ec.europa.eu/news/understanding-eupl-v12)

@@ -2,6 +2,7 @@
   "private": true,
   "description": "This file keeps track of which plugins should be installed.",
   "dependencies": {
+    "homebridge-alexa": "^0.4.73",
     "homebridge-bravia": "^2.2.3",
     "homebridge-camera-ffmpeg": "^2.0.0",
     "homebridge-dyson-pure-cool": "^1.7.8",

@@ -67,14 +67,11 @@ namespace FunctionalLiving.Knx.Listener
             catch (Exception e)
             {
                 logger.LogCritical(e, "Encountered a fatal exception, exiting program.");
-                Log.CloseAndFlush();
-
-                // Allow some time for flushing before shutdown.
-                Thread.Sleep(1000);
-                throw;
             }
 
             logger.LogInformation("Stopping...");
+            Log.CloseAndFlush();
+
             ct.WaitHandle.Close();
         }
 

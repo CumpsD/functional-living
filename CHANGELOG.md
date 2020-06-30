@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/cumpsd/functional-living/compare/v1.29.2...v1.30.0) (2020-06-30)
+
+
+### Features
+
+* wait for seq to be available ([c2f2888](https://github.com/cumpsd/functional-living/commit/c2f28884df3662fc83d5e7a2db99a740bd46cc02))
+
 ## [1.29.2](https://github.com/cumpsd/functional-living/compare/v1.29.1...v1.29.2) (2020-06-27)
 
 

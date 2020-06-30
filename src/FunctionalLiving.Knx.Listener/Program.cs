@@ -1,12 +1,12 @@
 namespace FunctionalLiving.Knx.Listener
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using FunctionalLiving.Knx.Listener.Infrastructure;
     using Infrastructure.Modules;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -51,10 +51,12 @@ namespace FunctionalLiving.Knx.Listener
             var openTelemetry = container.GetService<TracerFactoryBase>();
             var logger = container.GetRequiredService<ILogger<Program>>();
 
-            logger.LogInformation("Starting FunctionalLiving.Knx.Listener");
-
             try
             {
+                await WaitFor.SeqToBecomeAvailable(configuration).ConfigureAwait(false);
+
+                logger.LogInformation("Starting FunctionalLiving.Knx.Listener");
+
                 var runner = container.GetRequiredService<KnxListener>();
 
                 runner.Start();

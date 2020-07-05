@@ -30,7 +30,7 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                 .GetSection("Serilog:WriteTo")
                 .Get<WriteTo[]>();
 
-            var seq = writeTos.SingleOrDefault(to => "Seq".Equals(to.Name, StringComparison.InvariantCultureIgnoreCase));
+            var seq = writeTos?.SingleOrDefault(to => "Seq".Equals(to.Name, StringComparison.InvariantCultureIgnoreCase));
             if (seq == null)
                 return;
 

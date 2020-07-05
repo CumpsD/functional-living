@@ -1,3 +1,10 @@
+## [1.30.4](https://github.com/cumpsd/functional-living/compare/v1.30.3...v1.30.4) (2020-07-05)
+
+
+### Bug Fixes
+
+* dont start docker on boot ([20cd2dc](https://github.com/cumpsd/functional-living/commit/20cd2dc57b3a02d3c2309b3c46a24cc12be19842))
+
 ## [1.30.3](https://github.com/cumpsd/functional-living/compare/v1.30.2...v1.30.3) (2020-07-05)
 
 

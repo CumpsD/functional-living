@@ -1,3 +1,10 @@
+## [1.30.2](https://github.com/cumpsd/functional-living/compare/v1.30.1...v1.30.2) (2020-07-05)
+
+
+### Bug Fixes
+
+* add cors name ([9fd79cf](https://github.com/cumpsd/functional-living/commit/9fd79cf629ba285e46caa5cdd6d45ce48d437ad5))
+
 ## [1.30.1](https://github.com/cumpsd/functional-living/compare/v1.30.0...v1.30.1) (2020-06-30)
 
 # [1.30.0](https://github.com/cumpsd/functional-living/compare/v1.29.2...v1.30.0) (2020-06-30)

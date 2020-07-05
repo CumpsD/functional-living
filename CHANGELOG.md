@@ -1,3 +1,12 @@
+## [1.30.3](https://github.com/cumpsd/functional-living/compare/v1.30.2...v1.30.3) (2020-07-05)
+
+
+### Bug Fixes
+
+* waitfor can be mising WriteTo section ([9af3981](https://github.com/cumpsd/functional-living/commit/9af39816f966c1da310da7e7630636a9b5bc470a))
+* waitfor can be mising WriteTo section ([43d460b](https://github.com/cumpsd/functional-living/commit/43d460baf4c22c53a69a7de7047876ecbfa22165))
+* waitfor can be mising WriteTo section ([5747eca](https://github.com/cumpsd/functional-living/commit/5747ecac9da1d6fbabeda4cc5266a32d868c9b82))
+
 ## [1.30.2](https://github.com/cumpsd/functional-living/compare/v1.30.1...v1.30.2) (2020-07-05)
 
 

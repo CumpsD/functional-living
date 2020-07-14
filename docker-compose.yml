@@ -5,7 +5,7 @@ services:
     build: dist/FunctionalLiving.Api/linux/
     container_name: functional-living-api
     hostname: functional-living-api
-    restart: unless-stopped
+    restart: on-failure
     environment:
       Features__EnableSignalR: 'true'
       Features__EnableTracing: 'false'
@@ -46,7 +46,7 @@ services:
     build: dist/FunctionalLiving.Knx.Listener/linux/
     container_name: functional-living-knx-listener
     hostname: functional-living-knx-listener
-    restart: unless-stopped
+    restart: on-failure
     network_mode: host
     environment:
       Features__EnableTracing: 'false'
@@ -80,7 +80,7 @@ services:
     build: dist/FunctionalLiving.Knx.Sender/linux/
     container_name: functional-living-knx-sender
     hostname: functional-living-knx-sender
-    restart: unless-stopped
+    restart: on-failure
     network_mode: host
     environment:
       Features__EnableTracing: 'false'
@@ -109,7 +109,7 @@ services:
     image: oznu/homebridge:latest
     container_name: functional-living-homebridge
     hostname: functional-living-homebridge
-    restart: unless-stopped
+    restart: on-failure
     network_mode: host
     environment:
       - TZ=Europe/Brussels
@@ -125,7 +125,7 @@ services:
     image: datalust/seq
     container_name: functional-living-seq
     hostname: functional-living-seq
-    restart: unless-stopped
+    restart: on-failure
     environment:
       ACCEPT_EULA: Y
     ports:
@@ -136,7 +136,7 @@ services:
     image: jaegertracing/all-in-one:1.18
     container_name: functional-living-jaeger
     hostname: functional-living-jaeger
-    restart: unless-stopped
+    restart: on-failure
     environment:
       SPAN_STORAGE_TYPE: badger
       BADGER_EPHEMERAL: 'false'
@@ -152,7 +152,7 @@ services:
     image: quay.io/influxdb/influxdb:2.0.0-beta
     container_name: functional-living-influx
     hostname: functional-living-influx
-    restart: unless-stopped
+    restart: on-failure
     ports:
       - "9025:9999"
     volumes:

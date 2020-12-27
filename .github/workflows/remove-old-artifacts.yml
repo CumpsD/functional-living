@@ -1,0 +1,28 @@
+name: Remove old artifacts
+
+on:
+  watch:
+    types: [started]
+  schedule:
+    # Every day at 1am
+    - cron: '0 1 * * *'
+
+jobs:
+  remove-old-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Remove old artifacts
+      uses: exira/gha-remove-artifacts@v1.2.0
+      if: github.actor == github.event.repository.owner.login
+      with:
+        age: '5 days'
+        skip-tags: false
+
+    - name: Remove old artifacts
+      uses: exira/gha-remove-artifacts@v1.2.0
+      if: github.actor != github.event.repository.owner.login
+      with:
+        age: '5 days'
+        skip-tags: false

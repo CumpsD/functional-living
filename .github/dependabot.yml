@@ -1,0 +1,27 @@
+version: 2
+
+updates:
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+
+- package-ecosystem: docker
+  directory: "/src/FunctionalLiving.Api"
+  schedule:
+    interval: daily
+
+- package-ecosystem: docker
+  directory: "/src/FunctionalLiving.Knx.Listener"
+  schedule:
+    interval: daily
+
+- package-ecosystem: docker
+  directory: "/src/FunctionalLiving.Knx.Sender"
+  schedule:
+    interval: daily

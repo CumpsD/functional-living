@@ -28,7 +28,7 @@ services:
       Serilog__WriteTo__1__Name: Seq
       Serilog__WriteTo__1__Args__ServerUrl: http://functional-living-seq:5341
     ports:
-      - "9000:9000"
+      - 9000:9000
     depends_on:
       - seq
       - jaeger
@@ -122,18 +122,18 @@ services:
       - api
 
   seq:
-    image: datalust/seq
+    image: datalust/seq:2020.5
     container_name: functional-living-seq
     hostname: functional-living-seq
     restart: on-failure
     environment:
       ACCEPT_EULA: Y
     ports:
-      - "9015:80"
-      - "9016:5341"
+      - 9015:80
+      - 9016:5341
 
   jaeger:
-    image: jaegertracing/all-in-one:1.18
+    image: jaegertracing/all-in-one:1.21.0
     container_name: functional-living-jaeger
     hostname: functional-living-jaeger
     restart: on-failure
@@ -143,18 +143,18 @@ services:
       BADGER_DIRECTORY_VALUE: /badger/data
       BADGER_DIRECTORY_KEY: /badger/key
     ports:
-      - "9020:16686"
-      - "9021:6831/udp"
+      - 9020:16686
+      - 9021:6831/udp
     volumes:
       - jaeger:/badger
 
   influx:
-    image: quay.io/influxdb/influxdb:2.0.0-beta
+    image: quay.io/influxdb/influxdb:v2.0.3
     container_name: functional-living-influx
     hostname: functional-living-influx
     restart: on-failure
     ports:
-      - "9025:9999"
+      - 9025:9999
     volumes:
       - influxdb:/var/lib/influxdb2
     command: influxd run --reporting-disabled --bolt-path /var/lib/influxdb2/influxd.bolt --engine-path /var/lib/influxdb2/engine --store bolt

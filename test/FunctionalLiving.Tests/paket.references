@@ -5,6 +5,8 @@ xunit.categories
 AutoFixture
 AutoFixture.Xunit2
 
+Microsoft.Extensions.Configuration
+
 Be.Vlaanderen.Basisregisters.Testing.Infrastructure.Events
 
 Be.Vlaanderen.Basisregisters.AggregateSource.SqlStreamStore.Autofac

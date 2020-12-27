@@ -11,8 +11,9 @@ namespace FunctionalLiving.Tests
 
     public class FunctionalLivingTest : AutofacBasedTest
     {
-        private readonly JsonSerializerSettings _eventSerializerSettings = EventsJsonSerializerSettingsProvider.CreateSerializerSettings();
         private readonly IConfigurationRoot _configuration;
+
+        private readonly JsonSerializerSettings _eventSerializerSettings = EventsJsonSerializerSettingsProvider.CreateSerializerSettings();
 
         public FunctionalLivingTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {

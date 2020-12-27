@@ -1,10 +1,10 @@
 namespace FunctionalLiving.Knx.Listener.Infrastructure.Tracing
 {
-    using OpenTelemetry.Trace.Configuration;
+    using OpenTelemetry.Trace;
 
     public static class TraceBuilderExtensions
     {
-        public static TracerBuilder AddKnxListenerAdapter(this TracerBuilder builder)
-            => builder.AddAdapter(t => new KnxListenerAdapter(t));
+    //    public static TracerProviderBuilder AddKnxListenerAdapter(this TracerProviderBuilder builder)
+    //        => builder.AddAdapter(t => new KnxListenerAdapter(t));
     }
 }

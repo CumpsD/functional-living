@@ -1,11 +1,11 @@
 namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using Autofac;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using OpenTelemetry.Trace.Configuration;
-    using OpenTelemetry.Trace.Samplers;
+    using OpenTelemetry.Trace;
 
     public class TracingModule : Module
     {
@@ -20,16 +20,22 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure.Modules
                 return;
 
             services
-                .AddOpenTelemetry(builder => builder
-                    .UseJaeger(jaeger =>
+                .AddOpenTelemetryTracing(builder => builder
+                    .AddAspNetCoreInstrumentation()
+                    .AddJaegerExporter(jaeger =>
                     {
                         jaeger.AgentHost = configuration.GetValue<string>("Tracing:Host");
                         jaeger.AgentPort = configuration.GetValue<int>("Tracing:Port");
-                        jaeger.ServiceName = configuration.GetValue<string>("Tracing:ServiceName");
+                        jaeger.ProcessTags = new List<KeyValuePair<string, object>>
+                        {
+                            new KeyValuePair<string, object>("ServiceName", configuration.GetValue<string>("Tracing:ServiceName"))
+                        };
                     })
-                    .AddRequestAdapter()
-                    .AddDependencyAdapter()
                     .SetSampler(new AlwaysOnSampler()));
+
+            //services
+            //    .AddOpenTelemetryTracing(builder => builder
+            //        .AddDependencyAdapter()
         }
     }
 }

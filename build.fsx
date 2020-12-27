@@ -29,8 +29,12 @@ let setSolutionVersionsFSharp formatAssemblyVersion product copyright company x 
        AssemblyInfo.Copyright copyright
        AssemblyInfo.Company company]
 
+let buildTestFSharp' formatAssemblyVersion project =
+  buildNeutral formatAssemblyVersion ("test" @@ project @@ (sprintf "%s.fsproj" project))
+
 let buildSource = build assemblyVersionNumber
 let buildTest = buildTest assemblyVersionNumber
+let buildTestFSharp = buildTestFSharp' assemblyVersionNumber
 let setVersions = (setSolutionVersions assemblyVersionNumber product copyright company)
 let setVersionsFSharp = (setSolutionVersionsFSharp assemblyVersionNumber product copyright company)
 let publish = publish assemblyVersionNumber
@@ -41,15 +45,18 @@ let push = push dockerRepository
 supportedRuntimeIdentifiers <- [ "linux-x64" ]
 
 Target.create "Restore_Solution" (fun _ ->
-  restore "FunctionalLiving")
+  restore "FunctionalLiving"
+)
 
 Target.create "Build_Solution" (fun _ ->
   setVersions "SolutionInfo.cs"
   setVersionsFSharp "SolutionInfo.fs"
+
   buildSource "FunctionalLiving.Api"
   buildSource "FunctionalLiving.Knx.Listener"
   buildSource "FunctionalLiving.Knx.Sender"
-  buildTest "FunctionalLiving.Knx.Parser.Tests"
+
+  buildTestFSharp "FunctionalLiving.Knx.Parser.Tests"
   buildTest "FunctionalLiving.Knx.Tests"
   buildTest "FunctionalLiving.Tests"
 )
@@ -67,12 +74,14 @@ Target.create "Publish_Solution" (fun _ ->
     "FunctionalLiving.Api"
     "FunctionalLiving.Knx.Listener"
     "FunctionalLiving.Knx.Sender"
-  ] |> List.iter publish)
+  ] |> List.iter publish
+)
 
 Target.create "Pack_Solution" (fun _ ->
   [
     "FunctionalLiving.Api"
-  ] |> List.iter pack)
+  ] |> List.iter pack
+)
 
 Target.create "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
 Target.create "PushContainer_Api" (fun _ -> push "api")

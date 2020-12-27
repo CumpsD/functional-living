@@ -7,12 +7,12 @@ services:
     hostname: functional-living-api
     restart: on-failure
     environment:
-      Features__EnableSignalR: 'true'
-      Features__EnableTracing: 'false'
-      Features__SendToInflux: 'true'
-      Features__SendToKnxSender: 'true'
-      Features__SendToLog: 'true'
-      Features__SendToSignalR: 'true'
+      Features__EnableSignalR: "true"
+      Features__EnableTracing: "false"
+      Features__SendToInflux: "true"
+      Features__SendToKnxSender: "true"
+      Features__SendToLog: "true"
+      Features__SendToSignalR: "true"
       BaseUrl: http://localhost:9000
       Cors__0: http://localhost:9000
       Cors__1: http://blue:9000
@@ -49,13 +49,13 @@ services:
     restart: on-failure
     network_mode: host
     environment:
-      Features__EnableTracing: 'false'
-      Features__ConnectToKnx: 'true'
-      Features__DebugKnxCemi: 'false'
-      Features__SendToApi: 'true'
-      Features__SendToLog: 'true'
-      Features__UseKnxConnectionRouting: 'false'
-      Features__UseKnxConnectionTunneling: 'true'
+      Features__EnableTracing: "false"
+      Features__ConnectToKnx: "true"
+      Features__DebugKnxCemi: "false"
+      Features__SendToApi: "true"
+      Features__SendToLog: "true"
+      Features__UseKnxConnectionRouting: "false"
+      Features__UseKnxConnectionTunneling: "true"
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3672
@@ -83,11 +83,11 @@ services:
     restart: on-failure
     network_mode: host
     environment:
-      Features__EnableTracing: 'false'
-      Features__ConnectToKnx: 'true'
-      Features__DebugKnxCemi: 'false'
-      Features__UseKnxConnectionRouting: 'false'
-      Features__UseKnxConnectionTunneling: 'true'
+      Features__EnableTracing: "false"
+      Features__ConnectToKnx: "true"
+      Features__DebugKnxCemi: "false"
+      Features__UseKnxConnectionRouting: "false"
+      Features__UseKnxConnectionTunneling: "true"
       Knx__RouterIp: 10.0.4.7
       Knx__RouterPort: 3671
       Knx__LocalPort: 3671
@@ -139,7 +139,7 @@ services:
     restart: on-failure
     environment:
       SPAN_STORAGE_TYPE: badger
-      BADGER_EPHEMERAL: 'false'
+      BADGER_EPHEMERAL: "false"
       BADGER_DIRECTORY_VALUE: /badger/data
       BADGER_DIRECTORY_KEY: /badger/key
     ports:

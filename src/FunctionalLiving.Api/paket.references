@@ -7,7 +7,7 @@ Microsoft.Extensions.Http.Polly
 InfluxDB.Client
 
 OpenTelemetry
-OpenTelemetry.Adapter.AspNetCore
+OpenTelemetry.Instrumentation.AspNetCore
 OpenTelemetry.Adapter.Dependencies
 OpenTelemetry.Exporter.Jaeger
 OpenTelemetry.Extensions.Hosting

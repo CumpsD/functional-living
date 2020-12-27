@@ -1,14 +1,15 @@
 #r "paket:
-version 5.247.2
+version 6.0.0-beta8
 framework: netstandard20
 source https://api.nuget.org/v3/index.json
-nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 4.2.1 //"
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 5.0.1 //"
 
 #load "packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/build-generic.fsx"
 
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.DotNet
+open Fake.IO.FileSystemOperators
 open ``Build-generic``
 
 let product = "Functional Living"
@@ -28,10 +29,10 @@ let setSolutionVersionsFSharp formatAssemblyVersion product copyright company x 
        AssemblyInfo.Copyright copyright
        AssemblyInfo.Company company]
 
-let build = buildSolution assemblyVersionNumber
+let buildSource = build assemblyVersionNumber
+let buildTest = buildTest assemblyVersionNumber
 let setVersions = (setSolutionVersions assemblyVersionNumber product copyright company)
 let setVersionsFSharp = (setSolutionVersionsFSharp assemblyVersionNumber product copyright company)
-let test = testSolution
 let publish = publish assemblyVersionNumber
 let pack = pack nugetVersionNumber
 let containerize = containerize dockerRepository
@@ -39,14 +40,27 @@ let push = push dockerRepository
 
 supportedRuntimeIdentifiers <- [ "linux-x64" ]
 
-Target.create "Restore_Solution" (fun _ -> restore "FunctionalLiving")
+Target.create "Restore_Solution" (fun _ ->
+  restore "FunctionalLiving")
 
 Target.create "Build_Solution" (fun _ ->
   setVersions "SolutionInfo.cs"
   setVersionsFSharp "SolutionInfo.fs"
-  build "FunctionalLiving")
+  buildSource "FunctionalLiving.Api"
+  buildSource "FunctionalLiving.Knx.Listener"
+  buildSource "FunctionalLiving.Knx.Sender"
+  buildTest "FunctionalLiving.Knx.Parser.Tests"
+  buildTest "FunctionalLiving.Knx.Tests"
+  buildTest "FunctionalLiving.Tests"
+)
 
-Target.create "Test_Solution" (fun _ -> test "FunctionalLiving")
+Target.create "Test_Solution" (fun _ ->
+    [
+        "test" @@ "FunctionalLiving.Knx.Parser.Tests"
+        "test" @@ "FunctionalLiving.Knx.Tests"
+        "test" @@ "FunctionalLiving.Tests"
+    ] |> List.iter testWithDotNet
+)
 
 Target.create "Publish_Solution" (fun _ ->
   [

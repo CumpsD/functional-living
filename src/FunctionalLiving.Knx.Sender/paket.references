@@ -2,7 +2,7 @@ Be.Vlaanderen.Basisregisters.Api
 Be.Vlaanderen.Basisregisters.EventHandling.Autofac
 
 OpenTelemetry
-OpenTelemetry.Adapter.AspNetCore
+OpenTelemetry.Instrumentation.AspNetCore
 OpenTelemetry.Adapter.Dependencies
 OpenTelemetry.Exporter.Jaeger
 OpenTelemetry.Extensions.Hosting

@@ -38,8 +38,8 @@ namespace FunctionalLiving.Api.Light
         [ProducesResponseType(typeof(ListLightsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(ListLightsRequest), typeof(ListLightsRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ListLightsResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ListLightsResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples))]
         public IActionResult ListLights(
             [FromServices] LightsRepository lightsRepository,
             CancellationToken cancellationToken = default)
@@ -60,9 +60,9 @@ namespace FunctionalLiving.Api.Light
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(GetLightRequest), typeof(GetLightRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(GetLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(GetLightResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples))]
         public async Task<IActionResult> GetLight(
             [FromServices] LightsRepository lightsRepository,
             [FromRoute] Guid lightId,
@@ -99,10 +99,10 @@ namespace FunctionalLiving.Api.Light
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(TurnOnLightRequest), typeof(TurnOnLightRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOnLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOnLightResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples))]
         public async Task<IActionResult> TurnOnLight(
             [FromServices] IBus bus,
             [FromServices] LightsRepository lightsRepository,
@@ -146,10 +146,10 @@ namespace FunctionalLiving.Api.Light
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(TurnOnLightRequest), typeof(TurnOffLightRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOffLightResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(TurnOffLightResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(LightNotFoundResponseExamples))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples))]
         public async Task<IActionResult> TurnOffLight(
             [FromServices] IBus bus,
             [FromServices] LightsRepository lightsRepository,

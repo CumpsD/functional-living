@@ -12,7 +12,6 @@ namespace FunctionalLiving.Api.Light
     using Infrastructure;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json.Converters;
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;

@@ -14,7 +14,7 @@ Build the application and run it with docker-compose:
 
 ```bash
 ./build.sh Publish
-docker-compose -f docker-compose.yml up --build
+docker-compose up --build --force-recreate
 ```
 
 After everything has started, you can visit the following services:
@@ -27,6 +27,22 @@ After everything has started, you can visit the following services:
 | Seq                         | http://127.0.01:9015 |
 | Jaeger                      | http://127.0.01:9020 |
 | InfluxDb                    | http://127.0.01:9025 |
+
+When you are done press CTRL+C to stop and `docker-compose down` to clean up.
+
+## Extra Information
+
+## FunctionalLiving.Api
+
+This is the main API. For more details, see [README](src/FunctionalLiving.Api/README.md).
+
+## FunctionalLiving.Knx.Listener
+
+This components listens to KNX messages from the KNX bus. For more details, see [README](src/FunctionalLiving.Knx.Listener/README.md).
+
+## FunctionalLiving.Knx.Sender
+
+This components sends KNX messages to the KNX bus. For more details, see [README](src/FunctionalLiving.Knx.Sender/README.md).
 
 ## Useful additions
 

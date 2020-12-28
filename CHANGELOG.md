@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/cumpsd/functional-living/compare/v1.30.5...v1.31.0) (2020-12-28)
+
+
+### Features
+
+* push to docker hub ([de72f52](https://github.com/cumpsd/functional-living/commit/de72f52779d519736a422e1fb153ce4911a3d857))
+
 ## [1.30.5](https://github.com/cumpsd/functional-living/compare/v1.30.4...v1.30.5) (2020-12-28)
 
 ## [1.30.4](https://github.com/cumpsd/functional-living/compare/v1.30.3...v1.30.4) (2020-07-05)

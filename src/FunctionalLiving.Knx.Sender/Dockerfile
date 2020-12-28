@@ -7,5 +7,6 @@ WORKDIR /app
 
 EXPOSE 9001/tcp
 ENV ASPNETCORE_URLS http://*:9001
+ENV ASPNETCORE_ENVIRONMENT Production
 
 ENTRYPOINT ["./FunctionalLiving.Knx.Sender"]

@@ -16,7 +16,7 @@ let product = "Functional Living"
 let copyright = "Copyright (c) Cumps Consulting"
 let company = "Cumps Consulting"
 
-let dockerRepository = "functional-living"
+let dockerRepository = "cumpsd"
 let assemblyVersionNumber = (sprintf "2.%s")
 let nugetVersionNumber = (sprintf "2.%s")
 
@@ -83,14 +83,14 @@ Target.create "Pack_Solution" (fun _ ->
   ] |> List.iter pack
 )
 
-Target.create "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "api")
-Target.create "PushContainer_Api" (fun _ -> push "api")
+Target.create "Containerize_Api" (fun _ -> containerize "FunctionalLiving.Api" "functional-living-api")
+Target.create "PushContainer_Api" (fun _ -> push "functional-living-api")
 
-Target.create "Containerize_KnxListener" (fun _ -> containerize "FunctionalLiving.Knx.Listener" "knx-listener")
-Target.create "PushContainer_KnxListener" (fun _ -> push "knx-listener")
+Target.create "Containerize_KnxListener" (fun _ -> containerize "FunctionalLiving.Knx.Listener" "functional-living-knx-listener")
+Target.create "PushContainer_KnxListener" (fun _ -> push "functional-living-knx-listener")
 
-Target.create "Containerize_KnxSender" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "knx-sender")
-Target.create "PushContainer_KnxSender" (fun _ -> push "knx-sender")
+Target.create "Containerize_KnxSender" (fun _ -> containerize "FunctionalLiving.Knx.Sender" "functional-living-knx-sender")
+Target.create "PushContainer_KnxSender" (fun _ -> push "functional-living-knx-sender")
 
 Target.create "Build" ignore
 Target.create "Test" ignore

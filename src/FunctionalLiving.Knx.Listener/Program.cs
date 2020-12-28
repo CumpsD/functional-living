@@ -44,7 +44,7 @@ namespace FunctionalLiving.Knx.Listener
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                 .AddJsonFile($"appsettings.{Environment.MachineName.ToLowerInvariant()}.json", optional: true, reloadOnChange: false)
                 .AddEnvironmentVariables()
-                .AddCommandLine(args ?? new string[0])
+                .AddCommandLine(args ?? Array.Empty<string>())
                 .Build();
 
             var container = ConfigureServices(configuration);

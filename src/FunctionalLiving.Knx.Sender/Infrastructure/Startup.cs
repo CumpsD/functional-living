@@ -50,10 +50,16 @@ namespace FunctionalLiving.Knx.Sender.Infrastructure
                         Cors =
                         {
                             Origins = _configuration
-                                .GetSection("Cors")
+                                .GetSection("Cors:AllowedHosts")
                                 .GetChildren()
                                 .Select(c => c.Value)
-                                .ToArray()
+                                .ToArray(),
+
+                            Methods = _configuration
+                                .GetSection("Cors:AllowedMethods")
+                                .GetChildren()
+                                .Select(c => c.Value)
+                                .ToArray(),
                         },
                         Swagger =
                         {

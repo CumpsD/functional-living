@@ -19,6 +19,7 @@ module Category9_2ByteFloatValue =
         (0x16uy, 0x15uy, 62.28)
         (0x16uy, 0x13uy, 62.2)
         (0x8Auy, 0x24uy, -30.0)
+        (0x07uy, 0x51uy, 18.73)
     ]
 
     [<Theory; MemberData("data")>]

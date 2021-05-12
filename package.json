@@ -22,7 +22,7 @@
     "@semantic-release/release-notes-generator": "9.0.1",
     "commitizen": "4.2.2",
     "cz-conventional-changelog": "3.3.0",
-    "husky": "4.3.6",
+    "husky": "6.0.0",
     "form-data": "4.0.0",
     "semantic-release": "17.4.2",
     "merge": "2.1.0"

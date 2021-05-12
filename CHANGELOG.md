@@ -1,3 +1,11 @@
+## [1.31.1](https://github.com/cumpsd/functional-living/compare/v1.31.0...v1.31.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* update dotnet ([45b6da7](https://github.com/cumpsd/functional-living/commit/45b6da7474c09bc591be463775644c5dc88a72b5))
+* update global.json for dotnet ([0ee73e4](https://github.com/cumpsd/functional-living/commit/0ee73e408257efc6327dbd72cb3bf3166a4a8fa8))
+
 # [1.31.0](https://github.com/cumpsd/functional-living/compare/v1.30.5...v1.31.0) (2020-12-28)
 
 

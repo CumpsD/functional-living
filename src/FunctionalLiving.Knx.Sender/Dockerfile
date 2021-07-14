@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/runtime-deps:5.0.7
+FROM mcr.microsoft.com/dotnet/runtime-deps:5.0.8
 
 LABEL maintainer "David Cumps <david@cumps.be>"
 

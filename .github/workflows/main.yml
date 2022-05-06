@@ -82,7 +82,7 @@ jobs:
         pip install requests markdown argparse
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v1.14.1
+      uses: docker/login-action@v2.0.0
       with:
         registry: ${{ secrets.DOCKERHUB_REGISTRY }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
